@@ -9,6 +9,7 @@ namespace Programming
         {
             InitializeComponent();
             PopulateEnumsListBox();
+            DefaultSelectedEnums();
         }
         private void PopulateEnumsListBox()
         {
@@ -23,6 +24,11 @@ namespace Programming
             {
                 EnumsListBox.Items.Add(enumType.Name);
             }
+        }
+        private void DefaultSelectedEnums()
+        {
+            EnumsListBox.SetSelected(0, true);
+            ValuesListBox.SetSelected(1, true);
         }
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -52,6 +58,16 @@ namespace Programming
                 {
                     ValuesListBox.Items.Add(item);
                 }
+            }
+        }
+        private void ValuesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValueTextBox.Clear();
+
+            if (ValuesListBox.SelectedItem != null)
+            {
+                int selectedEnumName = ValuesListBox.SelectedIndex;
+                ValueTextBox.AppendText(selectedEnumName.ToString());
             }
         }
     }

@@ -47,7 +47,7 @@
             tabControl1.Location = new Point(12, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(776, 415);
+            tabControl1.Size = new Size(776, 481);
             tabControl1.TabIndex = 0;
             // 
             // Enums
@@ -62,7 +62,7 @@
             Enums.Location = new Point(4, 29);
             Enums.Name = "Enums";
             Enums.Padding = new Padding(3);
-            Enums.Size = new Size(768, 382);
+            Enums.Size = new Size(768, 448);
             Enums.TabIndex = 0;
             Enums.Text = "Enums";
             Enums.UseVisualStyleBackColor = true;
@@ -117,6 +117,7 @@
             ValuesListBox.Name = "ValuesListBox";
             ValuesListBox.Size = new Size(150, 224);
             ValuesListBox.TabIndex = 1;
+            ValuesListBox.SelectedIndexChanged += ValuesListBox_SelectedIndexChanged;
             // 
             // EnumsListBox
             // 
