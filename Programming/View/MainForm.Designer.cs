@@ -30,13 +30,13 @@
         {
             tabControl1 = new TabControl();
             Enums = new TabPage();
-            EnumsListBox = new ListBox();
-            ValuesListBox = new ListBox();
-            EnumsLabel = new Label();
-            ValueLabel = new Label();
-            Enumaration = new Label();
-            ValueTextBox = new TextBox();
             TextBoxLabel = new Label();
+            ValueTextBox = new TextBox();
+            Enumaration = new Label();
+            ValueLabel = new Label();
+            EnumsLabel = new Label();
+            ValuesListBox = new ListBox();
+            EnumsListBox = new ListBox();
             tabControl1.SuspendLayout();
             Enums.SuspendLayout();
             SuspendLayout();
@@ -67,40 +67,21 @@
             Enums.Text = "Enums";
             Enums.UseVisualStyleBackColor = true;
             // 
-            // EnumsListBox
+            // TextBoxLabel
             // 
-            EnumsListBox.FormattingEnabled = true;
-            EnumsListBox.Location = new Point(15, 53);
-            EnumsListBox.Name = "EnumsListBox";
-            EnumsListBox.Size = new Size(150, 224);
-            EnumsListBox.TabIndex = 0;
+            TextBoxLabel.AutoSize = true;
+            TextBoxLabel.Location = new Point(367, 30);
+            TextBoxLabel.Name = "TextBoxLabel";
+            TextBoxLabel.Size = new Size(65, 20);
+            TextBoxLabel.TabIndex = 6;
+            TextBoxLabel.Text = "int value";
             // 
-            // ValuesListBox
+            // ValueTextBox
             // 
-            ValuesListBox.FormattingEnabled = true;
-            ValuesListBox.Location = new Point(193, 53);
-            ValuesListBox.Name = "ValuesListBox";
-            ValuesListBox.Size = new Size(150, 224);
-            ValuesListBox.TabIndex = 1;
-            // 
-            // EnumsLabel
-            // 
-            EnumsLabel.AutoSize = true;
-            EnumsLabel.Location = new Point(15, 30);
-            EnumsLabel.Name = "EnumsLabel";
-            EnumsLabel.Size = new Size(146, 20);
-            EnumsLabel.TabIndex = 2;
-            EnumsLabel.Text = "Choose enumaration";
-            EnumsLabel.Click += this.label1_Click;
-            // 
-            // ValueLabel
-            // 
-            ValueLabel.AutoSize = true;
-            ValueLabel.Location = new Point(193, 30);
-            ValueLabel.Name = "ValueLabel";
-            ValueLabel.Size = new Size(97, 20);
-            ValueLabel.TabIndex = 3;
-            ValueLabel.Text = "Choose value";
+            ValueTextBox.Location = new Point(367, 53);
+            ValueTextBox.Name = "ValueTextBox";
+            ValueTextBox.Size = new Size(169, 27);
+            ValueTextBox.TabIndex = 5;
             // 
             // Enumaration
             // 
@@ -111,21 +92,40 @@
             Enumaration.TabIndex = 4;
             Enumaration.Text = "Enumaration";
             // 
-            // ValueTextBox
+            // ValueLabel
             // 
-            ValueTextBox.Location = new Point(367, 53);
-            ValueTextBox.Name = "ValueTextBox";
-            ValueTextBox.Size = new Size(169, 27);
-            ValueTextBox.TabIndex = 5;
+            ValueLabel.AutoSize = true;
+            ValueLabel.Location = new Point(193, 30);
+            ValueLabel.Name = "ValueLabel";
+            ValueLabel.Size = new Size(97, 20);
+            ValueLabel.TabIndex = 3;
+            ValueLabel.Text = "Choose value";
             // 
-            // TextBoxLabel
+            // EnumsLabel
             // 
-            TextBoxLabel.AutoSize = true;
-            TextBoxLabel.Location = new Point(367, 30);
-            TextBoxLabel.Name = "TextBoxLabel";
-            TextBoxLabel.Size = new Size(65, 20);
-            TextBoxLabel.TabIndex = 6;
-            TextBoxLabel.Text = "int value";
+            EnumsLabel.AutoSize = true;
+            EnumsLabel.Location = new Point(15, 30);
+            EnumsLabel.Name = "EnumsLabel";
+            EnumsLabel.Size = new Size(146, 20);
+            EnumsLabel.TabIndex = 2;
+            EnumsLabel.Text = "Choose enumaration";
+            // 
+            // ValuesListBox
+            // 
+            ValuesListBox.FormattingEnabled = true;
+            ValuesListBox.Location = new Point(193, 53);
+            ValuesListBox.Name = "ValuesListBox";
+            ValuesListBox.Size = new Size(150, 224);
+            ValuesListBox.TabIndex = 1;
+            // 
+            // EnumsListBox
+            // 
+            EnumsListBox.FormattingEnabled = true;
+            EnumsListBox.Location = new Point(15, 53);
+            EnumsListBox.Name = "EnumsListBox";
+            EnumsListBox.Size = new Size(150, 224);
+            EnumsListBox.TabIndex = 0;
+            EnumsListBox.SelectedIndexChanged += EnumsListBox_SelectedIndexChanged;
             // 
             // MainForm
             // 
@@ -134,7 +134,7 @@
             ClientSize = new Size(800, 505);
             Controls.Add(tabControl1);
             Name = "MainForm";
-            Text = "Form1";
+            Text = "Programming Demo";
             tabControl1.ResumeLayout(false);
             Enums.ResumeLayout(false);
             Enums.PerformLayout();
