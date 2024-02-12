@@ -33,6 +33,7 @@ namespace Programming
         }
         private void LoadSeasonComboBox()
         {
+            //Добавляем элементы Season в SeasonComboBox
             foreach (var item in Enum.GetValues(typeof(Season)))
             {
                 SeasonComboBox.Items.Add(item);
@@ -40,42 +41,31 @@ namespace Programming
         }
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Очистка ValuesListBox
             ValuesListBox.Items.Clear();
 
-            if (EnumsListBox.SelectedItem == null)
-            {
-                MessageBox.Show("Выберите элемент");
-                return;
-            }
-
-            //Название выбранного элемента в EnumsListBox
-            string selectedEnumName = EnumsListBox.SelectedItem.ToString();
-
-            //Получение всех типов в сборке
-            Type[] types = typeof(Program).Assembly.GetTypes();
-
-            //Фильтруем только перечисления
-            var enumTypes = Array.FindAll(types, type => type.IsEnum);
-            int indexSelectedEnum = 0;
-            for (int i = 0; i < enumTypes.Length; i++)
-            {
-                if (enumTypes[i].Name == selectedEnumName)
-                {
-                    break;
-                }
-                indexSelectedEnum++;
-            }
             if (EnumsListBox.SelectedItem != null)
             {
+                //Название выбранного элемента в EnumsListBox
+                int selectedEnumName = EnumsListBox.SelectedIndex;
+
+                //Получение всех типов в сборке
+                Type[] types = typeof(Program).Assembly.GetTypes();
+
+                //Фильтруем только перечисления
+                var enumTypes = Array.FindAll(types, type => type.IsEnum);
+                
                 //Добавляем значения перечисления в ValuesListBox
-                foreach (var item in Enum.GetValues(enumTypes[indexSelectedEnum]))
+                foreach (var item in Enum.GetValues(enumTypes[selectedEnumName]))
                 {
                     ValuesListBox.Items.Add(item);
                 }
             }
         }
+
         private void ValuesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Очистка ValuesTextBox
             ValueTextBox.Clear();
 
             if (ValuesListBox.SelectedItem != null)
@@ -84,8 +74,10 @@ namespace Programming
                 ValueTextBox.AppendText(selectedEnumName.ToString());
             }
         }
+
         private void ParseButton_Click(object sender, EventArgs e)
         {
+            //Очистка ResultTextBox
             ResultTextBox.Clear();
 
             if (WeekdayTextBox.Text == "")
@@ -95,10 +87,16 @@ namespace Programming
             }
 
             string inputUserText = WeekdayTextBox.Text;
-            if (int.TryParse(inputUserText, out int intUserText) == true)
+            bool flagNumber = false;
+
+            if (int.TryParse(inputUserText, out int intUserText))
             {
+                if ((intUserText < 8) && (intUserText > 0))
+                {
+                    flagNumber = true;
+                }
                 int IndexWeekday = intUserText - 1;
-                if (Enum.TryParse(IndexWeekday.ToString(), out Weekday valueWeekday) && (intUserText < 8))
+                if (Enum.TryParse(IndexWeekday.ToString(), out Weekday valueWeekday) && (flagNumber == true))
                 {
                     ResultTextBox.AppendText($"Это день недели ({intUserText} = {valueWeekday})");
                 }
@@ -107,10 +105,9 @@ namespace Programming
                     ResultTextBox.AppendText("Нет такого дня недели");
                 }
             }
-
             else
             {
-                if (Enum.TryParse(inputUserText, out Weekday result) == true)
+                if (Enum.TryParse(inputUserText, out Weekday result))
                 {
                     int numericValue = (int)result;
                     ResultTextBox.AppendText($"Это день недели ({inputUserText} = {numericValue + 1})");
@@ -121,6 +118,7 @@ namespace Programming
                 }
             }
         }
+
         private void GoButton_Click(object sender, EventArgs e)
         {
             if (SeasonComboBox.SelectedItem == null)
@@ -128,21 +126,15 @@ namespace Programming
                 MessageBox.Show("Выберите время года");
                 return;
             }
+
+            //Преобразуем в перечисление Season
             Season selectedSeason = (Season)SeasonComboBox.SelectedItem;
             switch (selectedSeason)
             {
-                case Season.Summer:
-                    MessageBox.Show("Ура! Солнце!");
-                    break;
-                case Season.Autumn:
-                    this.BackColor = Color.Orange;
-                    break;
-                case Season.Winter:
-                    MessageBox.Show("Брр! Холодно!");
-                    break;
-                case Season.Spring:
-                    this.BackColor = Color.ForestGreen;
-                    break;
+                case Season.Summer: MessageBox.Show("Ура! Солнце!!"); break;
+                case Season.Autumn: this.BackColor = System.Drawing.Color.FromArgb(226, 156, 69); break;
+                case Season.Winter: MessageBox.Show("Брр! Холодно!"); break;
+                case Season.Spring: this.BackColor = System.Drawing.Color.FromArgb(85, 156, 69); break;
             }
         }
     }
