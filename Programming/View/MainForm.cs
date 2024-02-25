@@ -95,7 +95,9 @@ namespace Programming
                 {
                     flagNumber = true;
                 }
+
                 int IndexWeekday = intUserText - 1;
+
                 if (Enum.TryParse(IndexWeekday.ToString(), out Weekday valueWeekday) && (flagNumber == true))
                 {
                     ResultTextBox.AppendText($"Это день недели ({intUserText} = {valueWeekday})");
