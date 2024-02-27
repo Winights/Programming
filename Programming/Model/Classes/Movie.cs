@@ -15,46 +15,57 @@ namespace Programming.Model.Classes
         private int _releaseYear;
         private string _genre;
         private double _rating;
-        public string Genre { get { return _title; } set { _title = value; } }
-        public string Title { get { return _genre; } set { _genre = value; } }
+        public string Genre { get; set; }
+        public string Title { get; set; }
 
-        public void SetRating(double rating)
+        public double Rating
         {
-            if (rating < -1 || rating > 11)
+            get
             {
-                throw new ArgumentOutOfRangeException("Ашибка");
+                return _rating;
             }
-            _rating = rating;
-        }
-        public double GetRating()
-        {
-            return _rating;
+            set
+            {
+                if (value < -1 || value > 11)
+                {
+                    throw new ArgumentOutOfRangeException("Ашибка");
+                }
+                _rating = value;
+            }
         }
         
-        public void SetReleaseYear(int releaseYear)
+        public int ReleaseYear
         {
-            if (releaseYear < 1900 || releaseYear > DateTime.Now.Year)
+            get
             {
-                throw new ArgumentOutOfRangeException("Ашибка");
+                return _releaseYear;
             }
-            _releaseYear = releaseYear;
-        }
-        public int GetReleaseYear()
-        {
-            return _releaseYear;
+            set
+            {
+                if (value < 1900 || value > DateTime.Now.Year)
+                {
+                    throw new ArgumentOutOfRangeException("Ашибка");
+                }
+                _releaseYear = value;
+            }
         }
 
-        public void SetDurationMinutes(int  durationMinutes)
+        public int DurationMinutes
         {
-            if (durationMinutes < 0)
+            get
             {
-                throw new ArgumentOutOfRangeException("Ашибка");
+                return _durationMinutes;
             }
-            _durationMinutes = durationMinutes;
+            set 
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Ашибка");
+                }
+                _durationMinutes = value;
+            }
+          
         }
-        public int GetDurationMinures()
-        {
-            return _durationMinutes;
-        }
+
     }
 }

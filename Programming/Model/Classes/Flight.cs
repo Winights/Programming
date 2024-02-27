@@ -12,21 +12,36 @@ namespace Programming.Model.Classes
         private string _destination;
         private string _destinationName;
         private int _flightTimeMinutes;
-        public string DestinationName { get { return _destinationName; } set { _destinationName = value; } }
-        public string Destination { get { return _destination; } set { _destination = value; } }
+        public string DestinationName { get; set; }
+        public string Destination { get; set; }
 
-        public void SetFlightTimeMinutes(int flightTimeMinutes)
+        public int FlightTimeMinutes
         {
-            if (flightTimeMinutes < 0)
+            get
             {
-                throw new ArgumentException("Не может быть отрицательным числом");
+                return _flightTimeMinutes;
             }
-            _flightTimeMinutes  = flightTimeMinutes;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Не может быть отрицательным числом");
+                }
+                _flightTimeMinutes = value;
+            }
         }
-        public int GetFlightTimeMinutes()
+
+        public Flight(string destination, string destinationName, int flightTimeMinutes)
         {
-            return _flightTimeMinutes;
+            Destination = destination;
+            DestinationName = destinationName;
+            FlightTimeMinutes = flightTimeMinutes;
         }
-            
+        public Flight()
+        {
+            Destination = "";
+            DestinationName = "";
+            FlightTimeMinutes = 0;
+        }
     }
 }

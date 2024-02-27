@@ -16,8 +16,22 @@ namespace Programming.Model.Classes
 
         public string Title { get; set; }
         public string Artist { get; set; }
-        public int DurationInSeconds { get; set; }
         public string Genre { get; set; }
+        public int DurationInSeconds 
+        { 
+            get
+            {
+                return _durationInSeconds;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Ашибка");
+                }
+                _durationInSeconds = value;
+            }
+        }
 
         public Song(string title, string artist, int durationInSeconds, string genre)
         {
@@ -28,7 +42,10 @@ namespace Programming.Model.Classes
         }
         public Song()
         {
-            // Конструктор без аргументов
+            Title = "";
+            Artist = "";
+            DurationInSeconds = 0;
+            Genre = "";
         }
     }
 }

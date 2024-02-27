@@ -13,9 +13,9 @@ namespace Programming.Model.Classes
         private int _semester;
         private string _professor;
 
-        public string Name { get { return _name; } set { _name = value; } }
-        public int Semester { get { return _semester; } set { _semester = value; } }
-        public string Professor { get { return _professor; } set { _professor = value; } }
+        public string Name { get; set; }
+        public int Semester { get; set; }
+        public string Professor { get; set; }
 
         public Discipline(string name, int credits, int semester, string professor)
         {

@@ -14,9 +14,9 @@ namespace Programming.Model.Classes
         private string _email;
         private string _phoneNumber;
 
-        public string Name { get { return _name; } set { _name = value; } }
-        public string Email { get { return _email; } set { _email = value; } }
-        public string PhoneNumber { get { return _phoneNumber; } set { _phoneNumber = value; } }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
 
         public Contact(string name, string phoneNumber, string email)
         {

@@ -12,42 +12,51 @@ namespace Programming.Model.Classes
         private int _minutes;
         private int _seconds;
 
-        public void SetHours(int hours)
+        public int Hours
         {
-            if (-1 < hours || hours > 24)
+            get
             {
-                throw new ArgumentOutOfRangeException("Ашибка");
+                return _hours;
             }
-            _hours = hours;
-        }
-        public int GetHours() 
-        {
-            return _hours;
-        }
-        public void SetMinutes(int minutes)
-        {
-            if (minutes > -1 || minutes > 61)
+            set
             {
-                throw new ArgumentOutOfRangeException();
+                if (-1 < value || value > 24)
+                {
+                    throw new ArgumentOutOfRangeException("Ашибка");
+                }
+                _hours = value;
             }
-            _minutes = minutes;
         }
-        public int GetMinutes()
+        public int Minutes
         {
-            return _minutes;
+            get
+            {
+                return _minutes;
+            }
+            set
+            {
+                if (value > -1 || value > 61)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                _minutes = value;
+            } 
         }
 
-        public void SetSeconds(int seconds)
+        public int Seconds
         {
-            if (seconds < -1 || seconds > 61)
+            get
             {
-                throw new ArgumentOutOfRangeException();
+                return _seconds;
             }
-            _seconds = seconds;
-        }
-        public int GetSeconds()
-        {
-            return _seconds;
+            set
+            {
+                if (value < -1 || value > 61)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                _seconds = value;
+            }
         }
     }
 }
