@@ -11,7 +11,6 @@ namespace Programming.Model.Classes
     {
         private double _length;
         private double _width;
-        private string _color;
         public string Color { get; set; }
 
         public double Length
@@ -28,7 +27,6 @@ namespace Programming.Model.Classes
                 }
                 _length = value;
             }
-            
         }
         public double Width
         {
@@ -51,7 +49,6 @@ namespace Programming.Model.Classes
             Width = width;
             Color = color;
         }
-
         public Rectangle()
         {
             Length = 0;

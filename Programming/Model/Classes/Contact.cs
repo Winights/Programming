@@ -10,10 +10,6 @@ namespace Programming.Model.Classes
 {
     public class Contact
     {
-        private string _name;
-        private string _email;
-        private string _phoneNumber;
-
         public string Name { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }

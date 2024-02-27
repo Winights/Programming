@@ -9,11 +9,7 @@ namespace Programming.Model.Classes
 {
     public class Song
     {
-        private string _title;
-        private string _artist;
         private int _durationInSeconds;
-        private string _genre;
-
         public string Title { get; set; }
         public string Artist { get; set; }
         public string Genre { get; set; }
@@ -32,7 +28,6 @@ namespace Programming.Model.Classes
                 _durationInSeconds = value;
             }
         }
-
         public Song(string title, string artist, int durationInSeconds, string genre)
         {
             Title = title;

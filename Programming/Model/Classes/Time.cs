@@ -42,7 +42,6 @@ namespace Programming.Model.Classes
                 _minutes = value;
             } 
         }
-
         public int Seconds
         {
             get

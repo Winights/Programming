@@ -10,10 +10,8 @@ namespace Programming.Model.Classes
 {
     public class Movie
     {
-        private string _title;
         private int _durationMinutes;
         private int _releaseYear;
-        private string _genre;
         private double _rating;
         public string Genre { get; set; }
         public string Title { get; set; }
@@ -33,7 +31,6 @@ namespace Programming.Model.Classes
                 _rating = value;
             }
         }
-        
         public int ReleaseYear
         {
             get
@@ -49,7 +46,6 @@ namespace Programming.Model.Classes
                 _releaseYear = value;
             }
         }
-
         public int DurationMinutes
         {
             get
@@ -64,8 +60,6 @@ namespace Programming.Model.Classes
                 }
                 _durationMinutes = value;
             }
-          
         }
-
     }
 }

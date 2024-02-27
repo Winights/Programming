@@ -9,8 +9,6 @@ namespace Programming.Model.Classes
 {
     public class Flight
     {
-        private string _destination;
-        private string _destinationName;
         private int _flightTimeMinutes;
         public string DestinationName { get; set; }
         public string Destination { get; set; }

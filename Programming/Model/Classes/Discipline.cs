@@ -9,21 +9,30 @@ namespace Programming.Model.Classes
 {
     public class Discipline
     {
-        private string _name;
         private int _semester;
-        private string _professor;
-
-        public string Name { get; set; }
-        public int Semester { get; set; }
         public string Professor { get; set; }
-
+        public string Name { get; set; }
+        public int Semester 
+        {
+            get
+            {
+                return _semester;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Ашибка");
+                }
+                _semester = value;
+            }
+        }
         public Discipline(string name, int credits, int semester, string professor)
         {
             Name = name;
             Semester = semester;
             Professor = professor;
         }
-
         public Discipline()
         {
             Name = "";
