@@ -24,7 +24,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (value < -1 || value > 11)
+                if (value < 0 || value > 10)
                 {
                     throw new ArgumentOutOfRangeException("Ашибка");
                 }
@@ -56,10 +56,26 @@ namespace Programming.Model.Classes
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("Ашибка");
+                    throw new ArgumentException("Ашибка");
                 }
                 _durationMinutes = value;
             }
+        }
+        public Movie(int durationMinutes, int releaseYear, double rating, string genre, string title)
+        {
+            DurationMinutes = durationMinutes; 
+            ReleaseYear = releaseYear;
+            Rating = rating;
+            Genre = genre;
+            Title = title;
+        }
+        public Movie()
+        {
+            DurationMinutes = 0;
+            ReleaseYear = 0;
+            Rating = 0;
+            Genre = "";
+            Title = "";
         }
     }
 }

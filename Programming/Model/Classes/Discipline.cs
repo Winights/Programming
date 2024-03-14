@@ -22,7 +22,7 @@ namespace Programming.Model.Classes
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("Ашибка");
+                    throw new ArgumentException("Ашибка");
                 }
                 _semester = value;
             }
