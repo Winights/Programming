@@ -8,9 +8,9 @@ namespace Programming
 {
     public partial class MainForm : Form
     {
-        private Model.Classes.Rectangle[] _rectangles;
+        private Model.Classes.Rectangle[] _rectangles = new Model.Classes.Rectangle[5];
         private Model.Classes.Rectangle _currentRectangle;
-        private Movie[] _movies;
+        private Movie[] _movies = new Movie[5];
         private Movie _currentMovie;
         public MainForm()
         {
@@ -18,34 +18,32 @@ namespace Programming
             PopulateEnumsListBox();
             DefaultSelectedEnums();
             LoadSeasonComboBox();
-            InitializetionRectangles();
-            InitializetionMovies();
+            InitializetionRectangles(_rectangles);
+            InitializetionMovies(_movies);
         }
-        private void InitializetionRectangles()
+        private void InitializetionRectangles(Model.Classes.Rectangle[] rectangles)
         {
-            _rectangles = new Model.Classes.Rectangle[5];
             Random ran = new Random();
             string[] colors = { "Red", "Yellow", "Green", "Blue", "Black", "White" };
 
             //Инициализируем массив _rectangles
-            for (int i = 0; i < _rectangles.Length; i++)
+            for (int i = 0; i < rectangles.Length; i++)
             {
                 double length = Math.Round(ran.NextDouble() * (25 - 1) + 1, 2);
                 double width = Math.Round(ran.NextDouble() * (25 - 1) + 1, 2);
                 int indexColor = ran.Next(colors.Length);
                 string color = colors[indexColor];
-                _rectangles[i] = new Model.Classes.Rectangle(length, width, color);
+                rectangles[i] = new Model.Classes.Rectangle(length, width, color);
             }
         }
-        private void InitializetionMovies()
+        private void InitializetionMovies(Movie[] movies)
         {
-            _movies = new Movie[5];
             Random ran = new Random();
             string[] genres = { "Comedy", "Drama", "Thriller", "Actioner", "Horror", "Blockbuster", "Romantic" };
             string[] titles = { "Green Mile", "Frozen", "Back to the future", "Lolita", "Braveheart", "Lost" };
 
             //Инициализируем массив _movies
-            for (int i = 0; i < _movies.Length; i++)
+            for (int i = 0; i < movies.Length; i++)
             {
                 int durationMinutes = ran.Next(40, 180);
                 int releaseYear = ran.Next(1900, DateTime.Now.Year);
@@ -54,7 +52,7 @@ namespace Programming
                 int indexTitle = ran.Next(titles.Length);
                 string genre = genres[indexGenre];
                 string title = titles[indexTitle]; ;
-                _movies[i] = new Movie(durationMinutes, releaseYear, rating, genre, title);
+                movies[i] = new Movie(durationMinutes, releaseYear, rating, genre, title);
             }
         }
         private void PopulateEnumsListBox()
