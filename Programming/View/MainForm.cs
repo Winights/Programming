@@ -27,6 +27,7 @@ namespace Programming
             Random ran = new Random();
             string[] colors = { "Red", "Yellow", "Green", "Blue", "Black", "White" };
 
+            //Инициализируем массив _rectangles
             for (int i = 0; i < _rectangles.Length; i++)
             {
                 double length = Math.Round(ran.NextDouble() * (25 - 1) + 1, 2);
@@ -41,8 +42,9 @@ namespace Programming
             _movies = new Movie[5];
             Random ran = new Random();
             string[] genres = { "Comedy", "Drama", "Thriller", "Actioner", "Horror", "Blockbuster", "Romantic" };
-            string[] titles = { "Green Mile", "Frozen", "Back to the future", "How to train your dragon", "Braveheart", "Lost" };
+            string[] titles = { "Green Mile", "Frozen", "Back to the future", "Lolita", "Braveheart", "Lost" };
 
+            //Инициализируем массив _movies
             for (int i = 0; i < _movies.Length; i++)
             {
                 int durationMinutes = ran.Next(40, 180);
@@ -242,10 +244,7 @@ namespace Programming
 
         private void ColorTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (double.TryParse(ColorTextBox.Text, out double valueColor) == false)
-            {
-                _currentRectangle.Color = ColorTextBox.Text;
-            }
+            _currentRectangle.Color = ColorTextBox.Text;
         }
         private int FindRectangleWithMaxWidth(Model.Classes.Rectangle[] rectangles)
         {
@@ -285,18 +284,12 @@ namespace Programming
 
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (double.TryParse(TitleTextBox.Text, out double valueTitle) == false)
-            {
-                _currentMovie.Title = TitleTextBox.Text;
-            }
+            _currentMovie.Title = TitleTextBox.Text;
         }
 
         private void GenreTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (double.TryParse(GenreTextBox.Text, out double valueGenre) == false)
-            {
-                _currentMovie.Genre = GenreTextBox.Text;
-            }
+            _currentMovie.Genre = GenreTextBox.Text;
         }
 
         private void DurationMinutesTextBox_TextChanged(object sender, EventArgs e)
@@ -325,7 +318,7 @@ namespace Programming
             try
             {
                 int valueReleaseYear = int.Parse(ReleaseYearTextBox.Text);
-                if (valueReleaseYear < 0 || valueReleaseYear < 1900 || valueReleaseYear > DateTime.Now.Year)
+                if (valueReleaseYear < 0)
                 {
                     ReleaseYearTextBox.BackColor = System.Drawing.Color.LightPink;
                 }
@@ -339,6 +332,10 @@ namespace Programming
             {
                 ReleaseYearTextBox.BackColor = System.Drawing.Color.LightPink;
             }
+            catch (ArgumentOutOfRangeException)
+            {
+                ReleaseYearTextBox.BackColor = System.Drawing.Color.LightPink;
+            }
         }
 
         private void RatingTextBox_TextChanged(object sender, EventArgs e)
@@ -346,7 +343,7 @@ namespace Programming
             try
             {
                 double valueRating = double.Parse(RatingTextBox.Text);
-                if (valueRating < 0 || valueRating > 10)
+                if (valueRating < 0)
                 {
                     RatingTextBox.BackColor = System.Drawing.Color.LightPink;
                 }
@@ -354,9 +351,14 @@ namespace Programming
                 {
                     _currentMovie.Rating = valueRating;
                     RatingTextBox.BackColor = System.Drawing.Color.White;
+
                 }
             }
             catch (FormatException)
+            {
+                RatingTextBox.BackColor = System.Drawing.Color.LightPink;
+            }
+            catch (ArgumentOutOfRangeException)
             {
                 RatingTextBox.BackColor = System.Drawing.Color.LightPink;
             }

@@ -26,7 +26,7 @@ namespace Programming.Model.Classes
             {
                 if (value < 0 || value > 10)
                 {
-                    throw new ArgumentOutOfRangeException("Ашибка");
+                    throw new ArgumentOutOfRangeException();
                 }
                 _rating = value;
             }
@@ -41,7 +41,7 @@ namespace Programming.Model.Classes
             {
                 if (value < 1900 || value > DateTime.Now.Year)
                 {
-                    throw new ArgumentOutOfRangeException("Ашибка");
+                    throw new ArgumentOutOfRangeException();
                 }
                 _releaseYear = value;
             }
@@ -56,7 +56,7 @@ namespace Programming.Model.Classes
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException("Ашибка");
+                    throw new ArgumentException("Длительность не может быть отрицательным числом");
                 }
                 _durationMinutes = value;
             }

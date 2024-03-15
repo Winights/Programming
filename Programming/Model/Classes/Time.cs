@@ -22,7 +22,7 @@ namespace Programming.Model.Classes
             {
                 if (-1 < value || value > 24)
                 {
-                    throw new ArgumentOutOfRangeException("Ашибка");
+                    throw new ArgumentOutOfRangeException();
                 }
                 _hours = value;
             }

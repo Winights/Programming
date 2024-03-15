@@ -23,7 +23,7 @@ namespace Programming.Model.Classes
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException("Ашибка");
+                    throw new ArgumentException("Длительность не может быть отрицательным числом");
                 }
                 _durationInSeconds = value;
             }

@@ -22,7 +22,7 @@ namespace Programming.Model.Classes
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException("Ашибка");
+                    throw new ArgumentException("Семестр не может быть отрицательным числом");
                 }
                 _semester = value;
             }
