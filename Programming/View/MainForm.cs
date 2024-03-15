@@ -222,16 +222,14 @@ namespace Programming
             try
             {
                 double valueWidth = double.Parse(WidthTextBox.Text);
-                _currentRectangle.Width = valueWidth;
-                WidthTextBox.BackColor = System.Drawing.Color.White;
                 if (valueWidth < 0)
                 {
-                    LengthTextBox.BackColor = System.Drawing.Color.LightPink;
+                    WidthTextBox.BackColor = System.Drawing.Color.LightPink;
                 }
                 else
                 {
-                    _currentRectangle.Length = valueWidth;
-                    LengthTextBox.BackColor = System.Drawing.Color.White;
+                    _currentRectangle.Width = valueWidth;
+                    WidthTextBox.BackColor = System.Drawing.Color.White;
                 }
             }
             catch (FormatException)
@@ -242,7 +240,15 @@ namespace Programming
 
         private void ColorTextBox_TextChanged(object sender, EventArgs e)
         {
-            _currentRectangle.Color = ColorTextBox.Text;
+            if (double.TryParse(ColorTextBox.Text, out var value))
+            {
+                ColorTextBox.BackColor = System.Drawing.Color.LightPink;
+            }
+            else
+            {
+                _currentRectangle.Color = ColorTextBox.Text;
+                ColorTextBox.BackColor = System.Drawing.Color.White;
+            }
         }
         private int FindRectangleWithMaxWidth(Model.Classes.Rectangle[] rectangles)
         {
@@ -282,12 +288,28 @@ namespace Programming
 
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
-            _currentMovie.Title = TitleTextBox.Text;
+            if (double.TryParse(TitleTextBox.Text, out var value))
+            {
+                TitleTextBox.BackColor = System.Drawing.Color.LightPink;
+            }
+            else
+            {
+                _currentMovie.Title = TitleTextBox.Text;
+                TitleTextBox.BackColor = System.Drawing.Color.White;
+            }
         }
 
         private void GenreTextBox_TextChanged(object sender, EventArgs e)
         {
-            _currentMovie.Genre = GenreTextBox.Text;
+            if (double.TryParse(GenreTextBox.Text, out var value))
+            {
+                GenreTextBox.BackColor = System.Drawing.Color.LightPink;
+            }
+            else
+            {
+                _currentMovie.Genre = GenreTextBox.Text;
+                GenreTextBox.BackColor = System.Drawing.Color.White;
+            }
         }
 
         private void DurationMinutesTextBox_TextChanged(object sender, EventArgs e)
