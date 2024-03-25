@@ -21,10 +21,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Длительность не может быть отрицательным числом");
-                }
+                Validator.AssertOnPositiveValue(value, "DurationInSeconds");
                 _durationInSeconds = value;
             }
         }

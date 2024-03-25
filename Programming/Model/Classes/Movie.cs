@@ -24,10 +24,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (value < 0 || value > 10)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
+                Validator.AssertOnPositiveValue(value, "Rating");
                 _rating = value;
             }
         }
@@ -39,10 +36,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (value < 1900 || value > DateTime.Now.Year)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
+                Validator.AssertValueInRange(value, 1900, DateTime.Now.Year, "Release");
                 _releaseYear = value;
             }
         }
@@ -54,10 +48,7 @@ namespace Programming.Model.Classes
             }
             set 
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Длительность не может быть отрицательным числом");
-                }
+                Validator.AssertOnPositiveValue(value, "DurationMinutes");
                 _durationMinutes = value;
             }
         }

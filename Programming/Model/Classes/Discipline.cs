@@ -20,10 +20,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Семестр не может быть отрицательным числом");
-                }
+                Validator.AssertOnPositiveValue(value, "Semester");
                 _semester = value;
             }
         }

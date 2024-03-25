@@ -21,7 +21,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                AssertStringContainsOnlyLetters(value);
+                AssertStringContainsOnlyLetters(value, "Name");
                 _name = value;
             }
         }
@@ -33,16 +33,16 @@ namespace Programming.Model.Classes
             }
             set
             {
-                AssertStringContainsOnlyLetters(value);
+                AssertStringContainsOnlyLetters(value, "Surname");
                 _surname = value;
             }
         }
-        private void AssertStringContainsOnlyLetters(string value)
+        private void AssertStringContainsOnlyLetters(string value, string Name)
         {
             bool consistsOfEnglishLetters = Regex.IsMatch(value, @"^[a-zA-Z]+$");
             if (consistsOfEnglishLetters == false)
             {
-                throw new ArgumentException("Строка должна содержать только символы английского алфавита.");
+                throw new ArgumentException($"Строка должна содержать только символы английского алфавита. Ошибка в {Name}");
             }
         }
 

@@ -21,10 +21,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Длина не может быть отрицательным числом");
-                }
+                Validator.AssertOnPositiveValue(value, "Length");
                 _length = value;
             }
         }
@@ -36,10 +33,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Ширина не может быть отрицательным числом");
-                }
+                Validator.AssertOnPositiveValue(value, "Width");
                 _width = value;
             }
         }

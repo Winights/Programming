@@ -20,10 +20,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (-1 < value || value > 24)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
+                Validator.AssertValueInRange(value, 0, 23, "Hours");
                 _hours = value;
             }
         }
@@ -35,10 +32,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (value > -1 || value > 61)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
+                Validator.AssertValueInRange(value, 0, 60, "Minutes");
                 _minutes = value;
             } 
         }
@@ -50,10 +44,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (value < -1 || value > 61)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
+                Validator.AssertValueInRange(value, 0, 60, "Seconds");
                 _seconds = value;
             }
         }
