@@ -11,8 +11,8 @@ namespace Programming.Model.Classes
 {
     public class Contact
     {
-        private string _name;
-        private string _surname;
+        private string _name = string.Empty;
+        private string _surname = string.Empty;
         public string Name 
         { 
             get

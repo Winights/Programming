@@ -64,7 +64,7 @@ namespace Programming.Model.Classes
             Length = 0;
             Width = 0;
             Color = "";
-            Center = null;
+            Center = new Point2D(0,0);
             _allRectanglesCount++;
             _id = _allRectanglesCount;
         }
