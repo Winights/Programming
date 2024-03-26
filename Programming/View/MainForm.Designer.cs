@@ -61,6 +61,11 @@
             TitleTextBox = new TextBox();
             MoviesListBox = new ListBox();
             RectanglesGroupBox = new GroupBox();
+            IdTextBox = new TextBox();
+            CoordYLabel = new Label();
+            CoordXLabel = new Label();
+            CoordYTextBox = new TextBox();
+            CoordXTextBox = new TextBox();
             ColorLabel = new Label();
             FindRectanglesButton = new Button();
             WidthLabel = new Label();
@@ -69,6 +74,7 @@
             LengthLabel = new Label();
             LengthTextBox = new TextBox();
             WidthTextBox = new TextBox();
+            Idlabel = new Label();
             mainTabControl.SuspendLayout();
             Enums.SuspendLayout();
             SeasonGroupBox.SuspendLayout();
@@ -284,7 +290,7 @@
             MovieGroupBox.Controls.Add(MoviesListBox);
             MovieGroupBox.Location = new Point(398, 18);
             MovieGroupBox.Name = "MovieGroupBox";
-            MovieGroupBox.Size = new Size(364, 355);
+            MovieGroupBox.Size = new Size(364, 413);
             MovieGroupBox.TabIndex = 1;
             MovieGroupBox.TabStop = false;
             MovieGroupBox.Text = "Movies";
@@ -352,7 +358,7 @@
             // 
             // FindMoviesButton
             // 
-            FindMoviesButton.Location = new Point(183, 301);
+            FindMoviesButton.Location = new Point(183, 361);
             FindMoviesButton.Name = "FindMoviesButton";
             FindMoviesButton.Size = new Size(142, 29);
             FindMoviesButton.TabIndex = 4;
@@ -390,12 +396,18 @@
             MoviesListBox.Items.AddRange(new object[] { "Movie 1", "Movie 2", "Movie 3", "Movie 4", "Movie 5" });
             MoviesListBox.Location = new Point(6, 26);
             MoviesListBox.Name = "MoviesListBox";
-            MoviesListBox.Size = new Size(161, 304);
+            MoviesListBox.Size = new Size(161, 364);
             MoviesListBox.TabIndex = 0;
             MoviesListBox.SelectedIndexChanged += MoviesListBox_SelectedIndexChanged;
             // 
             // RectanglesGroupBox
             // 
+            RectanglesGroupBox.Controls.Add(Idlabel);
+            RectanglesGroupBox.Controls.Add(IdTextBox);
+            RectanglesGroupBox.Controls.Add(CoordYLabel);
+            RectanglesGroupBox.Controls.Add(CoordXLabel);
+            RectanglesGroupBox.Controls.Add(CoordYTextBox);
+            RectanglesGroupBox.Controls.Add(CoordXTextBox);
             RectanglesGroupBox.Controls.Add(ColorLabel);
             RectanglesGroupBox.Controls.Add(FindRectanglesButton);
             RectanglesGroupBox.Controls.Add(WidthLabel);
@@ -406,10 +418,55 @@
             RectanglesGroupBox.Controls.Add(WidthTextBox);
             RectanglesGroupBox.Location = new Point(6, 18);
             RectanglesGroupBox.Name = "RectanglesGroupBox";
-            RectanglesGroupBox.Size = new Size(364, 355);
+            RectanglesGroupBox.Size = new Size(364, 413);
             RectanglesGroupBox.TabIndex = 0;
             RectanglesGroupBox.TabStop = false;
             RectanglesGroupBox.Text = "Rectangles";
+            // 
+            // IdTextBox
+            // 
+            IdTextBox.Enabled = false;
+            IdTextBox.Location = new Point(182, 314);
+            IdTextBox.Name = "IdTextBox";
+            IdTextBox.ReadOnly = true;
+            IdTextBox.Size = new Size(125, 27);
+            IdTextBox.TabIndex = 8;
+            // 
+            // CoordYLabel
+            // 
+            CoordYLabel.AutoSize = true;
+            CoordYLabel.Location = new Point(182, 238);
+            CoordYLabel.Name = "CoordYLabel";
+            CoordYLabel.Size = new Size(110, 20);
+            CoordYLabel.TabIndex = 10;
+            CoordYLabel.Text = "Coordination y:";
+            // 
+            // CoordXLabel
+            // 
+            CoordXLabel.AutoSize = true;
+            CoordXLabel.Location = new Point(182, 186);
+            CoordXLabel.Name = "CoordXLabel";
+            CoordXLabel.Size = new Size(110, 20);
+            CoordXLabel.TabIndex = 9;
+            CoordXLabel.Text = "Coordination x:";
+            // 
+            // CoordYTextBox
+            // 
+            CoordYTextBox.Location = new Point(182, 261);
+            CoordYTextBox.Name = "CoordYTextBox";
+            CoordYTextBox.ReadOnly = true;
+            CoordYTextBox.Size = new Size(125, 27);
+            CoordYTextBox.TabIndex = 8;
+            CoordYTextBox.TextChanged += CoordYTextBox_TextChanged;
+            // 
+            // CoordXTextBox
+            // 
+            CoordXTextBox.Location = new Point(182, 209);
+            CoordXTextBox.Name = "CoordXTextBox";
+            CoordXTextBox.ReadOnly = true;
+            CoordXTextBox.Size = new Size(125, 27);
+            CoordXTextBox.TabIndex = 7;
+            CoordXTextBox.TextChanged += CoordXTextBox_TextChanged;
             // 
             // ColorLabel
             // 
@@ -422,7 +479,7 @@
             // 
             // FindRectanglesButton
             // 
-            FindRectanglesButton.Location = new Point(182, 206);
+            FindRectanglesButton.Location = new Point(182, 363);
             FindRectanglesButton.Name = "FindRectanglesButton";
             FindRectanglesButton.Size = new Size(125, 27);
             FindRectanglesButton.TabIndex = 4;
@@ -453,7 +510,7 @@
             RectanglesListBox.Items.AddRange(new object[] { "Rectangle 1", "Rectangle 2", "Rectangle 3", "Rectangle 4", "Rectangle 5" });
             RectanglesListBox.Location = new Point(6, 26);
             RectanglesListBox.Name = "RectanglesListBox";
-            RectanglesListBox.Size = new Size(161, 204);
+            RectanglesListBox.Size = new Size(161, 364);
             RectanglesListBox.TabIndex = 1;
             RectanglesListBox.SelectedIndexChanged += RectanglesListBox_SelectedIndexChanged;
             // 
@@ -481,6 +538,15 @@
             WidthTextBox.Size = new Size(125, 27);
             WidthTextBox.TabIndex = 2;
             WidthTextBox.TextChanged += WidthTextBox_TextChanged;
+            // 
+            // Idlabel
+            // 
+            Idlabel.AutoSize = true;
+            Idlabel.Location = new Point(182, 291);
+            Idlabel.Name = "Idlabel";
+            Idlabel.Size = new Size(22, 20);
+            Idlabel.TabIndex = 11;
+            Idlabel.Text = "Id";
             // 
             // MainForm
             // 
@@ -549,5 +615,11 @@
         private Label ReleaseYearLabel;
         private Label DurationLabel;
         private Label GenreLabel;
+        private TextBox CoordYTextBox;
+        private TextBox CoordXTextBox;
+        private Label CoordYLabel;
+        private Label CoordXLabel;
+        private TextBox IdTextBox;
+        private Label Idlabel;
     }
 }

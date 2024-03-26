@@ -33,7 +33,10 @@ namespace Programming
                 double width = Math.Round(ran.NextDouble() * (25 - 1) + 1, 2);
                 int indexColor = ran.Next(colors.Length);
                 string color = colors[indexColor];
-                rectangles[i] = new Model.Classes.Rectangle(length, width, color);
+                double centerX = width / 2;
+                double centerY = length / 2;
+                Point2D center = new Point2D(centerX, centerY);
+                rectangles[i] = new Model.Classes.Rectangle(length, width, color, center);
             }
         }
         private void InitializetionMovies(Movie[] movies)
@@ -193,6 +196,9 @@ namespace Programming
                 LengthTextBox.Text = _currentRectangle.Length.ToString();
                 WidthTextBox.Text = _currentRectangle.Width.ToString();
                 ColorTextBox.Text = _currentRectangle.Color.ToString();
+                CoordXTextBox.Text = _currentRectangle.Center.X.ToString();
+                CoordYTextBox.Text = _currentRectangle.Center.Y.ToString();
+                IdTextBox.Text = _currentRectangle.Id.ToString();
             }
         }
 
@@ -248,6 +254,46 @@ namespace Programming
             {
                 _currentRectangle.Color = ColorTextBox.Text;
                 ColorTextBox.BackColor = System.Drawing.Color.White;
+            }
+        }
+        private void CoordXTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                double valueCoordX = double.Parse(CoordXTextBox.Text);
+                if (valueCoordX < 0)
+                {
+                    CoordXTextBox.BackColor = System.Drawing.Color.LightPink;
+                }
+                else
+                {
+                    _currentRectangle.Width = valueCoordX;
+                    CoordXTextBox.BackColor = System.Drawing.Color.White;
+                }
+            }
+            catch (FormatException)
+            {
+                CoordXTextBox.BackColor = System.Drawing.Color.LightPink;
+            }
+        }
+        private void CoordYTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                double valueCoordY = double.Parse(CoordYTextBox.Text);
+                if (valueCoordY < 0)
+                {
+                    CoordYTextBox.BackColor = System.Drawing.Color.LightPink;
+                }
+                else
+                {
+                    _currentRectangle.Width = valueCoordY;
+                    CoordYTextBox.BackColor = System.Drawing.Color.White;
+                }
+            }
+            catch (FormatException)
+            {
+                CoordYTextBox.BackColor = System.Drawing.Color.LightPink;
             }
         }
         private int FindRectangleWithMaxWidth(Model.Classes.Rectangle[] rectangles)

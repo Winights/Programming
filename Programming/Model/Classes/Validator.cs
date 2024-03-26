@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Classes
 {
-    internal class Validator
+    public class Validator
     {
        public static void AssertOnPositiveValue(int value, string Name)
        {
