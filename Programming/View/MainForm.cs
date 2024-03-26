@@ -9,9 +9,9 @@ namespace Programming
     public partial class MainForm : Form
     {
         private Model.Classes.Rectangle[] _rectangles = new Model.Classes.Rectangle[5];
-        private Model.Classes.Rectangle _currentRectangle;
+        private Model.Classes.Rectangle _currentRectangle = new Model.Classes.Rectangle();
         private Movie[] _movies = new Movie[5];
-        private Movie _currentMovie;
+        private Movie _currentMovie = new Movie();
         public MainForm()
         {
             InitializeComponent();

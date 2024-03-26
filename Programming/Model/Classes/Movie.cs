@@ -63,7 +63,7 @@ namespace Programming.Model.Classes
         public Movie()
         {
             DurationMinutes = 0;
-            ReleaseYear = 0;
+            ReleaseYear = 1900;
             Rating = 0;
             Genre = "";
             Title = "";
