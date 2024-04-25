@@ -5,14 +5,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Programming.Model.Classes
+namespace Programming.Model.Classes.Geometry
 {
+    /// <summary>
+    /// Хранит данные о прямоугольниках.
+    /// </summary>
     public class Rectangle
     {
+        /// <summary>
+        /// Длина для всех объектов данного класса.
+        /// </summary>
         private double _length;
+
+        /// <summary>
+        /// Ширина для всех объектов данного класса.
+        /// </summary>
         private double _width;
+
+        /// <summary>
+        /// Уникальный идентификатор для всех объектов данного класса.
+        /// </summary>
         private static int _allRectanglesCount;
+
+        /// <summary>
+        /// Счетчик для всех существующих объектов данного класса.
+        /// </summary>
         private readonly int _id;
+
+        /// <summary>
+        /// Цвет для всех объектов данного класса.
+        /// </summary>
         public string Color { get; set; }
 
         public double Length
@@ -40,7 +62,7 @@ namespace Programming.Model.Classes
             }
         }
         public Point2D Center { get; set; }
-        
+
         public static int AllRectanglesCount
         {
             get
@@ -56,17 +78,17 @@ namespace Programming.Model.Classes
             Width = width;
             Color = color;
             Center = center;
-            _allRectanglesCount++;
             _id = _allRectanglesCount;
+            _allRectanglesCount++;
         }
         public Rectangle()
         {
             Length = 0;
             Width = 0;
             Color = "";
-            Center = new Point2D(0,0);
-            _allRectanglesCount++;
+            Center = new Point2D(0, 0);
             _id = _allRectanglesCount;
+            _allRectanglesCount++;
         }
     }
 }

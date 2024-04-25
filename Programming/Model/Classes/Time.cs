@@ -6,10 +6,24 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Classes
 {
+    /// <summary>
+    /// Хранит данные о времени.
+    /// </summary>
     public class Time
     {
+        /// <summary>
+        /// Часы для всех объектов данного класса.
+        /// </summary>
         private int _hours;
+
+        /// <summary>
+        /// Минуты для всех объектов данного класса.
+        /// </summary>
         private int _minutes;
+
+        /// <summary>
+        /// Секунды для всех объектов данного класса.
+        /// </summary>
         private int _seconds;
 
         public int Hours

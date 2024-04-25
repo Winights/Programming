@@ -7,10 +7,24 @@ using System.Xml.Linq;
 
 namespace Programming.Model.Classes
 {
+    /// <summary>
+    /// Хранит данные о рейсах.
+    /// </summary>
     public class Flight
     {
+        /// <summary>
+        /// Время полета в минутах для всех объектов данного класса.
+        /// </summary>
         private int _flightTimeMinutes;
+
+        /// <summary>
+        /// Пункт вылета для всех объектов данного класса.
+        /// </summary>
         public string DestinationName { get; set; }
+
+        /// <summary>
+        /// Пункт назначения для всех объектов данного класса.
+        /// </summary>
         public string Destination { get; set; }
 
         public int FlightTimeMinutes

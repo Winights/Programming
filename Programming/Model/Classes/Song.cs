@@ -7,11 +7,29 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Classes
 {
+    /// <summary>
+    /// Хранит данные о песнях в плеере.
+    /// </summary>
     public class Song
     {
+        /// <summary>
+        /// Продолжительность песни в секундах для всех объектов данного класса.
+        /// </summary>
         private int _durationInSeconds;
+
+        /// <summary>
+        /// Название песни для всех объектов данного класса.
+        /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// Исполнитель песни для всех объектов данного класса.
+        /// </summary>
         public string Artist { get; set; }
+
+        /// <summary>
+        /// Жанр песни для всех объектов данного класса.
+        /// </summary>
         public string Genre { get; set; }
         public int DurationInSeconds 
         { 

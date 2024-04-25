@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Programming.Model.Classes
+namespace Programming.Model.Classes.Geometry
 {
-    internal class CollisionManager
+    /// <summary>
+    /// Выполняет проверку о пересечении/столкновении геометрических фигур.
+    /// </summary>
+    public class CollisionManager
     {
         public bool IsCollision(Rectangle rectangle1, Rectangle rectangle2)
         {

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Enums
 {
+    /// <summary>
+    /// Хранит данные о моделях телефонов.
+    /// </summary>
     public enum Manufactures
     {
         Samsung,

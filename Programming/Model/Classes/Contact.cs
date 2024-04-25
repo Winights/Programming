@@ -9,6 +9,9 @@ using System.Text.RegularExpressions;
 
 namespace Programming.Model.Classes
 {
+    /// <summary>
+    /// Хранит данные о контактных данных.
+    /// </summary>
     public class Contact
     {
         private string _name = string.Empty;

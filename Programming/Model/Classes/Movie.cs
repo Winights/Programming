@@ -8,12 +8,34 @@ using System.Xml.Linq;
 
 namespace Programming.Model.Classes
 {
+    /// <summary>
+    /// Хранит данные о фильмах.
+    /// </summary>
     public class Movie
     {
+        /// <summary>
+        /// Продолжительность фильма в минутах для всех объектов данного класса.
+        /// </summary>
         private int _durationMinutes;
+
+        /// <summary>
+        /// Дата выхода фильма для всех объектов данного класса.
+        /// </summary>
         private int _releaseYear;
+
+        /// <summary>
+        /// Рейтинг фильма для всех объектов данного класса.
+        /// </summary>
         private double _rating;
+
+        /// <summary>
+        /// Жанр фильма для всех объектов данного класса.
+        /// </summary>
         public string Genre { get; set; }
+
+        /// <summary>
+        /// Название фильма для всех объектов данного класса.
+        /// </summary>
         public string Title { get; set; }
 
         public double Rating

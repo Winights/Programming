@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Classes
 {
+    /// <summary>
+    /// Реализует статистическую проверку данных.
+    /// </summary>
     public class Validator
     {
        public static void AssertOnPositiveValue(int value, string Name)

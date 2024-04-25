@@ -7,10 +7,24 @@ using System.Xml.Linq;
 
 namespace Programming.Model.Classes
 {
+    /// <summary>
+    /// Хранит данные о дисциплинах в зачетной книжке.
+    /// </summary>
     public class Discipline
     {
+        /// <summary>
+        /// Номер семестра для всех объектов данного класса.
+        /// </summary>
         private int _semester;
+
+        /// <summary>
+        /// Имя профессора для всех объектов данного класса.
+        /// </summary>
         public string Professor { get; set; }
+
+        /// <summary>
+        /// Название дисциплины для всех объектов данного класса.
+        /// </summary>
         public string Name { get; set; }
         public int Semester 
         {

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Enums
 {
+    /// <summary>
+    /// Хранит данные о жанрах фильмов.
+    /// </summary>
     public enum Genre
     {
         Comedy,

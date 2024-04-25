@@ -4,11 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Programming.Model.Classes
+namespace Programming.Model.Classes.Geometry
 {
+    /// <summary>
+    /// Хранит данные о геометрических кольцах.
+    /// </summary>
     public class Ring
     {
+        /// <summary>
+        /// Внешний радиус для всех объектов данного класса.
+        /// </summary>
         private double _externalRadius;
+
+        /// <summary>
+        /// Внутренний радиус для всех объектов данного класса.
+        /// </summary>
         private double _internalRadius;
 
         public Point2D Center { get; set; }
@@ -48,7 +58,7 @@ namespace Programming.Model.Classes
         {
             get
             {
-                return (Math.PI * ExternalRadius * ExternalRadius) - (Math.PI * InternalRadius * InternalRadius);
+                return Math.PI * ExternalRadius * ExternalRadius - Math.PI * InternalRadius * InternalRadius;
             }
         }
         public Ring(double externalRadius, double internalRadius, Point2D center)
