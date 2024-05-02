@@ -13,20 +13,23 @@ namespace Programming.Model.Classes
     public class Flight
     {
         /// <summary>
-        /// Время полета в минутах для всех объектов данного класса.
+        /// Время полета в минутах.
         /// </summary>
         private int _flightTimeMinutes;
 
         /// <summary>
-        /// Пункт вылета для всех объектов данного класса.
+        /// Возвращает и задает пункт вылета.
         /// </summary>
         public string DestinationName { get; set; }
 
         /// <summary>
-        /// Пункт назначения для всех объектов данного класса.
+        /// Возвращает и задает пункт назначения.
         /// </summary>
         public string Destination { get; set; }
 
+        /// <summary>
+        /// Возвращает и задает время полета в минутах. Должно быть положительным числом.
+        /// </summary>
         public int FlightTimeMinutes
         {
             get
@@ -40,12 +43,22 @@ namespace Programming.Model.Classes
             }
         }
 
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Flight"/>.
+        /// </summary>
+        /// <param name="destination">Пункт назначения.</param>
+        /// <param name="destinationName">Пункт вылета.</param>
+        /// <param name="flightTimeMinutes">Время полета в минутах.</param>
         public Flight(string destination, string destinationName, int flightTimeMinutes)
         {
             Destination = destination;
             DestinationName = destinationName;
             FlightTimeMinutes = flightTimeMinutes;
         }
+
+        /// <summary>
+        /// Создаёт пустой экземпляр класса <see cref="Flight"/>.
+        /// </summary>
         public Flight()
         {
             Destination = "";

@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Classes.Geometry
 {
+    /// <summary>
+    /// Реализует статистическую генерацию нового случайного объекта прямоугольника.
+    /// </summary>
     public class RectangleFactory
     {
+        /// <summary>
+        /// Генерирует случайный обьект прямоугольника.
+        /// </summary>
+        /// <returns>Возвращает новый случайный объект прямоугольника.</returns>
         public static Rectangle Randomize()
         {
             Random ran = new Random();

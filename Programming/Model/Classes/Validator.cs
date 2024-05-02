@@ -11,13 +11,24 @@ namespace Programming.Model.Classes
     /// </summary>
     public class Validator
     {
-       public static void AssertOnPositiveValue(int value, string Name)
-       {
+        /// <summary>
+        /// Проверяет, что число является положительным.
+        /// </summary>
+        /// <param name="value">Проверямое число.</param>
+        /// <param name="Name">Имя свойства или объекта, которое подлежит проверке.</param>
+        public static void AssertOnPositiveValue(int value, string Name)
+        {
             if (value < 0)
             {
                 throw new ArgumentException($"Число не может быть отрицательным. Ошибка в свойстве {Name}");
             }
-       }
+        }
+
+        /// <summary>
+        /// Проверяет, что число является положительным.
+        /// </summary>
+        /// <param name="value">Проверямое число.</param>
+        /// <param name="Name">Имя свойства или объекта, которое подлежит проверке.</param>
         public static void AssertOnPositiveValue(double value, string Name)
         {
             if (value < 0)
@@ -25,7 +36,30 @@ namespace Programming.Model.Classes
                 throw new ArgumentException($"Число не может быть отрицательным. Ошибка в свойстве {Name}");
             }
         }
+
+        /// <summary>
+        /// Проверяет, что число входит в диапазон.
+        /// </summary>
+        /// <param name="value">Проверямое число.</param>
+        /// <param name="min">Минимальная граница.</param>
+        /// <param name="max">Максимальная граница.</param>
+        /// <param name="Name">Имя свойства или объекта, которое подлежит проверке.</param>
         public static void AssertValueInRange(int value, int min, int max, string Name)
+        {
+            if (value < min || value > max)
+            {
+                throw new ArgumentOutOfRangeException($"Ошибка в {Name}");
+            }
+        }
+
+        /// <summary>
+        /// Проверяет, что число входит в диапазон.
+        /// </summary>
+        /// <param name="value">Проверямое число.</param>
+        /// <param name="min">Минимальная граница.</param>
+        /// <param name="max">Максимальная граница.</param>
+        /// <param name="Name">Имя свойства или объекта, которое подлежит проверке.</param>
+        public static void AssertValueInRange(double value, int min, int max, string Name)
         {
             if (value < min || value > max)
             {

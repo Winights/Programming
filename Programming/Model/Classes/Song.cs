@@ -13,24 +13,28 @@ namespace Programming.Model.Classes
     public class Song
     {
         /// <summary>
-        /// Продолжительность песни в секундах для всех объектов данного класса.
+        /// Продолжительность песни в секундах.
         /// </summary>
         private int _durationInSeconds;
 
         /// <summary>
-        /// Название песни для всех объектов данного класса.
+        /// Возвращает и задает название песни.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// Исполнитель песни для всех объектов данного класса.
+        /// Возвращает и задает исполнителя песни.
         /// </summary>
         public string Artist { get; set; }
 
         /// <summary>
-        /// Жанр песни для всех объектов данного класса.
+        /// Возвращает и задает жанр песни.
         /// </summary>
         public string Genre { get; set; }
+
+        /// <summary>
+        /// Возвращает и задает продолжительность песни в секундах. Должна быть положительным числом.
+        /// </summary>
         public int DurationInSeconds 
         { 
             get
@@ -43,6 +47,14 @@ namespace Programming.Model.Classes
                 _durationInSeconds = value;
             }
         }
+
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Song"/>.
+        /// </summary>
+        /// <param name="title">Название песни.</param>
+        /// <param name="artist">Исполнитель песни.</param>
+        /// <param name="durationInSeconds">Продолжительность песни в секундах.</param>
+        /// <param name="genre">Жанр песни.</param>
         public Song(string title, string artist, int durationInSeconds, string genre)
         {
             Title = title;
@@ -50,6 +62,10 @@ namespace Programming.Model.Classes
             DurationInSeconds = durationInSeconds;
             Genre = genre;
         }
+
+        /// <summary>
+        /// Создаёт пустой экземпляр класса <see cref="Song"/>.
+        /// </summary>
         public Song()
         {
             Title = "";

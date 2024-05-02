@@ -12,20 +12,23 @@ namespace Programming.Model.Classes
     public class Time
     {
         /// <summary>
-        /// Часы для всех объектов данного класса.
+        /// Часы.
         /// </summary>
         private int _hours;
 
         /// <summary>
-        /// Минуты для всех объектов данного класса.
+        /// Минуты.
         /// </summary>
         private int _minutes;
 
         /// <summary>
-        /// Секунды для всех объектов данного класса.
+        /// Секунды.
         /// </summary>
         private int _seconds;
 
+        /// <summary>
+        /// Возвращает и задает часы. Должны быть положительным числом.
+        /// </summary>
         public int Hours
         {
             get
@@ -38,6 +41,10 @@ namespace Programming.Model.Classes
                 _hours = value;
             }
         }
+
+        /// <summary>
+        /// Возвращает и задает минуты. Должны быть положительным числом.
+        /// </summary>
         public int Minutes
         {
             get
@@ -50,6 +57,10 @@ namespace Programming.Model.Classes
                 _minutes = value;
             } 
         }
+
+        /// <summary>
+        /// Возвращает и задает секунды. Должны быть положительным числом.
+        /// </summary>
         public int Seconds
         {
             get
@@ -62,12 +73,23 @@ namespace Programming.Model.Classes
                 _seconds = value;
             }
         }
+
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Time"/>.
+        /// </summary>
+        /// <param name="hours">Часы.</param>
+        /// <param name="minutes">Минуты.</param>
+        /// <param name="seconds">Секунды.</param>
         public Time(int hours, int minutes, int seconds)
         {
             Hours = hours;
             Minutes = minutes;
             Seconds = seconds;
         }
+
+        /// <summary>
+        /// Создаёт пустой экземпляр класса <see cref="Time"/>.
+        /// </summary>
         public Time()
         {
             Hours = 0;

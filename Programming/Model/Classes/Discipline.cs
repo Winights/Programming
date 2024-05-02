@@ -13,19 +13,23 @@ namespace Programming.Model.Classes
     public class Discipline
     {
         /// <summary>
-        /// Номер семестра для всех объектов данного класса.
+        /// Номер семестра.
         /// </summary>
         private int _semester;
 
         /// <summary>
-        /// Имя профессора для всех объектов данного класса.
+        /// Возвращает и задает имя профессора.
         /// </summary>
         public string Professor { get; set; }
 
         /// <summary>
-        /// Название дисциплины для всех объектов данного класса.
+        /// Возвращает и задает название дисциплины.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Возвращает и задает номер семестра. Должен быть положительным числом.
+        /// </summary>
         public int Semester 
         {
             get
@@ -38,12 +42,23 @@ namespace Programming.Model.Classes
                 _semester = value;
             }
         }
-        public Discipline(string name, int credits, int semester, string professor)
+
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Discipline"/>.
+        /// </summary>
+        /// <param name="name">Название дисциплины.</param>
+        /// <param name="semester">Номер семестра.</param>
+        /// <param name="professor">Имя профессора.</param>
+        public Discipline(string name, int semester, string professor)
         {
             Name = name;
             Semester = semester;
             Professor = professor;
         }
+
+        /// <summary>
+        /// Создаёт пустой экземпляр класса <see cref="Discipline"/>.
+        /// </summary>
         public Discipline()
         {
             Name = "";

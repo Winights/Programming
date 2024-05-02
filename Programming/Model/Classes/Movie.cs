@@ -14,30 +14,33 @@ namespace Programming.Model.Classes
     public class Movie
     {
         /// <summary>
-        /// Продолжительность фильма в минутах для всех объектов данного класса.
+        /// Продолжительность фильма в минутах.
         /// </summary>
         private int _durationMinutes;
 
         /// <summary>
-        /// Дата выхода фильма для всех объектов данного класса.
+        /// Год выхода фильма.
         /// </summary>
         private int _releaseYear;
 
         /// <summary>
-        /// Рейтинг фильма для всех объектов данного класса.
+        /// Рейтинг фильма.
         /// </summary>
         private double _rating;
 
         /// <summary>
-        /// Жанр фильма для всех объектов данного класса.
+        /// Возвращает и задает жанр фильма.
         /// </summary>
         public string Genre { get; set; }
 
         /// <summary>
-        /// Название фильма для всех объектов данного класса.
+        /// Возвращает и задает название фильма.
         /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Возвращает и задает рейтинг фильма. Должен быть положительным числом и не больше 10.
+        /// </summary>
         public double Rating
         {
             get
@@ -47,9 +50,14 @@ namespace Programming.Model.Classes
             set
             {
                 Validator.AssertOnPositiveValue(value, "Rating");
+                Validator.AssertValueInRange(value, 0, 10, "Rating");
                 _rating = value;
             }
         }
+
+        /// <summary>
+        /// Возвращает и задает год выхода фильма. Должна быть не меньше 1900 и не больше нынешнего года.
+        /// </summary>
         public int ReleaseYear
         {
             get
@@ -62,6 +70,10 @@ namespace Programming.Model.Classes
                 _releaseYear = value;
             }
         }
+
+        /// <summary>
+        /// Возвращает и задает продолжительность фильма в минутах. Должна быть положительным числом.
+        /// </summary>
         public int DurationMinutes
         {
             get
@@ -74,6 +86,15 @@ namespace Programming.Model.Classes
                 _durationMinutes = value;
             }
         }
+
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Movie"/>.
+        /// </summary>
+        /// <param name="durationMinutes">Продолжительность фильма в минутах.</param>
+        /// <param name="releaseYear">Год выхода фильма.</param>
+        /// <param name="rating">Рейтинг фильма.</param>
+        /// <param name="genre">Жанр фильма.</param>
+        /// <param name="title">Название фильма.</param>
         public Movie(int durationMinutes, int releaseYear, double rating, string genre, string title)
         {
             DurationMinutes = durationMinutes; 
@@ -82,6 +103,10 @@ namespace Programming.Model.Classes
             Genre = genre;
             Title = title;
         }
+
+        /// <summary>
+        /// Создаёт пустой экземпляр класса <see cref="Movie"/>.
+        /// </summary>
         public Movie()
         {
             DurationMinutes = 0;
