@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProgrammingSolution.ModelSolution
 {
-    public enum Genres
+    /// <summary>
+    /// Хранит данные о жанрах.
+    /// </summary>
+    public enum Genre
     {
         Fantasy,
         Detective,

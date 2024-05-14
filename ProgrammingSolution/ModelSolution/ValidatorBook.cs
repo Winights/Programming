@@ -24,6 +24,12 @@ namespace ProgrammingSolution.ModelSolution
             }
         }
 
+        /// <summary>
+        /// Проверяет, что строка не больше допустимого диапазона.
+        /// </summary>
+        /// <param name="value">Проверямое число.</param>
+        /// <param name="max">Верхняя граница.</param>
+        /// <param name="Name">Имя свойства или объекта, которое подлежит проверке.</param>
         public static void AssertStringLength(string value, int max, string Name)
         {
             if (value.Length > max)
@@ -36,7 +42,8 @@ namespace ProgrammingSolution.ModelSolution
         /// Проверяет, что число входит в диапазон.
         /// </summary>
         /// <param name="value">Проверямое число.</param>
-        /// <param name="max">Максимальная граница.</param>
+        /// <param name="min">Нижняя граница.</param>
+        /// <param name="max">Верхняя граница.</param>
         /// <param name="Name">Имя свойства или объекта, которое подлежит проверке.</param>
         public static void AssertValueInRange(double value, int min, int max, string Name)
         {

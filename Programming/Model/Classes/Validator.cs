@@ -41,8 +41,8 @@ namespace Programming.Model.Classes
         /// Проверяет, что число входит в диапазон.
         /// </summary>
         /// <param name="value">Проверямое число.</param>
-        /// <param name="min">Минимальная граница.</param>
-        /// <param name="max">Максимальная граница.</param>
+        /// <param name="min">Нижняя граница.</param>
+        /// <param name="max">Верхняя граница.</param>
         /// <param name="Name">Имя свойства или объекта, которое подлежит проверке.</param>
         public static void AssertValueInRange(int value, int min, int max, string Name)
         {
@@ -56,8 +56,8 @@ namespace Programming.Model.Classes
         /// Проверяет, что число входит в диапазон.
         /// </summary>
         /// <param name="value">Проверямое число.</param>
-        /// <param name="min">Минимальная граница.</param>
-        /// <param name="max">Максимальная граница.</param>
+        /// <param name="min">Нижняя граница.</param>
+        /// <param name="max">Верхняя граница.</param>
         /// <param name="Name">Имя свойства или объекта, которое подлежит проверке.</param>
         public static void AssertValueInRange(double value, int min, int max, string Name)
         {

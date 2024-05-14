@@ -39,7 +39,7 @@
             AuthorTextBox = new TextBox();
             PagesTextBox = new TextBox();
             GenreComboBox = new ComboBox();
-            BooksListBox = new ListBox();
+            BookListBox = new ListBox();
             AddButton = new Button();
             DeleteButton = new Button();
             EditButton = new Button();
@@ -150,14 +150,14 @@
             GenreComboBox.Size = new Size(151, 28);
             GenreComboBox.TabIndex = 1;
             // 
-            // BooksListBox
+            // BookListBox
             // 
-            BooksListBox.FormattingEnabled = true;
-            BooksListBox.Location = new Point(12, 12);
-            BooksListBox.Name = "BooksListBox";
-            BooksListBox.Size = new Size(324, 364);
-            BooksListBox.TabIndex = 2;
-            BooksListBox.SelectedIndexChanged += BooksListBox_SelectedIndexChanged;
+            BookListBox.FormattingEnabled = true;
+            BookListBox.Location = new Point(12, 12);
+            BookListBox.Name = "BookListBox";
+            BookListBox.Size = new Size(324, 364);
+            BookListBox.TabIndex = 2;
+            BookListBox.SelectedIndexChanged += BooksListBox_SelectedIndexChanged;
             // 
             // AddButton
             // 
@@ -200,7 +200,7 @@
             Controls.Add(EditButton);
             Controls.Add(DeleteButton);
             Controls.Add(AddButton);
-            Controls.Add(BooksListBox);
+            Controls.Add(BookListBox);
             Controls.Add(groupBox1);
             Name = "MainFormSolution";
             Text = "MainFormSolution";
@@ -217,7 +217,7 @@
         private TextBox TitleTextBox;
         private TextBox AuthorTextBox;
         private TextBox PagesTextBox;
-        private ListBox BooksListBox;
+        private ListBox BookListBox;
         private Button AddButton;
         private Button DeleteButton;
         private Button EditButton;

@@ -21,18 +21,21 @@ namespace ProgrammingSolution
         /// <summary>
         /// Список книг.
         /// </summary>
-        private List<Books> _booksList = new List<Books>();
+        private List<Book> _booksList = new List<Book>();
 
         /// <summary>
         /// Переменная типа Rectangle.
         /// </summary>
-        private Books _currentBooks = new Books();
+        private Book _currentBook = new Book();
 
         /// <summary>
-        /// Список отсортированных книг.
+        /// Путь к AppData/Local.
         /// </summary>
-        private List<Books> _sortedBooks = new List<Books>();
         private static string _appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+        /// <summary>
+        /// Путь к AppBook/BooksInfo.
+        /// </summary>
         private string _filePath = Path.Combine(_appDataPath, "AppBook/BooksInfo"); // Путь к файлу
         public MainFormSolution()
         {
@@ -40,32 +43,46 @@ namespace ProgrammingSolution
             LoadGenreComboBox();
             LoadBooksListBox();
         }
+
+        /// <summary>
+        /// Добавляет элементы Genres в GenreComboBox.
+        /// </summary>
         private void LoadGenreComboBox()
         {
             //Добавляем элементы Genres в GenreComboBox
-            foreach (var item in Enum.GetValues(typeof(Genres)))
+            foreach (var item in Enum.GetValues(typeof(Genre)))
             {
                 GenreComboBox.Items.Add(item);
             }
         }
+        /// <summary>
+        /// Записывает элементы списка книг в файл BookInfo.
+        /// </summary>
         private void SaveToFile()
         {
             // Запись массива в файл
             using (StreamWriter writer = new StreamWriter(_filePath))
             {
-                for (int i = 0; i < _sortedBooks.Count; i++)
+                for (int i = 0; i < _booksList.Count; i++)
                 {
-                    _currentBooks = _sortedBooks[i];
-                    writer.WriteLine($"{_currentBooks.Title},{_currentBooks.YearOfIssue},{_currentBooks.Author},{_currentBooks.Pages},{_currentBooks.Genre}");
+                    _currentBook = _booksList[i];
+                    writer.WriteLine($"{_currentBook.Title},{_currentBook.YearOfIssue}," +
+                        $"{_currentBook.Author},{_currentBook.Pages},{_currentBook.Genre}");
                 }
             }
         }
+        /// <summary>
+        /// Добавляет из файла BookInfo данные в BooksListBox и в список книг.
+        /// </summary>
         private void LoadBooksListBox()
         {
             // Создание пути к файлу, если он не существует
             if (!Directory.Exists(Path.GetDirectoryName(_filePath)))
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(_filePath));
+                if (_filePath != null && !Directory.Exists(Path.GetDirectoryName(_filePath) ?? ""))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(_filePath) ?? "");
+                }
             }
             else if (!File.Exists(_filePath))
             {
@@ -81,29 +98,34 @@ namespace ProgrammingSolution
                     {
                         int yearOfIssue = int.Parse(parts[1]);
                         int pages = int.Parse(parts[3]);
-                        Enum.TryParse(parts[4], out Genres genre);
-                        _currentBooks = new Books(parts[0], yearOfIssue, parts[2], pages, genre);
-                        BooksListBox.Items.Add($"{_currentBooks.Title} / {_currentBooks.Author} / {_currentBooks.Genre}");
-                        _booksList.Add(_currentBooks);
-                        _sortedBooks.Add(_currentBooks);
+                        Enum.TryParse(parts[4], out Genre genre);
+                        _currentBook = new Book(parts[0], yearOfIssue, parts[2], pages, genre);
+                        BookListBox.Items.Add($"{_currentBook.Title} / {_currentBook.Author} / {_currentBook.Genre}");
+                        _booksList.Add(_currentBook);
                     }
                 }
             }
         }
+        /// <summary>
+        /// Добавляет элементы списка в BooksListBox.
+        /// </summary>
         private void UpdateListBox()
         {
-            BooksListBox.Items.Clear();
+            BookListBox.Items.Clear();
 
             // Сортируем список книг по названиям
-            _sortedBooks = _booksList.OrderBy(book => book.Title).ToList();
-
-           
-            foreach (var book in _sortedBooks)
+            List<Book> sortedBooks = _booksList.OrderBy(book => book.Title).ToList();
+            _booksList = sortedBooks;
+   
+            foreach (var book in _booksList)
             {
-                BooksListBox.Items.Add($"{book.Title} / {book.Author} / {book.Genre}");
+                BookListBox.Items.Add($"{book.Title} / {book.Author} / {book.Genre}");
             }
             SaveToFile();
         }
+        /// <summary>
+        /// Генерирует объект книги с помощью TextBox's.
+        /// </summary>
         private void AddBooksInfo()
         {
             if (GenreComboBox.SelectedItem != null)
@@ -112,21 +134,27 @@ namespace ProgrammingSolution
                 int yearOfIssue = int.Parse(YearOfIssueTextBox.Text);
                 string author = AuthorTextBox.Text;
                 int pages = int.Parse(PagesTextBox.Text);
-                Genres genre = (Genres)GenreComboBox.SelectedItem;
-                _currentBooks = new Books(title, yearOfIssue, author, pages, genre);
+                Genre genre = (Genre)GenreComboBox.SelectedItem;
+                _currentBook = new Book(title, yearOfIssue, author, pages, genre);
             }
         }
+        /// <summary>
+        /// Редактирует объект книги с помощью TextBox's.
+        /// </summary>
         private void EditBooksInfo()
         {
             if (GenreComboBox.SelectedItem != null)
             {
-                _currentBooks.Title = TitleTextBox.Text;
-                _currentBooks.YearOfIssue = int.Parse(YearOfIssueTextBox.Text);
-                _currentBooks.Author = AuthorTextBox.Text;
-                _currentBooks.Pages = int.Parse(PagesTextBox.Text);
-                _currentBooks.Genre = (Genres)GenreComboBox.SelectedItem;
+                _currentBook.Title = TitleTextBox.Text;
+                _currentBook.YearOfIssue = int.Parse(YearOfIssueTextBox.Text);
+                _currentBook.Author = AuthorTextBox.Text;
+                _currentBook.Pages = int.Parse(PagesTextBox.Text);
+                _currentBook.Genre = (Genre)GenreComboBox.SelectedItem;
             }
         }
+        /// <summary>
+        /// Очищает информацию о книге в TextBox's.
+        /// </summary>
         private void ClearBookInfo()
         {
             TitleTextBox.Clear();
@@ -143,12 +171,23 @@ namespace ProgrammingSolution
 
             GenreComboBox.SelectedIndex = -1;
         }
+        /// <summary>
+        /// Обновляет информацию о книге в TextBox's.
+        /// </summary>
+        /// <param name="book">Обновляемая книга.</param>
+        private void UpdateBookInfo(Book book)
+        {
+            TitleTextBox.Text = book.Title.ToString();
+            YearOfIssueTextBox.Text = book.YearOfIssue.ToString();
+            AuthorTextBox.Text = book.Author.ToString();
+            PagesTextBox.Text = book.Pages.ToString();
+            GenreComboBox.Text = book.Genre.ToString();
+        }
         private void AddButton_Click(object sender, EventArgs e)
         {
             // Создаем список TextBox'ов, которые нужно проверить
             var textBoxes = new List<System.Windows.Forms.TextBox> { TitleTextBox, YearOfIssueTextBox,
                 AuthorTextBox, PagesTextBox };
-
             bool ifRed = true;
 
             foreach (var textBox in textBoxes)
@@ -163,35 +202,86 @@ namespace ProgrammingSolution
                 && ifRed)
             {
                 AddBooksInfo();
-                _booksList.Add(_currentBooks);
+                _booksList.Add(_currentBook);
                 UpdateListBox();
                 ClearBookInfo();
+            }
+            else if (!ifRed)
+            {
+                // Выводим сообщение, если какой-либо TextBox покрашен в красный
+                MessageBox.Show(
+                    "Некоректные значения. Введите корректные значения для корректной работы программы",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
             }
             else
             {
                 // Выводим сообщение, если какой-либо TextBox пустой
-                MessageBox.Show("Заполните соответсвующие поля или выберите жанр.");
+                MessageBox.Show(
+                    "Введите данные в поля или выберете жанр для корректной работы программы",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
                 return;
             }
         }
-
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            if (BooksListBox.SelectedIndex != -1)
+            if (BookListBox.SelectedIndex != -1)
             {
-                _booksList.RemoveAt(BooksListBox.SelectedIndex);
-                BooksListBox.Items.RemoveAt(BooksListBox.SelectedIndex);
+                _booksList.RemoveAt(BookListBox.SelectedIndex);
+                BookListBox.Items.RemoveAt(BookListBox.SelectedIndex);
                 ClearBookInfo();
             }
         }
-
         private void EditButton_Click(object sender, EventArgs e)
         {
-            EditBooksInfo();
-            UpdateListBox();
-            ClearBookInfo();
-        }
+            var textBoxes = new List<System.Windows.Forms.TextBox> { TitleTextBox, YearOfIssueTextBox,
+                AuthorTextBox, PagesTextBox };
 
+            bool ifRed = true;
+
+            foreach (var textBox in textBoxes)
+            {
+                if (textBox.BackColor == Color.LightPink)
+                {
+                    ifRed = false;
+                }
+            }
+            // Проверяем, что все TextBox'ы не пустые
+            if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) && GenreComboBox.SelectedItem != null && ifRed)
+            {
+                EditBooksInfo();
+                UpdateListBox();
+                ClearBookInfo();
+            }
+            else if (!ifRed)
+            {
+                // Выводим сообщение, если какой-либо TextBox пустой
+                MessageBox.Show(
+                    "Некоректные значения. Введите корректные значения для корректной работы программы",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
+            else
+            {
+                // Выводим сообщение, если какой-либо TextBox пустой
+                MessageBox.Show(
+                    "Введите данные в поля или выберете жанр для корректной работы программы",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
+        }
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
             string valueTitle = TitleTextBox.Text;
@@ -205,7 +295,6 @@ namespace ProgrammingSolution
 
             }
         }
-
         private void YearOfIssueTextBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -217,7 +306,7 @@ namespace ProgrammingSolution
                 }
                 else
                 {
-                    _currentBooks.YearOfIssue = valueYear;
+                    _currentBook.YearOfIssue = valueYear;
                     YearOfIssueTextBox.BackColor = Color.White;
 
                 }
@@ -259,7 +348,7 @@ namespace ProgrammingSolution
                 }
                 else
                 {
-                    _currentBooks.Pages = valuePages;
+                    _currentBook.Pages = valuePages;
                     PagesTextBox.BackColor = Color.White;
                 }
             }
@@ -271,27 +360,18 @@ namespace ProgrammingSolution
             {
                 PagesTextBox.BackColor = Color.LightPink;
             }
-
         }
         private void BooksListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (BooksListBox.SelectedItem != null)
+            if (BookListBox.SelectedItem != null)
             {
-                _currentBooks = _sortedBooks[BooksListBox.SelectedIndex];
-                UpdateBookInfo(_currentBooks);
+                _currentBook = _booksList[BookListBox.SelectedIndex];
+                UpdateBookInfo(_currentBook);
             }
-            if (BooksListBox.SelectedIndex == -1)
+            if (BookListBox.SelectedIndex == -1)
             {
                 ClearBookInfo();
             }
-        }
-        private void UpdateBookInfo(Books book)
-        {
-            TitleTextBox.Text = book.Title.ToString();
-            YearOfIssueTextBox.Text = book.YearOfIssue.ToString();
-            AuthorTextBox.Text = book.Author.ToString();
-            PagesTextBox.Text = book.Pages.ToString();
-            GenreComboBox.Text = book.Genre.ToString();
         }
     }
 }
