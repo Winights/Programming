@@ -190,6 +190,7 @@
             EditButton.TabIndex = 5;
             EditButton.Text = "Edit";
             EditButton.UseVisualStyleBackColor = true;
+            EditButton.Click += EditButton_Click;
             // 
             // MainFormSolution
             // 
