@@ -21,13 +21,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_57547B169BCE4ADE9C37957DA930DD65"
+        "MsmKey" = "8:_3B6EAF5B89EC45FD876BE017CCA7E95D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9CECD28163AE4BB6AFCB179430189F7D"
+        "MsmKey" = "8:_8D9653AA801D4276BF35805F04E42210"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -56,6 +56,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -140,7 +148,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_57547B169BCE4ADE9C37957DA930DD65"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D9653AA801D4276BF35805F04E42210"
             {
             "SourcePath" = "8:..\\ProgrammingSolution\\bin\\Debug\\net8.0-windows\\ProgrammingSolution.exe"
             "TargetName" = "8:ProgrammingSolution.exe"
@@ -337,7 +345,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3695D996827A4595B98316506EBEEBD2"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8C954B713A1C4181886BF6C549A0A5A6"
             {
             "Name" = "8:AppBook"
             "Arguments" = "8:"
@@ -345,13 +353,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_57547B169BCE4ADE9C37957DA930DD65"
+            "Target" = "8:_8D9653AA801D4276BF35805F04E42210"
             "Folder" = "8:_C8453427E25C4D39923B63D288903CC4"
             "WorkingFolder" = "8:_9E6B1E9C917C493A86569914750EC125"
             "Icon" = "8:_0B0FA2E887624467822F04EB8DBD4A31"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9F56ED1F95194AF1A3E9EAF97C450728"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BBEA40AD584A483FB50962FBE25D2A25"
             {
             "Name" = "8:AppBook"
             "Arguments" = "8:"
@@ -359,7 +367,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_57547B169BCE4ADE9C37957DA930DD65"
+            "Target" = "8:_8D9653AA801D4276BF35805F04E42210"
             "Folder" = "8:_F811AB67673643F4AD7E767E4E911345"
             "WorkingFolder" = "8:_9E6B1E9C917C493A86569914750EC125"
             "Icon" = "8:_0B0FA2E887624467822F04EB8DBD4A31"
@@ -764,9 +772,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9CECD28163AE4BB6AFCB179430189F7D"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3B6EAF5B89EC45FD876BE017CCA7E95D"
             {
-            "SourcePath" = "8:..\\ProgrammingSolution\\obj\\Release\\net8.0-windows\\ProgrammingSolution.dll"
+            "SourcePath" = "8:..\\ProgrammingSolution\\obj\\Debug\\net8.0-windows\\ProgrammingSolution.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9E6B1E9C917C493A86569914750EC125"
@@ -784,7 +792,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
+            "OutputConfiguration" = "8:Debug|Any CPU"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{E1173FFB-A879-4B75-99E5-6E85DDD7CB89}"
             "ShowKeyOutput" = "11:TRUE"
