@@ -60,7 +60,7 @@ namespace ProgrammingSolution
         /// </summary>
         private void SaveToFile()
         {
-            // Запись массива в файл
+            // Запись списка в файл
             using (StreamWriter writer = new StreamWriter(_filePath))
             {
                 for (int i = 0; i < _booksList.Count; i++)
@@ -84,6 +84,7 @@ namespace ProgrammingSolution
                     Directory.CreateDirectory(Path.GetDirectoryName(_filePath) ?? "");
                 }
             }
+            // Создание файла, если он не существует
             else if (!File.Exists(_filePath))
             {
                 File.Create(_filePath).Dispose();
@@ -185,114 +186,124 @@ namespace ProgrammingSolution
         }
         private void AddButton_Click(object sender, EventArgs e)
         {
-            // Создаем список TextBox'ов, которые нужно проверить
-            var textBoxes = new List<System.Windows.Forms.TextBox> { TitleTextBox, YearOfIssueTextBox,
-                AuthorTextBox, PagesTextBox };
-            bool ifRed = true;
-
-            foreach (var textBox in textBoxes)
+            try
             {
-                if (textBox.BackColor == Color.LightPink)
+                // Создаем список TextBox'ов, которые нужно проверить
+                var textBoxes = new List<System.Windows.Forms.TextBox> { TitleTextBox, YearOfIssueTextBox, 
+                    AuthorTextBox, PagesTextBox };
+                bool ifRed = true;
+
+                foreach (var textBox in textBoxes)
                 {
-                    ifRed = false;
+                    if (textBox.BackColor == Color.LightPink)
+                    {
+                        ifRed = false;
+                    }
+                }
+
+                // Проверяем, что все TextBox'ы не пустые, ComboBox не null и не один из TextBox'ов не красный
+                if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) && GenreComboBox.SelectedItem != null && ifRed)
+                {
+                    AddBooksInfo();
+                    _booksList.Add(_currentBook);
+                    UpdateListBox();
+                    ClearBookInfo();
+                }
+                else
+                {
+                    throw new Exception("Некоректные значения. Введите корректные значения для корректной работы программы.");
                 }
             }
-            // Проверяем, что все TextBox'ы не пустые
-            if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) && GenreComboBox.SelectedItem != null
-                && ifRed)
+            catch (Exception ex)
             {
-                AddBooksInfo();
-                _booksList.Add(_currentBook);
-                UpdateListBox();
-                ClearBookInfo();
-            }
-            else if (!ifRed)
-            {
-                // Выводим сообщение, если какой-либо TextBox покрашен в красный
-                MessageBox.Show(
-                    "Некоректные значения. Введите корректные значения для корректной работы программы",
-                    "Ошибка",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1);
-                return;
-            }
-            else
-            {
-                // Выводим сообщение, если какой-либо TextBox пустой
-                MessageBox.Show(
-                    "Введите данные в поля или выберете жанр для корректной работы программы",
-                    "Ошибка",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1);
-                return;
+                // Выводим сообщение с ошибкой
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            if (BookListBox.SelectedIndex != -1)
+            if (BookListBox.SelectedIndex == -1)
             {
-                _booksList.RemoveAt(BookListBox.SelectedIndex);
-                BookListBox.Items.RemoveAt(BookListBox.SelectedIndex);
-                ClearBookInfo();
+                // Выводим сообщение, если не выбран элемент
+                MessageBox.Show(
+                    "Не выбран элемент для удаления.",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
             }
+            _booksList.RemoveAt(BookListBox.SelectedIndex);
+            BookListBox.Items.RemoveAt(BookListBox.SelectedIndex);
+            ClearBookInfo();
         }
         private void EditButton_Click(object sender, EventArgs e)
         {
-            var textBoxes = new List<System.Windows.Forms.TextBox> { TitleTextBox, YearOfIssueTextBox,
-                AuthorTextBox, PagesTextBox };
-
-            bool ifRed = true;
-
-            foreach (var textBox in textBoxes)
+            if (BookListBox.SelectedIndex == -1)
             {
-                if (textBox.BackColor == Color.LightPink)
+                // Выводим сообщение, если не выбран
+                MessageBox.Show(
+                    "Не выбран элемент для редактирования.",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
+            try
+            {
+                // Создаем список TextBox'ов, которые нужно проверить
+                var textBoxes = new List<System.Windows.Forms.TextBox> { TitleTextBox, YearOfIssueTextBox,
+                    AuthorTextBox, PagesTextBox };
+                bool ifRed = true;
+
+                foreach (var textBox in textBoxes)
                 {
-                    ifRed = false;
+                    if (textBox.BackColor == Color.LightPink)
+                    {
+                        ifRed = false;
+                    }
+                }
+
+                // Проверяем, что все TextBox'ы не пустые, ComboBox не null и не один из TextBox'ов не красный
+                if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) && GenreComboBox.SelectedItem != null && ifRed)
+                {
+                    EditBooksInfo();
+                    UpdateListBox();
+                    ClearBookInfo();
+                }
+                else
+                {
+                    throw new Exception("Некоректные значения. Введите корректные значения для корректной работы программы.");
                 }
             }
-            // Проверяем, что все TextBox'ы не пустые
-            if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) && GenreComboBox.SelectedItem != null && ifRed)
+            catch (Exception ex)
             {
-                EditBooksInfo();
-                UpdateListBox();
-                ClearBookInfo();
-            }
-            else if (!ifRed)
-            {
-                // Выводим сообщение, если какой-либо TextBox пустой
-                MessageBox.Show(
-                    "Некоректные значения. Введите корректные значения для корректной работы программы",
-                    "Ошибка",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1);
-                return;
-            }
-            else
-            {
-                // Выводим сообщение, если какой-либо TextBox пустой
-                MessageBox.Show(
-                    "Введите данные в поля или выберете жанр для корректной работы программы",
-                    "Ошибка",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1);
-                return;
+                // Выводим сообщение с ошибкой
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
-            string valueTitle = TitleTextBox.Text;
-            if (valueTitle.Length == 0)
+            try
+            {
+                string valueTitle = TitleTextBox.Text;
+                if (valueTitle.Length == 0)
+                {
+                    TitleTextBox.BackColor = Color.LightPink;
+                }
+                else
+                {
+                    _currentBook.Title = valueTitle;
+                    TitleTextBox.BackColor = Color.White;
+
+                }
+            }
+            catch(ArgumentOutOfRangeException)
             {
                 TitleTextBox.BackColor = Color.LightPink;
-            }
-            else
-            {
-                TitleTextBox.BackColor = Color.White;
-
             }
         }
         private void YearOfIssueTextBox_TextChanged(object sender, EventArgs e)

@@ -34,7 +34,7 @@ namespace ProgrammingSolution.ModelSolution
         {
             if (value.Length > max)
             {
-                throw new ArgumentException($"Превысило {max} символов. Ошибка в {Name}");
+                throw new ArgumentOutOfRangeException($"Превысило {max} символов. Ошибка в {Name}");
             }
         }
 
@@ -45,7 +45,7 @@ namespace ProgrammingSolution.ModelSolution
         /// <param name="min">Нижняя граница.</param>
         /// <param name="max">Верхняя граница.</param>
         /// <param name="Name">Имя свойства или объекта, которое подлежит проверке.</param>
-        public static void AssertValueInRange(double value, int min, int max, string Name)
+        public static void AssertValueInRange(int value, int min, int max, string Name)
         {
             if (value < min || value > max)
             {
