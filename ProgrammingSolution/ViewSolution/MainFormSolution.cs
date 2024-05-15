@@ -301,7 +301,7 @@ namespace ProgrammingSolution
 
                 }
             }
-            catch(ArgumentOutOfRangeException)
+            catch(SystemException)
             {
                 TitleTextBox.BackColor = Color.LightPink;
             }
@@ -322,17 +322,9 @@ namespace ProgrammingSolution
 
                 }
             }
-            catch (FormatException)
+            catch (SystemException)
             {
                 YearOfIssueTextBox.BackColor = Color.LightPink;
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                YearOfIssueTextBox.BackColor = Color.LightPink;
-            }
-            catch (NullReferenceException)
-            {
-                PagesTextBox.BackColor = Color.LightPink;
             }
         }
         private void AuthorTextBox_TextChanged(object sender, EventArgs e)
@@ -363,11 +355,7 @@ namespace ProgrammingSolution
                     PagesTextBox.BackColor = Color.White;
                 }
             }
-            catch (FormatException)
-            {
-                PagesTextBox.BackColor = Color.LightPink;
-            }
-            catch (NullReferenceException)
+            catch (SystemException)
             {
                 PagesTextBox.BackColor = Color.LightPink;
             }
