@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Programming", "Programming\Programming.csproj", "{102B37E4-0368-4B5B-8B90-250D0B67A9F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammingSolution", "ProgrammingSolution\ProgrammingSolution.csproj", "{E1173FFB-A879-4B75-99E5-6E85DDD7CB89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgrammingSolution", "ProgrammingSolution\ProgrammingSolution.csproj", "{E1173FFB-A879-4B75-99E5-6E85DDD7CB89}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AppBook_Setup", "AppBook_Setup\AppBook_Setup.vdproj", "{B5C6274E-3E16-45F4-A645-C66FAB6E5098}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,8 @@ Global
 		{E1173FFB-A879-4B75-99E5-6E85DDD7CB89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1173FFB-A879-4B75-99E5-6E85DDD7CB89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1173FFB-A879-4B75-99E5-6E85DDD7CB89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5C6274E-3E16-45F4-A645-C66FAB6E5098}.Debug|Any CPU.ActiveCfg = Debug
+		{B5C6274E-3E16-45F4-A645-C66FAB6E5098}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
