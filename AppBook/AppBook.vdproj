@@ -15,19 +15,19 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_37C6CEF6EB47494F96CF29ACFD1C373A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_68BC57698AAB47ABB3C57E333D8131F9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9D864296F78B4CCF91410FF3567C56C1"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BE6B44BF44A34D2797B41BCAECA7EC91"
+        "MsmKey" = "8:_910C79B9822D47779F3D02AE96E491F3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -63,6 +63,11 @@
                     "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 и x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.7.2"
                     }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.CoreRuntime.8.0.x86"
+                    {
+                    "Name" = "8:Среда выполнения .NET 8.0.1 (x86)"
+                    "ProductCode" = "8:Microsoft.NetCore.CoreRuntime.8.0.x86"
+                    }
                 }
             }
         }
@@ -81,6 +86,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -132,10 +145,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BE6B44BF44A34D2797B41BCAECA7EC91"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_910C79B9822D47779F3D02AE96E491F3"
             {
-            "SourcePath" = "8:..\\ProgrammingSolution\\bin\\Debug\\net8.0-windows\\ProgrammingSolution.exe"
-            "TargetName" = "8:ProgrammingSolution.exe"
+            "SourcePath" = "8:..\\..\\..\\..\\Downloads\\windowsdesktop-runtime-8.0.5-win-x64.exe"
+            "TargetName" = "8:windowsdesktop-runtime-8.0.5-win-x64.exe"
             "Tag" = "8:"
             "Folder" = "8:_0629E16FAC2F495BBAAF9EAC40248B84"
             "Condition" = "8:"
@@ -160,7 +173,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_0629E16FAC2F495BBAAF9EAC40248B84"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -209,7 +222,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AppBook"
         "ProductCode" = "8:{0DD4F59E-1780-4DEC-A483-698DD4D9C68F}"
-        "PackageCode" = "8:{7B51A157-CC94-46C7-9D43-D582066C03BE}"
+        "PackageCode" = "8:{2BFF503C-7F45-4B17-994C-693F1C78C9C0}"
         "UpgradeCode" = "8:{BA4C8923-10E1-43C5-A076-05AAE1864F64}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -329,34 +342,6 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_23C47ACA77E542B7A57746B68CC03F9E"
-            {
-            "Name" = "8:AppBook"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_BE6B44BF44A34D2797B41BCAECA7EC91"
-            "Folder" = "8:_3AC23C53CFBE4835915AA966119713D2"
-            "WorkingFolder" = "8:_0629E16FAC2F495BBAAF9EAC40248B84"
-            "Icon" = "8:_68BC57698AAB47ABB3C57E333D8131F9"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_50837847E3A646198A3ABF9B393EDEC2"
-            {
-            "Name" = "8:AppBook"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_BE6B44BF44A34D2797B41BCAECA7EC91"
-            "Folder" = "8:_4D7F7F2276A345C2B18A257360B970F4"
-            "WorkingFolder" = "8:_0629E16FAC2F495BBAAF9EAC40248B84"
-            "Icon" = "8:_68BC57698AAB47ABB3C57E333D8131F9"
-            "Feature" = "8:"
-            }
         }
         "UserInterface"
         {
@@ -756,9 +741,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9D864296F78B4CCF91410FF3567C56C1"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_37C6CEF6EB47494F96CF29ACFD1C373A"
             {
-            "SourcePath" = "8:..\\ProgrammingSolution\\obj\\Debug\\net8.0-windows\\ProgrammingSolution.dll"
+            "SourcePath" = "8:..\\ProgrammingSolution\\obj\\Debug\\net8.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0629E16FAC2F495BBAAF9EAC40248B84"
@@ -777,7 +762,7 @@
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:Debug|Any CPU"
-            "OutputGroupCanonicalName" = "8:Built"
+            "OutputGroupCanonicalName" = "8:PublishItems"
             "OutputProjectGuid" = "8:{E1173FFB-A879-4B75-99E5-6E85DDD7CB89}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
