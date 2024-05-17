@@ -236,8 +236,7 @@ namespace ProgrammingSolution
             }
             _booksList.RemoveAt(BookListBox.SelectedIndex);
             BookListBox.Items.RemoveAt(BookListBox.SelectedIndex);
-            UpdateListBox();
-            ClearBookInfo();
+            SaveToFile();
         }
         private void EditButton_Click(object sender, EventArgs e)
         {

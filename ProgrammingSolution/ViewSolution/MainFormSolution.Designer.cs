@@ -203,6 +203,7 @@
             Controls.Add(BookListBox);
             Controls.Add(groupBox1);
             Name = "MainFormSolution";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AppBook";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

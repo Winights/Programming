@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Programming", "Programming\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgrammingSolution", "ProgrammingSolution\ProgrammingSolution.csproj", "{E1173FFB-A879-4B75-99E5-6E85DDD7CB89}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AppBook", "AppBook\AppBook.vdproj", "{09FC48A1-5BD4-4A71-B543-22338DD37D41}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AppBook", "AppBook\AppBook.vdproj", "{82998F49-F9EE-412C-85E0-3B1FECFF015D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,8 +23,8 @@ Global
 		{E1173FFB-A879-4B75-99E5-6E85DDD7CB89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1173FFB-A879-4B75-99E5-6E85DDD7CB89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1173FFB-A879-4B75-99E5-6E85DDD7CB89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09FC48A1-5BD4-4A71-B543-22338DD37D41}.Debug|Any CPU.ActiveCfg = Debug
-		{09FC48A1-5BD4-4A71-B543-22338DD37D41}.Release|Any CPU.ActiveCfg = Release
+		{82998F49-F9EE-412C-85E0-3B1FECFF015D}.Debug|Any CPU.ActiveCfg = Debug
+		{82998F49-F9EE-412C-85E0-3B1FECFF015D}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
