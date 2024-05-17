@@ -24,6 +24,11 @@ namespace ProgrammingSolution
         private List<Book> _booksList = new List<Book>();
 
         /// <summary>
+        /// Отсортированный список книг.
+        /// </summary>
+        private List<Book> _sortedBooks = new List<Book>();
+
+        /// <summary>
         /// Переменная типа Rectangle.
         /// </summary>
         private Book _currentBook = new Book();
@@ -115,10 +120,10 @@ namespace ProgrammingSolution
             BookListBox.Items.Clear();
 
             // Сортируем список книг по названиям
-            List<Book> sortedBooks = _booksList.OrderBy(book => book.Title).ToList();
-            _booksList = sortedBooks;
-   
-            foreach (var book in _booksList)
+            _sortedBooks = _booksList.OrderBy(book => book.Title).ToList();
+            _booksList = _sortedBooks;
+
+            foreach (Book book in _booksList)
             {
                 BookListBox.Items.Add($"{book.Title} / {book.Author} / {book.Genre}");
             }
@@ -237,6 +242,7 @@ namespace ProgrammingSolution
             _booksList.RemoveAt(BookListBox.SelectedIndex);
             BookListBox.Items.RemoveAt(BookListBox.SelectedIndex);
             SaveToFile();
+            ClearBookInfo();
         }
         private void EditButton_Click(object sender, EventArgs e)
         {
@@ -290,15 +296,13 @@ namespace ProgrammingSolution
             try
             {
                 string valueTitle = TitleTextBox.Text;
-                if (valueTitle.Length == 0)
+                if (valueTitle.Length == 0 || valueTitle.Length > 100)
                 {
                     TitleTextBox.BackColor = Color.LightPink;
                 }
                 else
                 {
-                    _currentBook.Title = valueTitle;
                     TitleTextBox.BackColor = Color.White;
-
                 }
             }
             catch(SystemException)
@@ -311,15 +315,13 @@ namespace ProgrammingSolution
             try
             {
                 int valueYear = int.Parse(YearOfIssueTextBox.Text);
-                if (valueYear < 0)
+                if (valueYear < 0 || valueYear > DateTime.Now.Year)
                 {
                     YearOfIssueTextBox.BackColor = Color.LightPink;
                 }
                 else
                 {
-                    _currentBook.YearOfIssue = valueYear;
                     YearOfIssueTextBox.BackColor = Color.White;
-
                 }
             }
             catch (SystemException)
@@ -351,7 +353,6 @@ namespace ProgrammingSolution
                 }
                 else
                 {
-                    _currentBook.Pages = valuePages;
                     PagesTextBox.BackColor = Color.White;
                 }
             }
