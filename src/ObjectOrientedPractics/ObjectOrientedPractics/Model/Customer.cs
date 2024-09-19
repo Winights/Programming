@@ -46,6 +46,7 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 ValueValidator.AssertStringOnLength(value, 200, "Fullname");
+                _fullname = value;
             }
         }
 
@@ -61,6 +62,7 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 ValueValidator.AssertStringOnLength(value, 500, "Address");
+                _address = value;
             }
         }
 

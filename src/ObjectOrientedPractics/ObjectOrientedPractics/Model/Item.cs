@@ -53,6 +53,7 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 ValueValidator.AssertStringOnLength(value, 200, "Id");
+                _name = value;
             }
         }
 
@@ -68,6 +69,7 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 ValueValidator.AssertStringOnLength(value, 1000, "Info");
+                _info = value;
             }
         }
 
@@ -83,6 +85,7 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 ValueValidator.AssertValueInRange(value, 0, 100000, "Cost");
+                _cost = value;
             }
         }
 
