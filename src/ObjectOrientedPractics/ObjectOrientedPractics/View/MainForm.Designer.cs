@@ -31,18 +31,22 @@
             ObjecTabControl = new TabControl();
             tabPage1 = new TabPage();
             itemsTab1 = new View.Tabs.ItemsTab();
+            tabPage2 = new TabPage();
+            customersTab1 = new View.Tabs.CustomersTab();
             ObjecTabControl.SuspendLayout();
             tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // ObjecTabControl
             // 
             ObjecTabControl.Controls.Add(tabPage1);
+            ObjecTabControl.Controls.Add(tabPage2);
             ObjecTabControl.Dock = DockStyle.Fill;
             ObjecTabControl.Location = new Point(0, 0);
             ObjecTabControl.Name = "ObjecTabControl";
             ObjecTabControl.SelectedIndex = 0;
-            ObjecTabControl.Size = new Size(794, 641);
+            ObjecTabControl.Size = new Size(814, 653);
             ObjecTabControl.TabIndex = 0;
             // 
             // tabPage1
@@ -64,16 +68,35 @@
             itemsTab1.Size = new Size(780, 602);
             itemsTab1.TabIndex = 0;
             // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(customersTab1);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Size = new Size(806, 620);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Customers";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // customersTab1
+            // 
+            customersTab1.Dock = DockStyle.Fill;
+            customersTab1.Location = new Point(0, 0);
+            customersTab1.Name = "customersTab1";
+            customersTab1.Size = new Size(806, 620);
+            customersTab1.TabIndex = 0;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(794, 641);
+            ClientSize = new Size(814, 653);
             Controls.Add(ObjecTabControl);
             Name = "MainForm";
             Text = "Object Oriented Practics";
             ObjecTabControl.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -82,5 +105,7 @@
         private TabControl ObjecTabControl;
         private TabPage tabPage1;
         private View.Tabs.ItemsTab itemsTab1;
+        private TabPage tabPage2;
+        private View.Tabs.CustomersTab customersTab1;
     }
 }

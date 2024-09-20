@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             ItemsGroupBox = new GroupBox();
+            EditButton = new Button();
             RemoveButton = new Button();
             AddButton = new Button();
             ItemsListBox = new ListBox();
@@ -41,7 +42,6 @@
             NameTextBox = new TextBox();
             CostTextBox = new TextBox();
             IdTextBox = new TextBox();
-            EditButton = new Button();
             ItemsGroupBox.SuspendLayout();
             SelectedItemGroupBox.SuspendLayout();
             SuspendLayout();
@@ -53,12 +53,23 @@
             ItemsGroupBox.Controls.Add(AddButton);
             ItemsGroupBox.Controls.Add(ItemsListBox);
             ItemsGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ItemsGroupBox.Location = new Point(3, 12);
+            ItemsGroupBox.Location = new Point(0, 3);
             ItemsGroupBox.Name = "ItemsGroupBox";
-            ItemsGroupBox.Size = new Size(345, 606);
+            ItemsGroupBox.Size = new Size(348, 615);
             ItemsGroupBox.TabIndex = 0;
             ItemsGroupBox.TabStop = false;
             ItemsGroupBox.Text = "Items";
+            // 
+            // EditButton
+            // 
+            EditButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            EditButton.Location = new Point(231, 536);
+            EditButton.Name = "EditButton";
+            EditButton.Size = new Size(108, 53);
+            EditButton.TabIndex = 9;
+            EditButton.Text = "Edit";
+            EditButton.UseVisualStyleBackColor = true;
+            EditButton.Click += EditButton_Click;
             // 
             // RemoveButton
             // 
@@ -104,9 +115,9 @@
             SelectedItemGroupBox.Controls.Add(CostTextBox);
             SelectedItemGroupBox.Controls.Add(IdTextBox);
             SelectedItemGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            SelectedItemGroupBox.Location = new Point(348, 12);
+            SelectedItemGroupBox.Location = new Point(348, 3);
             SelectedItemGroupBox.Name = "SelectedItemGroupBox";
-            SelectedItemGroupBox.Size = new Size(455, 606);
+            SelectedItemGroupBox.Size = new Size(455, 615);
             SelectedItemGroupBox.TabIndex = 1;
             SelectedItemGroupBox.TabStop = false;
             SelectedItemGroupBox.Text = "Selected Item";
@@ -157,7 +168,7 @@
             DescryptionTextBox.Location = new Point(6, 278);
             DescryptionTextBox.Multiline = true;
             DescryptionTextBox.Name = "DescryptionTextBox";
-            DescryptionTextBox.Size = new Size(419, 180);
+            DescryptionTextBox.Size = new Size(443, 180);
             DescryptionTextBox.TabIndex = 3;
             DescryptionTextBox.TextChanged += DescryptionTextBox_TextChanged;
             // 
@@ -167,7 +178,7 @@
             NameTextBox.Location = new Point(6, 133);
             NameTextBox.Multiline = true;
             NameTextBox.Name = "NameTextBox";
-            NameTextBox.Size = new Size(419, 119);
+            NameTextBox.Size = new Size(443, 119);
             NameTextBox.TabIndex = 2;
             NameTextBox.TextChanged += NameTextBox_TextChanged;
             // 
@@ -189,17 +200,6 @@
             IdTextBox.ReadOnly = true;
             IdTextBox.Size = new Size(125, 27);
             IdTextBox.TabIndex = 0;
-            // 
-            // EditButton
-            // 
-            EditButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            EditButton.Location = new Point(231, 536);
-            EditButton.Name = "EditButton";
-            EditButton.Size = new Size(108, 53);
-            EditButton.TabIndex = 9;
-            EditButton.Text = "Edit";
-            EditButton.UseVisualStyleBackColor = true;
-            EditButton.Click += EditButton_Click;
             // 
             // ItemsTab
             // 
