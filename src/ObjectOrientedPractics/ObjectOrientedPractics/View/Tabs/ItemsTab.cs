@@ -21,7 +21,8 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Переменная типа Item.
         /// </summary>
-        private Model.Item _currentItem = new Model.Item();
+        private Model.Item _currentItem;
+
         public ItemsTab()
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private void AddItemsInfo()
         {
             string name = NameTextBox.Text;
-            string descryption = DescryptionTextBox.Text;
+            string descryption = DescriptionTextBox.Text;
             double cost = double.Parse(CostTextBox.Text);
             _currentItem = new Model.Item(name, descryption, cost);
         }
@@ -62,8 +63,8 @@ namespace ObjectOrientedPractics.View.Tabs
             NameTextBox.Clear();
             NameTextBox.BackColor = Color.White;
 
-            DescryptionTextBox.Clear();
-            DescryptionTextBox.BackColor = Color.White;
+            DescriptionTextBox.Clear();
+            DescriptionTextBox.BackColor = Color.White;
 
             IdTextBox.Clear();
         }
@@ -72,12 +73,13 @@ namespace ObjectOrientedPractics.View.Tabs
         /// Обновляет информацию о товаре в TextBox's.
         /// </summary>
         /// <param name="item">Обновляемая книга.</param>
-        private void UpdateItemInfo(Model.Item item)
+        private void UpdateItemInfo()
         {
-            IdTextBox.Text = item.Id.ToString();
-            CostTextBox.Text = item.Cost.ToString();
-            NameTextBox.Text = item.Name.ToString();
-            DescryptionTextBox.Text = item.Info.ToString();
+            _currentItem = _itemsList[ItemsListBox.SelectedIndex];
+            IdTextBox.Text = _currentItem.Id.ToString();
+            CostTextBox.Text = _currentItem.Cost.ToString();
+            NameTextBox.Text = _currentItem.Name.ToString();
+            DescriptionTextBox.Text = _currentItem.Info.ToString();
         }
 
         /// <summary>
@@ -89,7 +91,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _currentItem.Cost = double.Parse(CostTextBox.Text);
                 _currentItem.Name = NameTextBox.Text;
-                _currentItem.Info = DescryptionTextBox.Text;
+                _currentItem.Info = DescriptionTextBox.Text;
             }
         }
 
@@ -133,23 +135,23 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
-        private void DescryptionTextBox_TextChanged(object sender, EventArgs e)
+        private void DescriptionTextBox_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                string valueInfo = DescryptionTextBox.Text;
+                string valueInfo = DescriptionTextBox.Text;
                 if (valueInfo.Length > 1000)
                 {
-                    DescryptionTextBox.BackColor = Color.LightPink;
+                    DescriptionTextBox.BackColor = Color.LightPink;
                 }
                 else
                 {
-                    DescryptionTextBox.BackColor = Color.White;
+                    DescriptionTextBox.BackColor = Color.White;
                 }
             }
             catch (SystemException)
             {
-                DescryptionTextBox.BackColor = Color.LightPink;
+                DescriptionTextBox.BackColor = Color.LightPink;
             }
         }
 
@@ -159,7 +161,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 // Создаем список TextBox'ов, которые нужно проверить
                 var textBoxes = new List<TextBox> { CostTextBox,
-                    NameTextBox, DescryptionTextBox };
+                    NameTextBox, DescriptionTextBox };
                 bool ifRed = true;
 
                 foreach (var textBox in textBoxes)
@@ -213,8 +215,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (ItemsListBox.SelectedItem != null)
             {
-                _currentItem = _itemsList[ItemsListBox.SelectedIndex];
-                UpdateItemInfo(_currentItem);
+                UpdateItemInfo();
             }
 
             if (ItemsListBox.SelectedIndex == -1)
@@ -234,3 +235,4 @@ namespace ObjectOrientedPractics.View.Tabs
         }
     }
 }
+

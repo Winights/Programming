@@ -36,9 +36,9 @@
             SelectedItemGroupBox = new GroupBox();
             IdLabel = new Label();
             CostLabel = new Label();
-            DescryptionLabel = new Label();
+            DescriptionLabel = new Label();
             NameLabel = new Label();
-            DescryptionTextBox = new TextBox();
+            DescriptionTextBox = new TextBox();
             NameTextBox = new TextBox();
             CostTextBox = new TextBox();
             IdTextBox = new TextBox();
@@ -108,9 +108,9 @@
             SelectedItemGroupBox.BackColor = Color.White;
             SelectedItemGroupBox.Controls.Add(IdLabel);
             SelectedItemGroupBox.Controls.Add(CostLabel);
-            SelectedItemGroupBox.Controls.Add(DescryptionLabel);
+            SelectedItemGroupBox.Controls.Add(DescriptionLabel);
             SelectedItemGroupBox.Controls.Add(NameLabel);
-            SelectedItemGroupBox.Controls.Add(DescryptionTextBox);
+            SelectedItemGroupBox.Controls.Add(DescriptionTextBox);
             SelectedItemGroupBox.Controls.Add(NameTextBox);
             SelectedItemGroupBox.Controls.Add(CostTextBox);
             SelectedItemGroupBox.Controls.Add(IdTextBox);
@@ -142,15 +142,15 @@
             CostLabel.TabIndex = 6;
             CostLabel.Text = "Cost:";
             // 
-            // DescryptionLabel
+            // DescriptionLabel
             // 
-            DescryptionLabel.AutoSize = true;
-            DescryptionLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            DescryptionLabel.Location = new Point(6, 255);
-            DescryptionLabel.Name = "DescryptionLabel";
-            DescryptionLabel.Size = new Size(91, 20);
-            DescryptionLabel.TabIndex = 5;
-            DescryptionLabel.Text = "Descryption:";
+            DescriptionLabel.AutoSize = true;
+            DescriptionLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            DescriptionLabel.Location = new Point(6, 255);
+            DescriptionLabel.Name = "DescriptionLabel";
+            DescriptionLabel.Size = new Size(88, 20);
+            DescriptionLabel.TabIndex = 5;
+            DescriptionLabel.Text = "Description:";
             // 
             // NameLabel
             // 
@@ -162,15 +162,15 @@
             NameLabel.TabIndex = 4;
             NameLabel.Text = "Name:";
             // 
-            // DescryptionTextBox
+            // DescriptionTextBox
             // 
-            DescryptionTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            DescryptionTextBox.Location = new Point(6, 278);
-            DescryptionTextBox.Multiline = true;
-            DescryptionTextBox.Name = "DescryptionTextBox";
-            DescryptionTextBox.Size = new Size(443, 180);
-            DescryptionTextBox.TabIndex = 3;
-            DescryptionTextBox.TextChanged += DescryptionTextBox_TextChanged;
+            DescriptionTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            DescriptionTextBox.Location = new Point(6, 278);
+            DescriptionTextBox.Multiline = true;
+            DescriptionTextBox.Name = "DescriptionTextBox";
+            DescriptionTextBox.Size = new Size(443, 180);
+            DescriptionTextBox.TabIndex = 3;
+            DescriptionTextBox.TextChanged += DescriptionTextBox_TextChanged;
             // 
             // NameTextBox
             // 
@@ -220,13 +220,13 @@
         private GroupBox ItemsGroupBox;
         private ListBox ItemsListBox;
         private GroupBox SelectedItemGroupBox;
-        private TextBox DescryptionTextBox;
+        private TextBox DescriptionTextBox;
         private TextBox NameTextBox;
         private TextBox CostTextBox;
         private TextBox IdTextBox;
         private Label IdLabel;
         private Label CostLabel;
-        private Label DescryptionLabel;
+        private Label DescriptionLabel;
         private Label NameLabel;
         private Button RemoveButton;
         private Button AddButton;

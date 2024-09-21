@@ -52,7 +52,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueValidator.AssertStringOnLength(value, 200, "Id");
+                ValueValidator.AssertStringOnLength(value, 200, "Name");
                 _name = value;
             }
         }
