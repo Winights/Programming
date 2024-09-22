@@ -23,12 +23,12 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Название товара.
         /// </summary>
-        private string _name = string.Empty;
+        private string _name;
 
         /// <summary>
         /// Описание товара.
         /// </summary>
-        private string _info = string.Empty;
+        private string _info;
 
         /// <summary>
         /// Стоимость товара.

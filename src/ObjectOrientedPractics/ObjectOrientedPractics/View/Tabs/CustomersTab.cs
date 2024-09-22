@@ -17,12 +17,18 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Список покупателей.
         /// </summary>
-        private List<Model.Customer> _customersList = new List<Model.Customer>();
+        private List<Customer> _customersList = new List<Customer>();
 
         /// <summary>
         /// Переменная типа Customer.
         /// </summary>
-        private Model.Customer _currentCustomer = new Model.Customer();
+        private Customer _currentCustomer = new Customer();
+
+        /// <summary>
+        /// Переменная типа Customer c пустыми значениями.
+        /// </summary>
+        private Customer _selectedCustomer = new Customer();
+
         public CustomersTab()
         {
             InitializeComponent();
@@ -31,11 +37,11 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Генерирует объект товара с помощью TextBox's.
         /// </summary>
-        private void AddItemsInfo()
+        private Customer AddItemsInfo()
         {
             string fullname = FullnameTextBox.Text;
             string address = AddressTextBox.Text;
-            _currentCustomer = new Model.Customer(fullname, address);
+            return new Customer(fullname, address);
         }
 
         /// <summary>
@@ -45,7 +51,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             CustomersListBox.Items.Clear();
 
-            foreach (Model.Customer customer in _customersList)
+            foreach (Customer customer in _customersList)
             {
                 CustomersListBox.Items.Add($"{customer.Id} / {customer.Fullname}");
             }
@@ -68,41 +74,21 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Обновляет информацию о товаре в TextBox's.
         /// </summary>
-        /// <param name="item">Обновляемая книга.</param>
-        private void UpdateItemInfo(Model.Customer customer)
+        private void UpdateItemInfo(Customer customer)
         {
             IdTextBox.Text = customer.Id.ToString();
             FullnameTextBox.Text = customer.Fullname.ToString();
             AddressTextBox.Text = customer.Address.ToString();
         }
 
-        /// <summary>
-        /// Редактирует объект книги с помощью TextBox's.
-        /// </summary>
-        private void EditBooksInfo()
-        {
-            if (CustomersListBox.SelectedItem != null)
-            {
-                _currentCustomer.Fullname = FullnameTextBox.Text;
-                _currentCustomer.Address = AddressTextBox.Text;
-            }
-        }
-
         private void FullnameTextBox_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                string valueFullname = FullnameTextBox.Text;
-                if (valueFullname.Length > 200)
-                {
-                    FullnameTextBox.BackColor = Color.LightPink;
-                }
-                else
-                {
-                    FullnameTextBox.BackColor = Color.White;
-                }
+                _currentCustomer.Fullname = FullnameTextBox.Text;
+                FullnameTextBox.BackColor = Color.White;
             }
-            catch (SystemException)
+            catch (ArgumentException)
             {
                 FullnameTextBox.BackColor = Color.LightPink;
             }
@@ -112,17 +98,10 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                string valueAddress = AddressTextBox.Text;
-                if (valueAddress.Length > 500)
-                {
-                    AddressTextBox.BackColor = Color.LightPink;
-                }
-                else
-                {
-                    AddressTextBox.BackColor = Color.White;
-                }
+                _currentCustomer.Address = AddressTextBox.Text;
+                AddressTextBox.BackColor = Color.White;
             }
-            catch (SystemException)
+            catch (ArgumentException)
             {
                 AddressTextBox.BackColor = Color.LightPink;
             }
@@ -133,7 +112,7 @@ namespace ObjectOrientedPractics.View.Tabs
             try
             {
                 // Создаем список TextBox'ов, которые нужно проверить
-                var textBoxes = new List<System.Windows.Forms.TextBox> 
+                var textBoxes = new List<System.Windows.Forms.TextBox>
                 { FullnameTextBox, AddressTextBox };
                 bool ifRed = true;
 
@@ -148,10 +127,9 @@ namespace ObjectOrientedPractics.View.Tabs
                 // Проверяем, что все TextBox'ы не пустые и не один из TextBox'ов не красный
                 if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) && ifRed)
                 {
-                    AddItemsInfo();
-                    _customersList.Add(_currentCustomer);
+                    Customer selectedCustomer = AddItemsInfo();
+                    _customersList.Add(selectedCustomer);
                     UpdateListBox();
-                    ClearItemInfo();
                 }
                 else
                 {
@@ -184,16 +162,6 @@ namespace ObjectOrientedPractics.View.Tabs
             ClearItemInfo();
         }
 
-        private void EditButton_Click(object sender, EventArgs e)
-        {
-            if (CustomersListBox.SelectedItem != null)
-            {
-                EditBooksInfo();
-                UpdateListBox();
-                ClearItemInfo();
-            }
-        }
-
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CustomersListBox.SelectedItem != null)
@@ -201,10 +169,14 @@ namespace ObjectOrientedPractics.View.Tabs
                 _currentCustomer = _customersList[CustomersListBox.SelectedIndex];
                 UpdateItemInfo(_currentCustomer);
             }
+        }
 
-            if (CustomersListBox.SelectedIndex == -1)
+        private void CustomersListBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedItem != null)
             {
-                ClearItemInfo();
+                UpdateListBox();
+                _currentCustomer = _selectedCustomer;
             }
         }
     }

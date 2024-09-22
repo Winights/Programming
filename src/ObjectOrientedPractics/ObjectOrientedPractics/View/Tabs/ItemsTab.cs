@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Tracing;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -16,12 +17,17 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Список товаров.
         /// </summary>
-        private List<Model.Item> _itemsList = new List<Model.Item>();
+        private List<Model.Item> _items = new();
 
         /// <summary>
         /// Переменная типа Item.
         /// </summary>
-        private Model.Item _currentItem;
+        private Model.Item _currentItem = new Model.Item();
+
+        /// <summary>
+        /// Переменная типа Item c пустыми значениями.
+        /// </summary>
+        private Model.Item _selectedItem = new Model.Item();
 
         public ItemsTab()
         {
@@ -31,12 +37,12 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Генерирует объект товара с помощью TextBox's.
         /// </summary>
-        private void AddItemsInfo()
+        private Model.Item AddItemsInfo()
         {
             string name = NameTextBox.Text;
             string descryption = DescriptionTextBox.Text;
             double cost = double.Parse(CostTextBox.Text);
-            _currentItem = new Model.Item(name, descryption, cost);
+            return new Model.Item(name, descryption, cost);
         }
 
         /// <summary>
@@ -46,9 +52,9 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             ItemsListBox.Items.Clear();
 
-            foreach (Model.Item item in _itemsList)
+            foreach (Model.Item item in _items)
             {
-                ItemsListBox.Items.Add($"{item.Id} / {item.Name} / {item.Cost}");
+                ItemsListBox.Items.Add($"{item.Id} / {item.Name}");
             }
         }
 
@@ -57,6 +63,8 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private void ClearItemInfo()
         {
+            IdTextBox.Clear();
+
             CostTextBox.Clear();
             CostTextBox.BackColor = Color.White;
 
@@ -65,53 +73,33 @@ namespace ObjectOrientedPractics.View.Tabs
 
             DescriptionTextBox.Clear();
             DescriptionTextBox.BackColor = Color.White;
-
-            IdTextBox.Clear();
+            
         }
 
         /// <summary>
         /// Обновляет информацию о товаре в TextBox's.
         /// </summary>
-        /// <param name="item">Обновляемая книга.</param>
-        private void UpdateItemInfo()
-        {
-            _currentItem = _itemsList[ItemsListBox.SelectedIndex];
-            IdTextBox.Text = _currentItem.Id.ToString();
-            CostTextBox.Text = _currentItem.Cost.ToString();
-            NameTextBox.Text = _currentItem.Name.ToString();
-            DescriptionTextBox.Text = _currentItem.Info.ToString();
-        }
-
-        /// <summary>
-        /// Редактирует объект книги с помощью TextBox's.
-        /// </summary>
-        private void EditBooksInfo()
-        {
-            if (ItemsListBox.SelectedItem != null)
-            {
-                _currentItem.Cost = double.Parse(CostTextBox.Text);
-                _currentItem.Name = NameTextBox.Text;
-                _currentItem.Info = DescriptionTextBox.Text;
-            }
+        private void UpdateItemInfo(Model.Item item)
+        {  
+            IdTextBox.Text = item.Id.ToString();
+            CostTextBox.Text = item.Cost.ToString();
+            NameTextBox.Text = item.Name;
+            DescriptionTextBox.Text = item.Info;
         }
 
         private void CostTextBox_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                double valueCost = double.Parse(CostTextBox.Text);
-                if (valueCost < 0 || valueCost > 100000)
+                _currentItem.Cost = double.Parse(CostTextBox.Text);
+                CostTextBox.BackColor = Color.White;
+            }
+            catch (Exception)
+            {
+                if (CostTextBox.Text != "")
                 {
                     CostTextBox.BackColor = Color.LightPink;
                 }
-                else
-                {
-                    CostTextBox.BackColor = Color.White;
-                }
-            }
-            catch (SystemException)
-            {
-                CostTextBox.BackColor = Color.LightPink;
             }
         }
 
@@ -119,17 +107,10 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                string valueName = NameTextBox.Text;
-                if (valueName.Length > 200)
-                {
-                    NameTextBox.BackColor = Color.LightPink;
-                }
-                else
-                {
-                    NameTextBox.BackColor = Color.White;
-                }
+                _currentItem.Name = NameTextBox.Text;
+                NameTextBox.BackColor = Color.White;
             }
-            catch (SystemException)
+            catch (ArgumentException)
             {
                 NameTextBox.BackColor = Color.LightPink;
             }
@@ -139,17 +120,10 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                string valueInfo = DescriptionTextBox.Text;
-                if (valueInfo.Length > 1000)
-                {
-                    DescriptionTextBox.BackColor = Color.LightPink;
-                }
-                else
-                {
-                    DescriptionTextBox.BackColor = Color.White;
-                }
+                _currentItem.Info = DescriptionTextBox.Text;
+                DescriptionTextBox.BackColor = Color.White;
             }
-            catch (SystemException)
+            catch (ArgumentException)
             {
                 DescriptionTextBox.BackColor = Color.LightPink;
             }
@@ -175,14 +149,14 @@ namespace ObjectOrientedPractics.View.Tabs
                 // Проверяем, что все TextBox'ы не пустые и не один из TextBox'ов не красный
                 if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) && ifRed)
                 {
-                    AddItemsInfo();
-                    _itemsList.Add(_currentItem);
+                    Model.Item selectedItem = AddItemsInfo();
+                    _items.Add(selectedItem);
                     UpdateListBox();
-                    ClearItemInfo();
                 }
                 else
                 {
-                    throw new Exception("Некоректные значения. Введите корректные значения для корректной работы программы.");
+                    throw new Exception("Некоректные значения. Введите корректные значения для " +
+                        "корректной работы программы.");
                 }
             }
             catch (Exception ex)
@@ -206,7 +180,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     MessageBoxDefaultButton.Button1);
                 return;
             }
-            _itemsList.RemoveAt(ItemsListBox.SelectedIndex);
+            _items.RemoveAt(ItemsListBox.SelectedIndex);
             ItemsListBox.Items.RemoveAt(ItemsListBox.SelectedIndex);
             ClearItemInfo();
         }
@@ -215,24 +189,18 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (ItemsListBox.SelectedItem != null)
             {
-                UpdateItemInfo();
-            }
-
-            if (ItemsListBox.SelectedIndex == -1)
-            {
-                ClearItemInfo();
+                _currentItem = _items[ItemsListBox.SelectedIndex];
+                UpdateItemInfo(_currentItem);
             }
         }
 
-        private void EditButton_Click(object sender, EventArgs e)
+        private void ItemsListBox_DoubleClick(object sender, EventArgs e)
         {
             if (ItemsListBox.SelectedItem != null)
             {
-                EditBooksInfo();
                 UpdateListBox();
-                ClearItemInfo();
+                _currentItem = _selectedItem;
             }
         }
     }
 }
-

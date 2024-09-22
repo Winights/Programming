@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             ItemsGroupBox = new GroupBox();
-            EditButton = new Button();
             RemoveButton = new Button();
             AddButton = new Button();
             ItemsListBox = new ListBox();
@@ -48,7 +47,6 @@
             // 
             // ItemsGroupBox
             // 
-            ItemsGroupBox.Controls.Add(EditButton);
             ItemsGroupBox.Controls.Add(RemoveButton);
             ItemsGroupBox.Controls.Add(AddButton);
             ItemsGroupBox.Controls.Add(ItemsListBox);
@@ -59,17 +57,6 @@
             ItemsGroupBox.TabIndex = 0;
             ItemsGroupBox.TabStop = false;
             ItemsGroupBox.Text = "Items";
-            // 
-            // EditButton
-            // 
-            EditButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            EditButton.Location = new Point(231, 536);
-            EditButton.Name = "EditButton";
-            EditButton.Size = new Size(108, 53);
-            EditButton.TabIndex = 9;
-            EditButton.Text = "Edit";
-            EditButton.UseVisualStyleBackColor = true;
-            EditButton.Click += EditButton_Click;
             // 
             // RemoveButton
             // 
@@ -102,6 +89,7 @@
             ItemsListBox.Size = new Size(333, 504);
             ItemsListBox.TabIndex = 1;
             ItemsListBox.SelectedIndexChanged += ItemsListBox_SelectedIndexChanged;
+            ItemsListBox.DoubleClick += ItemsListBox_DoubleClick;
             // 
             // SelectedItemGroupBox
             // 
@@ -230,6 +218,5 @@
         private Label NameLabel;
         private Button RemoveButton;
         private Button AddButton;
-        private Button EditButton;
     }
 }

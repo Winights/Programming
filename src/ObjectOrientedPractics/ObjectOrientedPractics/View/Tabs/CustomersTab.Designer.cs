@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             CustomerGroupBox = new GroupBox();
-            EditButton = new Button();
             RemoveButton = new Button();
             AddButton = new Button();
             CustomersListBox = new ListBox();
@@ -47,7 +46,6 @@
             // 
             // CustomerGroupBox
             // 
-            CustomerGroupBox.Controls.Add(EditButton);
             CustomerGroupBox.Controls.Add(RemoveButton);
             CustomerGroupBox.Controls.Add(AddButton);
             CustomerGroupBox.Controls.Add(CustomersListBox);
@@ -58,17 +56,6 @@
             CustomerGroupBox.TabIndex = 0;
             CustomerGroupBox.TabStop = false;
             CustomerGroupBox.Text = "Customers";
-            // 
-            // EditButton
-            // 
-            EditButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            EditButton.Location = new Point(231, 536);
-            EditButton.Name = "EditButton";
-            EditButton.Size = new Size(108, 53);
-            EditButton.TabIndex = 11;
-            EditButton.Text = "Edit";
-            EditButton.UseVisualStyleBackColor = true;
-            EditButton.Click += EditButton_Click;
             // 
             // RemoveButton
             // 
@@ -101,6 +88,7 @@
             CustomersListBox.Size = new Size(333, 504);
             CustomersListBox.TabIndex = 0;
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
+            CustomersListBox.DoubleClick += CustomersListBox_DoubleClick;
             // 
             // SelectedCustomerGroupBox
             // 
@@ -215,6 +203,5 @@
         private ListBox CustomersListBox;
         private Button AddButton;
         private Button RemoveButton;
-        private Button EditButton;
     }
 }
