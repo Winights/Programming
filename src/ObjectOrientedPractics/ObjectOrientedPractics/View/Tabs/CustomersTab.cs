@@ -27,7 +27,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Переменная типа Customer c пустыми значениями.
         /// </summary>
-        private Customer _selectedCustomer = new Customer();
+        private Customer _nullCustomer = new Customer();
 
         public CustomersTab()
         {
@@ -176,7 +176,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (CustomersListBox.SelectedItem != null)
             {
                 UpdateListBox();
-                _currentCustomer = _selectedCustomer;
+                _currentCustomer = _nullCustomer;
             }
         }
     }

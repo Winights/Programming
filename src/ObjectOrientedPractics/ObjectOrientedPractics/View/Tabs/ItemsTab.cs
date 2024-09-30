@@ -27,7 +27,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Переменная типа Item c пустыми значениями.
         /// </summary>
-        private Model.Item _selectedItem = new Model.Item();
+        private Model.Item _nullItem = new Model.Item();
 
         public ItemsTab()
         {
@@ -79,6 +79,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Обновляет информацию о товаре в TextBox's.
         /// </summary>
+        ///  /// <param name="item">Передаваемые товар.</param>
         private void UpdateItemInfo(Model.Item item)
         {  
             IdTextBox.Text = item.Id.ToString();
@@ -199,7 +200,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (ItemsListBox.SelectedItem != null)
             {
                 UpdateListBox();
-                _currentItem = _selectedItem;
+                _currentItem = _nullItem;
             }
         }
     }

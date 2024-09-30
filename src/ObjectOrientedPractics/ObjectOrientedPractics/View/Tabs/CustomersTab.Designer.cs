@@ -49,10 +49,11 @@
             CustomerGroupBox.Controls.Add(RemoveButton);
             CustomerGroupBox.Controls.Add(AddButton);
             CustomerGroupBox.Controls.Add(CustomersListBox);
+            CustomerGroupBox.Dock = DockStyle.Left;
             CustomerGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            CustomerGroupBox.Location = new Point(3, 3);
+            CustomerGroupBox.Location = new Point(0, 0);
             CustomerGroupBox.Name = "CustomerGroupBox";
-            CustomerGroupBox.Size = new Size(352, 616);
+            CustomerGroupBox.Size = new Size(352, 622);
             CustomerGroupBox.TabIndex = 0;
             CustomerGroupBox.TabStop = false;
             CustomerGroupBox.Text = "Customers";
@@ -99,10 +100,11 @@
             SelectedCustomerGroupBox.Controls.Add(FullnameTextBox);
             SelectedCustomerGroupBox.Controls.Add(AddressTextBox);
             SelectedCustomerGroupBox.Controls.Add(IdTextBox);
+            SelectedCustomerGroupBox.Dock = DockStyle.Right;
             SelectedCustomerGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            SelectedCustomerGroupBox.Location = new Point(355, 3);
+            SelectedCustomerGroupBox.Location = new Point(358, 0);
             SelectedCustomerGroupBox.Name = "SelectedCustomerGroupBox";
-            SelectedCustomerGroupBox.Size = new Size(448, 330);
+            SelectedCustomerGroupBox.Size = new Size(448, 622);
             SelectedCustomerGroupBox.TabIndex = 1;
             SelectedCustomerGroupBox.TabStop = false;
             SelectedCustomerGroupBox.Text = "Selected Customer";
