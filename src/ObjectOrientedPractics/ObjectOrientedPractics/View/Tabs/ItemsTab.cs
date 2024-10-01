@@ -19,17 +19,17 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Список товаров.
         /// </summary>
-        private List<Model.Item> _items = new();
+        private List<Item> _items = new();
 
         /// <summary>
         /// Переменная типа Item.
         /// </summary>
-        private Model.Item _currentItem = new Model.Item();
+        private Item _currentItem = new Item();
 
         /// <summary>
-        /// Переменная типа Item c пустыми значениями.
+        /// Возвращает и задаёт список товаров.
         /// </summary>
-        private Model.Item _nullItem = new Model.Item();
+        public List<Item> Items { get { return _items; } set { _items = value; } }
 
         public ItemsTab()
         {
@@ -60,7 +60,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 string descryption = DescriptionTextBox.Text;
                 double cost = double.Parse(CostTextBox.Text);
                 Category category = (Category)CategoryComboBox.SelectedItem;
-                _currentItem = new Model.Item(name, descryption, cost, category);
+                _currentItem = new Item(name, descryption, cost, category);
             }
         }
 
@@ -71,7 +71,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             ItemsListBox.Items.Clear();
 
-            foreach (Model.Item item in _items)
+            foreach (Item item in _items)
             {
                 ItemsListBox.Items.Add($"{item.Id} / {item.Name} / {item.Category}");
             }
@@ -100,7 +100,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Обновляет информацию о товаре в TextBox's.
         /// </summary>
-        private void UpdateItemInfo(Model.Item item)
+        private void UpdateItemInfo(Item item)
         {
             IdTextBox.Text = item.Id.ToString();
             CostTextBox.Text = item.Cost.ToString();
@@ -222,7 +222,6 @@ namespace ObjectOrientedPractics.View.Tabs
             if (ItemsListBox.SelectedItem != null)
             {
                 UpdateListBox();
-                _currentItem = _nullItem;
             }
         }
 

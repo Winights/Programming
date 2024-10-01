@@ -166,7 +166,7 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public Address()
         {
-            Index = 0;
+            Index = 100000;
             Country = string.Empty;
             City = string.Empty;
             Street = string.Empty;
