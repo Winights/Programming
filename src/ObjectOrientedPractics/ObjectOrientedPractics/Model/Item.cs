@@ -119,6 +119,7 @@ namespace ObjectOrientedPractics.Model
             Info = string.Empty;
             Cost = 0;
             _id = IdGenerator.GetNextId();
+            Category = 0;
         }
     }
 }
