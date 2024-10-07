@@ -29,6 +29,8 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         public List<Customer> Customers { get { return _customers; } set { _customers = value; } }
 
+
+
         public CustomersTab()
         {
             InitializeComponent();
@@ -170,6 +172,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (CustomersListBox.SelectedItem != null)
             {
                 AddressControl.EditTextBoxs(_currentCustomer);   
+
             }
         }
     }

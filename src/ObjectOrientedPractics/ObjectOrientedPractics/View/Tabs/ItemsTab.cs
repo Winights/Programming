@@ -31,6 +31,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         public List<Item> Items { get { return _items; } set { _items = value; } }
 
+
         public ItemsTab()
         {
             InitializeComponent();

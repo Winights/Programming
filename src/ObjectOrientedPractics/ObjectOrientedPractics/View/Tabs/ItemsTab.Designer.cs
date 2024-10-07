@@ -57,6 +57,7 @@
             ItemsGroupBox.Location = new Point(0, 0);
             ItemsGroupBox.Name = "ItemsGroupBox";
             ItemsGroupBox.Size = new Size(356, 800);
+
             ItemsGroupBox.TabIndex = 0;
             ItemsGroupBox.TabStop = false;
             ItemsGroupBox.Text = "Items";
@@ -109,9 +110,11 @@
             SelectedItemGroupBox.Controls.Add(IdTextBox);
             SelectedItemGroupBox.Dock = DockStyle.Right;
             SelectedItemGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+
             SelectedItemGroupBox.Location = new Point(387, 0);
             SelectedItemGroupBox.Name = "SelectedItemGroupBox";
             SelectedItemGroupBox.Size = new Size(615, 800);
+
             SelectedItemGroupBox.TabIndex = 1;
             SelectedItemGroupBox.TabStop = false;
             SelectedItemGroupBox.Text = "Selected Item";
@@ -222,7 +225,9 @@
             Controls.Add(SelectedItemGroupBox);
             Controls.Add(ItemsGroupBox);
             Name = "ItemsTab";
+
             Size = new Size(1002, 800);
+          
             ItemsGroupBox.ResumeLayout(false);
             SelectedItemGroupBox.ResumeLayout(false);
             SelectedItemGroupBox.PerformLayout();

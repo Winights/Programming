@@ -103,9 +103,11 @@
             SelectedCustomerGroupBox.Controls.Add(IdTextBox);
             SelectedCustomerGroupBox.Dock = DockStyle.Right;
             SelectedCustomerGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+
             SelectedCustomerGroupBox.Location = new Point(355, 0);
             SelectedCustomerGroupBox.Name = "SelectedCustomerGroupBox";
             SelectedCustomerGroupBox.Size = new Size(624, 622);
+
             SelectedCustomerGroupBox.TabIndex = 1;
             SelectedCustomerGroupBox.TabStop = false;
             SelectedCustomerGroupBox.Text = "Selected Customer";
