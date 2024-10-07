@@ -12,7 +12,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Хранит данные о покупателе.
     /// </summary>
-    internal class Customer
+    public class Customer
     {
         /// <summary>
         /// Уникальный номер покупателя.
@@ -27,7 +27,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Адрес доставки для покупателя.
         /// </summary>
-        private string _address = string.Empty;
+        private Address _address = new Address();
 
         /// <summary>
         /// Возвращает уникальный номер покупателя.
@@ -53,7 +53,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задает адреса для доставки. Должен не превышать 500 символов.
         /// </summary>
-        public string Address
+        public Address CustomerAddress
         {
             get
             {
@@ -61,7 +61,6 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertStringOnLength(value, 500, "Address");
                 _address = value;
             }
         }
@@ -71,10 +70,10 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         /// <param name="fullname">Полное имя покупателя.</param>
         /// <param name="address">Адрес доставки для покупателя.</param>
-        public Customer(string fullname, string address)
+        public Customer(string fullname, Address address)
         {
             Fullname = fullname;
-            Address = address;
+            CustomerAddress = address;
             _id = IdGenerator.GetNextId();
         }
 
@@ -84,7 +83,7 @@ namespace ObjectOrientedPractics.Model
         public Customer()
         {
             Fullname = string.Empty;
-            Address = string.Empty;
+            CustomerAddress = new Address();
             _id = IdGenerator.GetNextId();
         }
     }

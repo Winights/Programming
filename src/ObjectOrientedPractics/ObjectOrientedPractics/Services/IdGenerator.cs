@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Services
     /// <summary>
     /// Реализует статистическую генерацию следующего номера для обьекта.
     /// </summary>
-    internal class IdGenerator
+    public class IdGenerator
     {
         /// <summary>
         /// Счетчик для всех существующих объектов.

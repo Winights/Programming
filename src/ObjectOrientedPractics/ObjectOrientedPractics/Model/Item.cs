@@ -13,7 +13,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Хранит данные о товарах.
     /// </summary>
-    internal class Item
+    public class Item
     {
         /// <summary>
         /// Уникальный номер товара.
@@ -23,12 +23,12 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Название товара.
         /// </summary>
-        private string _name;
+        private string _name = string.Empty;
 
         /// <summary>
         /// Описание товара.
         /// </summary>
-        private string _info;
+        private string _info = string.Empty;
 
         /// <summary>
         /// Стоимость товара.
@@ -90,17 +90,24 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
+        /// Возвращает и задает категорию товара.
+        /// </summary>
+        public Category Category { get; set; }
+
+        /// <summary>
         /// Создаёт экземпляр класса <see cref="Item"/>.
         /// </summary>
         /// <param name="name">Название товара.</param>
         /// <param name="info">Описание товара.</param>
         /// <param name="cost">Стоимость товара.</param>
-        public Item(string name, string info, double cost)
+        /// <param name="category">Категория товара.</param>
+        public Item(string name, string info, double cost, Category category)
         {
             Name = name;
             Info = info;
             Cost = cost;
             _id = IdGenerator.GetNextId();
+            Category = category;
         }
 
         /// <summary>
@@ -112,6 +119,7 @@ namespace ObjectOrientedPractics.Model
             Info = string.Empty;
             Cost = 0;
             _id = IdGenerator.GetNextId();
+            Category = 0;
         }
     }
 }

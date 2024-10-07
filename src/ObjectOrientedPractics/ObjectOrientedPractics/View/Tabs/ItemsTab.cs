@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ObjectOrientedPractics.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -17,32 +19,50 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Список товаров.
         /// </summary>
-        private List<Model.Item> _items = new();
+        private List<Item> _items = new();
 
         /// <summary>
         /// Переменная типа Item.
         /// </summary>
-        private Model.Item _currentItem = new Model.Item();
+        private Item _currentItem = new Item();
 
         /// <summary>
-        /// Переменная типа Item c пустыми значениями.
+        /// Возвращает и задаёт список товаров.
         /// </summary>
-        private Model.Item _nullItem = new Model.Item();
+        public List<Item> Items { get { return _items; } set { _items = value; } }
+
 
         public ItemsTab()
         {
             InitializeComponent();
+            LoadCategoryComboBox();
+        }
+
+        /// <summary>
+        /// Добавляет элементы Category в CategoryComboBox.
+        /// </summary>
+        private void LoadCategoryComboBox()
+        {
+            //Добавляем элементы Genres в GenreComboBox
+            foreach (var item in Enum.GetValues(typeof(Category)))
+            {
+                CategoryComboBox.Items.Add(item);
+            }
         }
 
         /// <summary>
         /// Генерирует объект товара с помощью TextBox's.
         /// </summary>
-        private Model.Item AddItemsInfo()
+        private void AddItemInfo()
         {
-            string name = NameTextBox.Text;
-            string descryption = DescriptionTextBox.Text;
-            double cost = double.Parse(CostTextBox.Text);
-            return new Model.Item(name, descryption, cost);
+            if (CategoryComboBox.SelectedItem != null)
+            {
+                string name = NameTextBox.Text;
+                string descryption = DescriptionTextBox.Text;
+                double cost = double.Parse(CostTextBox.Text);
+                Category category = (Category)CategoryComboBox.SelectedItem;
+                _currentItem = new Item(name, descryption, cost, category);
+            }
         }
 
         /// <summary>
@@ -52,9 +72,9 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             ItemsListBox.Items.Clear();
 
-            foreach (Model.Item item in _items)
+            foreach (Item item in _items)
             {
-                ItemsListBox.Items.Add($"{item.Id} / {item.Name}");
+                ItemsListBox.Items.Add($"{item.Id} / {item.Name} / {item.Category}");
             }
         }
 
@@ -73,19 +93,21 @@ namespace ObjectOrientedPractics.View.Tabs
 
             DescriptionTextBox.Clear();
             DescriptionTextBox.BackColor = Color.White;
-            
+
+            CategoryComboBox.SelectedIndex = -1;
+
         }
 
         /// <summary>
         /// Обновляет информацию о товаре в TextBox's.
         /// </summary>
-        ///  /// <param name="item">Передаваемые товар.</param>
-        private void UpdateItemInfo(Model.Item item)
-        {  
+        private void UpdateItemInfo(Item item)
+        {
             IdTextBox.Text = item.Id.ToString();
             CostTextBox.Text = item.Cost.ToString();
             NameTextBox.Text = item.Name;
             DescriptionTextBox.Text = item.Info;
+            CategoryComboBox.Text = item.Category.ToString();
         }
 
         private void CostTextBox_TextChanged(object sender, EventArgs e)
@@ -148,10 +170,11 @@ namespace ObjectOrientedPractics.View.Tabs
                 }
 
                 // Проверяем, что все TextBox'ы не пустые и не один из TextBox'ов не красный
-                if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) && ifRed)
+                if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) 
+                    && CategoryComboBox.SelectedItem != null && ifRed)
                 {
-                    Model.Item selectedItem = AddItemsInfo();
-                    _items.Add(selectedItem);
+                    AddItemInfo();
+                    _items.Add(_currentItem);
                     UpdateListBox();
                 }
                 else
@@ -200,7 +223,15 @@ namespace ObjectOrientedPractics.View.Tabs
             if (ItemsListBox.SelectedItem != null)
             {
                 UpdateListBox();
-                _currentItem = _nullItem;
+            }
+        }
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CategoryComboBox.SelectedItem != null && ItemsListBox.SelectedItem != null)
+            {
+                _currentItem.Category = (Category)CategoryComboBox.SelectedItem;
+                UpdateItemInfo(_currentItem);
             }
         }
     }

@@ -46,7 +46,7 @@
             ObjecTabControl.Location = new Point(0, 0);
             ObjecTabControl.Name = "ObjecTabControl";
             ObjecTabControl.SelectedIndex = 0;
-            ObjecTabControl.Size = new Size(814, 653);
+            ObjecTabControl.Size = new Size(984, 653);
             ObjecTabControl.TabIndex = 0;
             // 
             // tabPage1
@@ -55,7 +55,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(786, 608);
+            tabPage1.Size = new Size(976, 620);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Items";
             tabPage1.UseVisualStyleBackColor = true;
@@ -65,7 +65,7 @@
             itemsTab1.Dock = DockStyle.Fill;
             itemsTab1.Location = new Point(3, 3);
             itemsTab1.Name = "itemsTab1";
-            itemsTab1.Size = new Size(780, 602);
+            itemsTab1.Size = new Size(970, 614);
             itemsTab1.TabIndex = 0;
             // 
             // tabPage2
@@ -73,7 +73,7 @@
             tabPage2.Controls.Add(customersTab1);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
-            tabPage2.Size = new Size(806, 620);
+            tabPage2.Size = new Size(979, 620);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Customers";
             tabPage2.UseVisualStyleBackColor = true;
@@ -83,14 +83,14 @@
             customersTab1.Dock = DockStyle.Fill;
             customersTab1.Location = new Point(0, 0);
             customersTab1.Name = "customersTab1";
-            customersTab1.Size = new Size(806, 620);
+            customersTab1.Size = new Size(979, 620);
             customersTab1.TabIndex = 0;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(814, 653);
+            ClientSize = new Size(984, 653);
             Controls.Add(ObjecTabControl);
             Name = "MainForm";
             Text = "Object Oriented Practics";
