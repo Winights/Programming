@@ -35,6 +35,11 @@ namespace ObjectOrientedPractics.Model
         private Cart _cart = new Cart();
 
         /// <summary>
+        /// Список заказов.
+        /// </summary>
+        private List<Order> _orders = new List<Order>();
+
+        /// <summary>
         /// Возвращает уникальный номер покупателя.
         /// </summary>
         public int Id { get { return _id; } }
@@ -86,6 +91,21 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
+        /// Возвращает и задаёт список заказов.
+        /// </summary>
+        public List<Order> Orders
+        {
+            get
+            {
+                return _orders;
+            }
+            set
+            {
+                _orders = value;
+            }
+        }
+
+        /// <summary>
         /// Создаёт экземпляр класса <see cref="Item"/>.
         /// </summary>
         /// <param name="fullname">Полное имя покупателя.</param>
@@ -96,6 +116,7 @@ namespace ObjectOrientedPractics.Model
             CustomerAddress = address;
             _id = IdGenerator.GetNextId();
             CustomerCart = new Cart();
+            Orders = new List<Order>();
         }
 
         /// <summary>
@@ -107,6 +128,7 @@ namespace ObjectOrientedPractics.Model
             CustomerAddress = new Address();
             _id = IdGenerator.GetNextId();
             CustomerCart = new Cart();
+            Orders = new List<Order>();
         }
     }
 }
