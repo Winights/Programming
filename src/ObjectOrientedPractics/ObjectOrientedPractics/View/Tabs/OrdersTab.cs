@@ -38,6 +38,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             InitializeComponent();
         }
+
         /// <summary>
         /// Обновляет данные при переключении на вкладку.
         /// </summary>
@@ -57,8 +58,9 @@ namespace ObjectOrientedPractics.View.Tabs
 
             foreach (Order order in _orders)
             {
-                OrdersDataGridView.Rows.Add(order.Id, order.Date, $"{order.Address.Country},{order.Address.City}" +
-                    $"{order.Address.Street}, {order.Address.Building},{order.Address.Apartment}", order.CustomerFullName);
+                OrdersDataGridView.Rows.Add(order.Id, order.Date, $"{order.Address.Country}," +
+                    $"{order.Address.City}, {order.Address.Street}, {order.Address.Building}," +
+                    $"{order.Address.Apartment}", order.CustomerFullName);
             }
         }
 
@@ -80,7 +82,7 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
         /// <summary>
-        /// Заполняет листбокс товарами заказа.
+        /// Заполняет список товарами заказа.
         /// </summary>
         private void FillOrderItemsListBox()
         {
@@ -92,7 +94,7 @@ namespace ObjectOrientedPractics.View.Tabs
         }
 
         /// <summary>
-        /// Добавляет элементы списка Customers в CustomerComboBox.
+        /// Добавляет элементы перечисления Orderstatus в StatusComboBox.
         /// </summary>
         private void LoadStatusComboBox()
         {

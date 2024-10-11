@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address2 = new Model.Address();
+            Model.Address address3 = new Model.Address();
             OrdersGroupBox = new GroupBox();
             OrdersDataGridView = new DataGridView();
             IdColumn = new DataGridViewTextBoxColumn();
@@ -39,10 +39,10 @@
             StatusLabel = new Label();
             CreatedLabel = new Label();
             IdLabel = new Label();
+            AddressControl = new Controls.AddressControl();
             CreatedTextBox = new TextBox();
             StatusComboBox = new ComboBox();
             IdTextBox = new TextBox();
-            AddressControl = new Controls.AddressControl();
             OrderItemsGroupBox = new GroupBox();
             TotalCostLabel = new Label();
             AmountLabel = new Label();
@@ -60,7 +60,7 @@
             OrdersGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             OrdersGroupBox.Location = new Point(0, 0);
             OrdersGroupBox.Name = "OrdersGroupBox";
-            OrdersGroupBox.Size = new Size(488, 640);
+            OrdersGroupBox.Size = new Size(476, 725);
             OrdersGroupBox.TabIndex = 0;
             OrdersGroupBox.TabStop = false;
             OrdersGroupBox.Text = "Orders";
@@ -76,7 +76,7 @@
             OrdersDataGridView.Name = "OrdersDataGridView";
             OrdersDataGridView.ReadOnly = true;
             OrdersDataGridView.RowHeadersWidth = 51;
-            OrdersDataGridView.Size = new Size(475, 592);
+            OrdersDataGridView.Size = new Size(463, 677);
             OrdersDataGridView.TabIndex = 0;
             OrdersDataGridView.SelectionChanged += OrdersDataGridView_SelectionChanged;
             // 
@@ -114,18 +114,18 @@
             // 
             // SelectedOrderGroupBox
             // 
-            SelectedOrderGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            SelectedOrderGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             SelectedOrderGroupBox.Controls.Add(StatusLabel);
             SelectedOrderGroupBox.Controls.Add(CreatedLabel);
             SelectedOrderGroupBox.Controls.Add(IdLabel);
+            SelectedOrderGroupBox.Controls.Add(AddressControl);
             SelectedOrderGroupBox.Controls.Add(CreatedTextBox);
             SelectedOrderGroupBox.Controls.Add(StatusComboBox);
             SelectedOrderGroupBox.Controls.Add(IdTextBox);
-            SelectedOrderGroupBox.Controls.Add(AddressControl);
             SelectedOrderGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            SelectedOrderGroupBox.Location = new Point(493, 0);
+            SelectedOrderGroupBox.Location = new Point(481, 0);
             SelectedOrderGroupBox.Name = "SelectedOrderGroupBox";
-            SelectedOrderGroupBox.Size = new Size(619, 376);
+            SelectedOrderGroupBox.Size = new Size(619, 388);
             SelectedOrderGroupBox.TabIndex = 1;
             SelectedOrderGroupBox.TabStop = false;
             SelectedOrderGroupBox.Text = "Selected Order:";
@@ -160,8 +160,24 @@
             IdLabel.TabIndex = 5;
             IdLabel.Text = "ID:";
             // 
+            // AddressControl
+            // 
+            AddressControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            AddressControl.Location = new Point(6, 168);
+            AddressControl.Name = "AddressControl";
+            address3.Apartment = "";
+            address3.Building = "";
+            address3.City = "";
+            address3.Country = "";
+            address3.Index = 100000;
+            address3.Street = "";
+            AddressControl.OurAddress = address3;
+            AddressControl.Size = new Size(610, 214);
+            AddressControl.TabIndex = 0;
+            // 
             // CreatedTextBox
             // 
+            CreatedTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             CreatedTextBox.Font = new Font("Segoe UI", 9F);
             CreatedTextBox.Location = new Point(84, 68);
             CreatedTextBox.Name = "CreatedTextBox";
@@ -170,6 +186,7 @@
             // 
             // StatusComboBox
             // 
+            StatusComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             StatusComboBox.Font = new Font("Segoe UI", 9F);
             StatusComboBox.FormattingEnabled = true;
             StatusComboBox.Location = new Point(84, 113);
@@ -180,46 +197,33 @@
             // 
             // IdTextBox
             // 
+            IdTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             IdTextBox.Font = new Font("Segoe UI", 9F);
             IdTextBox.Location = new Point(84, 26);
             IdTextBox.Name = "IdTextBox";
             IdTextBox.Size = new Size(151, 27);
             IdTextBox.TabIndex = 1;
             // 
-            // AddressControl
-            // 
-            AddressControl.Anchor = AnchorStyles.Right;
-            AddressControl.Location = new Point(0, 158);
-            AddressControl.Name = "AddressControl";
-            address2.Apartment = "";
-            address2.Building = "";
-            address2.City = "";
-            address2.Country = "";
-            address2.Index = 100000;
-            address2.Street = "";
-            AddressControl.OurAddress = address2;
-            AddressControl.Size = new Size(616, 221);
-            AddressControl.TabIndex = 0;
-            // 
             // OrderItemsGroupBox
             // 
-            OrderItemsGroupBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            OrderItemsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             OrderItemsGroupBox.Controls.Add(TotalCostLabel);
             OrderItemsGroupBox.Controls.Add(AmountLabel);
             OrderItemsGroupBox.Controls.Add(OrderItemsListBox);
             OrderItemsGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            OrderItemsGroupBox.Location = new Point(493, 374);
+            OrderItemsGroupBox.Location = new Point(481, 394);
             OrderItemsGroupBox.Name = "OrderItemsGroupBox";
-            OrderItemsGroupBox.Size = new Size(619, 266);
+            OrderItemsGroupBox.Size = new Size(619, 331);
             OrderItemsGroupBox.TabIndex = 2;
             OrderItemsGroupBox.TabStop = false;
             OrderItemsGroupBox.Text = "Order Items";
             // 
             // TotalCostLabel
             // 
+            TotalCostLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             TotalCostLabel.AutoSize = true;
             TotalCostLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            TotalCostLabel.Location = new Point(524, 193);
+            TotalCostLabel.Location = new Point(524, 272);
             TotalCostLabel.Name = "TotalCostLabel";
             TotalCostLabel.Size = new Size(89, 28);
             TotalCostLabel.TabIndex = 5;
@@ -227,8 +231,9 @@
             // 
             // AmountLabel
             // 
+            AmountLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             AmountLabel.AutoSize = true;
-            AmountLabel.Location = new Point(542, 173);
+            AmountLabel.Location = new Point(542, 252);
             AmountLabel.Name = "AmountLabel";
             AmountLabel.Size = new Size(71, 20);
             AmountLabel.TabIndex = 4;
@@ -236,12 +241,13 @@
             // 
             // OrderItemsListBox
             // 
-            OrderItemsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            OrderItemsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             OrderItemsListBox.Font = new Font("Segoe UI", 9F);
             OrderItemsListBox.FormattingEnabled = true;
-            OrderItemsListBox.Location = new Point(6, 26);
+            OrderItemsListBox.Location = new Point(6, 31);
+            OrderItemsListBox.MinimumSize = new Size(607, 64);
             OrderItemsListBox.Name = "OrderItemsListBox";
-            OrderItemsListBox.Size = new Size(607, 124);
+            OrderItemsListBox.Size = new Size(607, 144);
             OrderItemsListBox.TabIndex = 3;
             // 
             // OrdersTab
@@ -252,7 +258,7 @@
             Controls.Add(SelectedOrderGroupBox);
             Controls.Add(OrdersGroupBox);
             Name = "OrdersTab";
-            Size = new Size(1112, 643);
+            Size = new Size(1100, 728);
             OrdersGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)OrdersDataGridView).EndInit();
             SelectedOrderGroupBox.ResumeLayout(false);

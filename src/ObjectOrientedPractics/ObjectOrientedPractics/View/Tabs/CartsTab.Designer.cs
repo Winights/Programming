@@ -47,23 +47,24 @@
             // 
             // ItemsGroupBox
             // 
+            ItemsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ItemsGroupBox.Controls.Add(AddCartButton);
             ItemsGroupBox.Controls.Add(ItemsListBox);
-            ItemsGroupBox.Dock = DockStyle.Left;
             ItemsGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ItemsGroupBox.Location = new Point(0, 0);
             ItemsGroupBox.Name = "ItemsGroupBox";
-            ItemsGroupBox.Size = new Size(853, 576);
+            ItemsGroupBox.Size = new Size(392, 687);
             ItemsGroupBox.TabIndex = 0;
             ItemsGroupBox.TabStop = false;
             ItemsGroupBox.Text = "Items";
             // 
             // AddCartButton
             // 
+            AddCartButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddCartButton.Font = new Font("Segoe UI", 9F);
-            AddCartButton.Location = new Point(6, 505);
+            AddCartButton.Location = new Point(12, 577);
             AddCartButton.Name = "AddCartButton";
-            AddCartButton.Size = new Size(108, 53);
+            AddCartButton.Size = new Size(117, 64);
             AddCartButton.TabIndex = 1;
             AddCartButton.Text = "Add To Cart";
             AddCartButton.UseVisualStyleBackColor = true;
@@ -71,15 +72,17 @@
             // 
             // ItemsListBox
             // 
+            ItemsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ItemsListBox.Font = new Font("Segoe UI", 9F);
             ItemsListBox.FormattingEnabled = true;
-            ItemsListBox.Location = new Point(6, 26);
+            ItemsListBox.Location = new Point(12, 26);
             ItemsListBox.Name = "ItemsListBox";
-            ItemsListBox.Size = new Size(397, 464);
+            ItemsListBox.Size = new Size(371, 544);
             ItemsListBox.TabIndex = 1;
             // 
             // CustomerGroupBox
             // 
+            CustomerGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             CustomerGroupBox.Controls.Add(TotalCostLabel);
             CustomerGroupBox.Controls.Add(AmountLabel);
             CustomerGroupBox.Controls.Add(CartLabel);
@@ -89,18 +92,18 @@
             CustomerGroupBox.Controls.Add(CreateOrderButton);
             CustomerGroupBox.Controls.Add(CartListBox);
             CustomerGroupBox.Controls.Add(CustomerComboBox);
-            CustomerGroupBox.Dock = DockStyle.Right;
-            CustomerGroupBox.Location = new Point(409, 0);
+            CustomerGroupBox.Location = new Point(398, 0);
             CustomerGroupBox.Name = "CustomerGroupBox";
-            CustomerGroupBox.Size = new Size(444, 576);
+            CustomerGroupBox.Size = new Size(476, 687);
             CustomerGroupBox.TabIndex = 1;
             CustomerGroupBox.TabStop = false;
             // 
             // TotalCostLabel
             // 
+            TotalCostLabel.Anchor = AnchorStyles.Bottom;
             TotalCostLabel.AutoSize = true;
             TotalCostLabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            TotalCostLabel.Location = new Point(306, 301);
+            TotalCostLabel.Location = new Point(346, 319);
             TotalCostLabel.Name = "TotalCostLabel";
             TotalCostLabel.Size = new Size(121, 38);
             TotalCostLabel.TabIndex = 8;
@@ -108,9 +111,10 @@
             // 
             // AmountLabel
             // 
+            AmountLabel.Anchor = AnchorStyles.Bottom;
             AmountLabel.AutoSize = true;
             AmountLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            AmountLabel.Location = new Point(334, 278);
+            AmountLabel.Location = new Point(374, 296);
             AmountLabel.Name = "AmountLabel";
             AmountLabel.Size = new Size(80, 23);
             AmountLabel.TabIndex = 7;
@@ -137,8 +141,9 @@
             // 
             // RemoveItemButton
             // 
+            RemoveItemButton.Anchor = AnchorStyles.Bottom;
             RemoveItemButton.Font = new Font("Segoe UI", 9F);
-            RemoveItemButton.Location = new Point(205, 350);
+            RemoveItemButton.Location = new Point(248, 390);
             RemoveItemButton.Name = "RemoveItemButton";
             RemoveItemButton.Size = new Size(108, 53);
             RemoveItemButton.TabIndex = 4;
@@ -148,8 +153,9 @@
             // 
             // ClearCartButton
             // 
+            ClearCartButton.Anchor = AnchorStyles.Bottom;
             ClearCartButton.Font = new Font("Segoe UI", 9F);
-            ClearCartButton.Location = new Point(319, 350);
+            ClearCartButton.Location = new Point(362, 390);
             ClearCartButton.Name = "ClearCartButton";
             ClearCartButton.Size = new Size(108, 53);
             ClearCartButton.TabIndex = 3;
@@ -159,8 +165,9 @@
             // 
             // CreateOrderButton
             // 
+            CreateOrderButton.Anchor = AnchorStyles.Bottom;
             CreateOrderButton.Font = new Font("Segoe UI", 9F);
-            CreateOrderButton.Location = new Point(6, 350);
+            CreateOrderButton.Location = new Point(6, 390);
             CreateOrderButton.Name = "CreateOrderButton";
             CreateOrderButton.Size = new Size(108, 53);
             CreateOrderButton.TabIndex = 2;
@@ -170,10 +177,11 @@
             // 
             // CartListBox
             // 
+            CartListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             CartListBox.FormattingEnabled = true;
             CartListBox.Location = new Point(6, 102);
             CartListBox.Name = "CartListBox";
-            CartListBox.Size = new Size(422, 164);
+            CartListBox.Size = new Size(464, 164);
             CartListBox.TabIndex = 1;
             // 
             // CustomerComboBox
@@ -181,7 +189,7 @@
             CustomerComboBox.FormattingEnabled = true;
             CustomerComboBox.Location = new Point(94, 29);
             CustomerComboBox.Name = "CustomerComboBox";
-            CustomerComboBox.Size = new Size(333, 28);
+            CustomerComboBox.Size = new Size(376, 28);
             CustomerComboBox.TabIndex = 0;
             CustomerComboBox.SelectedIndexChanged += CustomerComboBox_SelectedIndexChanged;
             // 
@@ -192,7 +200,7 @@
             Controls.Add(CustomerGroupBox);
             Controls.Add(ItemsGroupBox);
             Name = "CartsTab";
-            Size = new Size(853, 576);
+            Size = new Size(874, 687);
             ItemsGroupBox.ResumeLayout(false);
             CustomerGroupBox.ResumeLayout(false);
             CustomerGroupBox.PerformLayout();
