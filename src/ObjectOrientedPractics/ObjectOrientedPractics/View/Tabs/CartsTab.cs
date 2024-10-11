@@ -89,6 +89,7 @@ namespace ObjectOrientedPractics.View.Tabs
             FillItemListBox();
             CartListBox.Items.Clear();
             TotalCostLabel.Text = "0";
+            CustomerComboBox.Text = null;
         }
 
         private void CustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)

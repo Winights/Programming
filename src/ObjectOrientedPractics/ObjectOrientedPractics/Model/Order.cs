@@ -95,7 +95,7 @@ namespace ObjectOrientedPractics.Model
             {
                 Items.Add(item);
             }
-            OrderStatus = 0;
+            OrderStatus = OrderStatus.New;
             CustomerFullName = fullname;
 
         }
@@ -109,7 +109,7 @@ namespace ObjectOrientedPractics.Model
             _date = DateTime.Now;
             Address = new Address();
             Items = new List<Item>();
-            OrderStatus = 0;
+            OrderStatus = OrderStatus.New;
             CustomerFullName = string.Empty;
         }
     }

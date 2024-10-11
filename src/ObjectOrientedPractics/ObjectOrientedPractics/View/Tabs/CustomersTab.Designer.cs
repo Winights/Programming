@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address2 = new Model.Address();
+            Model.Address address1 = new Model.Address();
             CustomerGroupBox = new GroupBox();
             RemoveButton = new Button();
             AddButton = new Button();
@@ -103,11 +103,9 @@
             SelectedCustomerGroupBox.Controls.Add(IdTextBox);
             SelectedCustomerGroupBox.Dock = DockStyle.Right;
             SelectedCustomerGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-
             SelectedCustomerGroupBox.Location = new Point(355, 0);
             SelectedCustomerGroupBox.Name = "SelectedCustomerGroupBox";
             SelectedCustomerGroupBox.Size = new Size(624, 622);
-
             SelectedCustomerGroupBox.TabIndex = 1;
             SelectedCustomerGroupBox.TabStop = false;
             SelectedCustomerGroupBox.Text = "Selected Customer";
@@ -115,22 +113,22 @@
             // CustomerPanel
             // 
             CustomerPanel.BackColor = Color.White;
-            CustomerPanel.Location = new Point(6, 322);
+            CustomerPanel.Location = new Point(6, 330);
             CustomerPanel.Name = "CustomerPanel";
-            CustomerPanel.Size = new Size(612, 300);
+            CustomerPanel.Size = new Size(612, 292);
             CustomerPanel.TabIndex = 2;
             // 
             // AddressControl
             // 
-            AddressControl.Location = new Point(6, 125);
+            AddressControl.Location = new Point(3, 125);
             AddressControl.Name = "AddressControl";
-            address2.Apartment = "";
-            address2.Building = "";
-            address2.City = "";
-            address2.Country = "";
-            address2.Index = 100000;
-            address2.Street = "";
-            AddressControl.OurAddress = address2;
+            address1.Apartment = "";
+            address1.Building = "";
+            address1.City = "";
+            address1.Country = "";
+            address1.Index = 100000;
+            address1.Street = "";
+            AddressControl.OurAddress = address1;
             AddressControl.Size = new Size(612, 199);
             AddressControl.TabIndex = 5;
             // 
