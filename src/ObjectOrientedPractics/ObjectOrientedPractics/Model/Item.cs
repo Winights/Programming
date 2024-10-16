@@ -101,13 +101,13 @@ namespace ObjectOrientedPractics.Model
         /// <param name="info">Описание товара.</param>
         /// <param name="cost">Стоимость товара.</param>
         /// <param name="category">Категория товара.</param>
-        public Item(string name, string info, double cost, Category category)
+        public Item(string name, string info, double cost)
         {
             Name = name;
             Info = info;
             Cost = cost;
             _id = IdGenerator.GetNextId();
-            Category = category;
+            Category = new Category();
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace ObjectOrientedPractics.Model
             Info = string.Empty;
             Cost = 0;
             _id = IdGenerator.GetNextId();
-            Category = 0;
+            Category = new Category();
         }
     }
 }

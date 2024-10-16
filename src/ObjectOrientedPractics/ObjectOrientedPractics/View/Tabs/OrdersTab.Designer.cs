@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address3 = new Model.Address();
+            Model.Address address1 = new Model.Address();
             OrdersGroupBox = new GroupBox();
             OrdersDataGridView = new DataGridView();
             IdColumn = new DataGridViewTextBoxColumn();
@@ -39,7 +39,7 @@
             StatusLabel = new Label();
             CreatedLabel = new Label();
             IdLabel = new Label();
-            AddressControl = new Controls.AddressControl();
+            OrderAddressControl = new Controls.AddressControl();
             CreatedTextBox = new TextBox();
             StatusComboBox = new ComboBox();
             IdTextBox = new TextBox();
@@ -118,7 +118,7 @@
             SelectedOrderGroupBox.Controls.Add(StatusLabel);
             SelectedOrderGroupBox.Controls.Add(CreatedLabel);
             SelectedOrderGroupBox.Controls.Add(IdLabel);
-            SelectedOrderGroupBox.Controls.Add(AddressControl);
+            SelectedOrderGroupBox.Controls.Add(OrderAddressControl);
             SelectedOrderGroupBox.Controls.Add(CreatedTextBox);
             SelectedOrderGroupBox.Controls.Add(StatusComboBox);
             SelectedOrderGroupBox.Controls.Add(IdTextBox);
@@ -160,27 +160,30 @@
             IdLabel.TabIndex = 5;
             IdLabel.Text = "ID:";
             // 
-            // AddressControl
+            // OrderAddressControl
             // 
-            AddressControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            AddressControl.Location = new Point(6, 168);
-            AddressControl.Name = "AddressControl";
-            address3.Apartment = "";
-            address3.Building = "";
-            address3.City = "";
-            address3.Country = "";
-            address3.Index = 100000;
-            address3.Street = "";
-            AddressControl.OurAddress = address3;
-            AddressControl.Size = new Size(610, 214);
-            AddressControl.TabIndex = 0;
+            OrderAddressControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            OrderAddressControl.Enabled = false;
+            OrderAddressControl.Location = new Point(6, 168);
+            OrderAddressControl.Name = "OrderAddressControl";
+            address1.Apartment = "";
+            address1.Building = "";
+            address1.City = "";
+            address1.Country = "";
+            address1.Index = 100000;
+            address1.Street = "";
+            OrderAddressControl.OurAddress = address1;
+            OrderAddressControl.Size = new Size(610, 214);
+            OrderAddressControl.TabIndex = 0;
             // 
             // CreatedTextBox
             // 
             CreatedTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            CreatedTextBox.Enabled = false;
             CreatedTextBox.Font = new Font("Segoe UI", 9F);
             CreatedTextBox.Location = new Point(84, 68);
             CreatedTextBox.Name = "CreatedTextBox";
+            CreatedTextBox.ReadOnly = true;
             CreatedTextBox.Size = new Size(151, 27);
             CreatedTextBox.TabIndex = 4;
             // 
@@ -198,9 +201,11 @@
             // IdTextBox
             // 
             IdTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            IdTextBox.Enabled = false;
             IdTextBox.Font = new Font("Segoe UI", 9F);
             IdTextBox.Location = new Point(84, 26);
             IdTextBox.Name = "IdTextBox";
+            IdTextBox.ReadOnly = true;
             IdTextBox.Size = new Size(151, 27);
             IdTextBox.TabIndex = 1;
             // 
@@ -242,6 +247,7 @@
             // OrderItemsListBox
             // 
             OrderItemsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            OrderItemsListBox.Enabled = false;
             OrderItemsListBox.Font = new Font("Segoe UI", 9F);
             OrderItemsListBox.FormattingEnabled = true;
             OrderItemsListBox.Location = new Point(6, 31);
@@ -277,7 +283,7 @@
         private DataGridViewTextBoxColumn StatusColumn;
         private DataGridViewTextBoxColumn FullnameColumn;
         private GroupBox SelectedOrderGroupBox;
-        private Controls.AddressControl AddressControl;
+        private Controls.AddressControl OrderAddressControl;
         private TextBox CreatedTextBox;
         private ComboBox StatusComboBox;
         private TextBox IdTextBox;

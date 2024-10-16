@@ -23,8 +23,6 @@ namespace ObjectOrientedPractics
         {
             switch (ObjecTabControl.SelectedIndex)
             {
-                case 0:
-                    break;
                 case 2:
                     CartsTab.RefreshData();
                     break;

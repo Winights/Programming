@@ -42,7 +42,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private Customer AddItemsInfo()
         {
             string fullname = FullnameTextBox.Text;
-            return new Customer(fullname, AddressControl.AddFromTextBoxs());
+            return new Customer(fullname);
         }
 
         /// <summary>
@@ -117,6 +117,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) && ifRed)
                 {
                     Customer selectedCustomer = AddItemsInfo();
+                    selectedCustomer.CustomerAddress = AddressControl.AddFromTextBoxs();
                     _customers.Add(selectedCustomer);
                     UpdateListBox();
                 }

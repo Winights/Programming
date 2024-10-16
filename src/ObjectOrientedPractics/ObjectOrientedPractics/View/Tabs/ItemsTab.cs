@@ -60,8 +60,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 string name = NameTextBox.Text;
                 string descryption = DescriptionTextBox.Text;
                 double cost = double.Parse(CostTextBox.Text);
-                Category category = (Category)CategoryComboBox.SelectedItem;
-                return new Item(name, descryption, cost, category);
+                return new Item(name, descryption, cost);
             }
             else
             {
@@ -178,6 +177,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     && CategoryComboBox.SelectedItem != null && ifRed)
                 {
                     Item selectedItem = AddItemInfo();
+                    selectedItem.Category = (Category)CategoryComboBox.SelectedItem;
                     _items.Add(selectedItem);
                     UpdateListBox();
                 }

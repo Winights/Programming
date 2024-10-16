@@ -25,7 +25,7 @@ namespace ObjectOrientedPractics.View.Tabs
         public List<Customer> Customers { get; set; } = new List<Customer>();
 
         /// <summary>
-        /// Выбранный индекс в таблице заказов.
+        /// Выбранный индекс строки в таблице заказов.
         /// </summary>
         private int _selectedOrderIndex;
 
@@ -47,6 +47,7 @@ namespace ObjectOrientedPractics.View.Tabs
             UpdateOrders();
             RefreshDataGrid();
             LoadStatusComboBox();
+            TotalCostLabel.Text = "0";
         }
 
         /// <summary>
@@ -108,19 +109,21 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void OrdersDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            try
+            if (OrdersDataGridView.SelectedRows.Count != 0)
             {
                 _selectedOrderIndex = OrdersDataGridView.SelectedRows[0].Index;
                 _selectedOrder = _orders[_selectedOrderIndex];
-                AddressControl.OurAddress = _orders[_selectedOrderIndex].Address;
-                AddressControl.SelelctedTextBoxs();
+
+                OrderAddressControl.OurAddress = _orders[_selectedOrderIndex].Address;
+                OrderAddressControl.SelelctedTextBoxs();
+
                 IdTextBox.Text = _selectedOrder.Id.ToString();
                 CreatedTextBox.Text = _selectedOrder.Date.ToString();
                 StatusComboBox.SelectedItem = _selectedOrder.OrderStatus;
                 TotalCostLabel.Text = _selectedOrder.Amount.ToString();
+
                 FillOrderItemsListBox();
             }
-            catch (Exception) { }
         }
 
         private void StatusComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -131,7 +134,16 @@ namespace ObjectOrientedPractics.View.Tabs
                 OrderStatus orderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), ourStatus);
                 _selectedOrder.OrderStatus = orderStatus;
             }
-            catch (Exception) { }
+            catch (Exception) 
+            {
+                MessageBox.Show(
+                    "Неправильно введен статус или статус не выбран",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
         }
     }
 }

@@ -85,7 +85,6 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         /// <param name="address">Адрес доставки для покупателя.</param>
         /// <param name="items">Список товаров.</param>
-        /// <param name="orderStatus">Статус заказа.</param>
         public Order(Address address, List<Item> items, string fullname)
         {
             _id = IdGenerator.GetNextId();
@@ -95,7 +94,7 @@ namespace ObjectOrientedPractics.Model
             {
                 Items.Add(item);
             }
-            OrderStatus = OrderStatus.New;
+            OrderStatus = new OrderStatus();
             CustomerFullName = fullname;
 
         }
@@ -109,7 +108,7 @@ namespace ObjectOrientedPractics.Model
             _date = DateTime.Now;
             Address = new Address();
             Items = new List<Item>();
-            OrderStatus = OrderStatus.New;
+            OrderStatus = new OrderStatus();
             CustomerFullName = string.Empty;
         }
     }

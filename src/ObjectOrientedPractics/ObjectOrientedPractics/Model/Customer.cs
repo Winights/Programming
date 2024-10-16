@@ -110,10 +110,10 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         /// <param name="fullname">Полное имя покупателя.</param>
         /// <param name="address">Адрес доставки для покупателя.</param>
-        public Customer(string fullname, Address address)
+        public Customer(string fullname)
         {
             Fullname = fullname;
-            CustomerAddress = address;
+            CustomerAddress = new Address();
             _id = IdGenerator.GetNextId();
             CustomerCart = new Cart();
             Orders = new List<Order>();
