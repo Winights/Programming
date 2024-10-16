@@ -12,8 +12,24 @@ namespace ObjectOrientedPractics
         public MainForm()
         {
             InitializeComponent();
-            itemsTab1.Items = _store.Items;
-            customersTab1.Customers = _store.Customers;
+            ItemsTab.Items = _store.Items;
+            CustomersTab.Customers = _store.Customers;
+            CartsTab.Items = _store.Items;
+            CartsTab.Customers = _store.Customers;
+            OrdersTab.Customers = _store.Customers;
+        }
+
+        private void ObjecTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (ObjecTabControl.SelectedIndex)
+            {
+                case 2:
+                    CartsTab.RefreshData();
+                    break;
+                case 3:
+                    OrdersTab.RefreshData();
+                    break;
+            }
         }
     }
 }

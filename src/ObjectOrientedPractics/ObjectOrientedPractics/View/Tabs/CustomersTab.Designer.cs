@@ -46,22 +46,23 @@
             // 
             // CustomerGroupBox
             // 
+            CustomerGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             CustomerGroupBox.Controls.Add(RemoveButton);
             CustomerGroupBox.Controls.Add(AddButton);
             CustomerGroupBox.Controls.Add(CustomersListBox);
-            CustomerGroupBox.Dock = DockStyle.Left;
             CustomerGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             CustomerGroupBox.Location = new Point(0, 0);
             CustomerGroupBox.Name = "CustomerGroupBox";
-            CustomerGroupBox.Size = new Size(352, 622);
+            CustomerGroupBox.Size = new Size(355, 654);
             CustomerGroupBox.TabIndex = 0;
             CustomerGroupBox.TabStop = false;
             CustomerGroupBox.Text = "Customers";
             // 
             // RemoveButton
             // 
+            RemoveButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             RemoveButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            RemoveButton.Location = new Point(119, 536);
+            RemoveButton.Location = new Point(119, 568);
             RemoveButton.Name = "RemoveButton";
             RemoveButton.Size = new Size(108, 53);
             RemoveButton.TabIndex = 10;
@@ -71,8 +72,9 @@
             // 
             // AddButton
             // 
+            AddButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            AddButton.Location = new Point(6, 537);
+            AddButton.Location = new Point(6, 569);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(108, 53);
             AddButton.TabIndex = 9;
@@ -82,11 +84,12 @@
             // 
             // CustomersListBox
             // 
+            CustomersListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             CustomersListBox.Font = new Font("Segoe UI", 9F);
             CustomersListBox.FormattingEnabled = true;
             CustomersListBox.Location = new Point(6, 26);
             CustomersListBox.Name = "CustomersListBox";
-            CustomersListBox.Size = new Size(333, 504);
+            CustomersListBox.Size = new Size(336, 524);
             CustomersListBox.TabIndex = 0;
             CustomersListBox.Click += CustomersListBox_Click;
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
@@ -94,6 +97,7 @@
             // 
             // SelectedCustomerGroupBox
             // 
+            SelectedCustomerGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             SelectedCustomerGroupBox.BackColor = Color.White;
             SelectedCustomerGroupBox.Controls.Add(CustomerPanel);
             SelectedCustomerGroupBox.Controls.Add(AddressControl);
@@ -101,28 +105,27 @@
             SelectedCustomerGroupBox.Controls.Add(IDLabel);
             SelectedCustomerGroupBox.Controls.Add(FullnameTextBox);
             SelectedCustomerGroupBox.Controls.Add(IdTextBox);
-            SelectedCustomerGroupBox.Dock = DockStyle.Right;
             SelectedCustomerGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-
             SelectedCustomerGroupBox.Location = new Point(355, 0);
             SelectedCustomerGroupBox.Name = "SelectedCustomerGroupBox";
-            SelectedCustomerGroupBox.Size = new Size(624, 622);
-
+            SelectedCustomerGroupBox.Size = new Size(624, 654);
             SelectedCustomerGroupBox.TabIndex = 1;
             SelectedCustomerGroupBox.TabStop = false;
             SelectedCustomerGroupBox.Text = "Selected Customer";
             // 
             // CustomerPanel
             // 
+            CustomerPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             CustomerPanel.BackColor = Color.White;
-            CustomerPanel.Location = new Point(6, 322);
+            CustomerPanel.Location = new Point(6, 340);
             CustomerPanel.Name = "CustomerPanel";
-            CustomerPanel.Size = new Size(612, 300);
+            CustomerPanel.Size = new Size(612, 311);
             CustomerPanel.TabIndex = 2;
             // 
             // AddressControl
             // 
-            AddressControl.Location = new Point(6, 125);
+            AddressControl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            AddressControl.Location = new Point(6, 135);
             AddressControl.Name = "AddressControl";
             address2.Apartment = "";
             address2.Building = "";
@@ -156,8 +159,9 @@
             // 
             // FullnameTextBox
             // 
+            FullnameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             FullnameTextBox.Font = new Font("Segoe UI", 9F);
-            FullnameTextBox.Location = new Point(88, 92);
+            FullnameTextBox.Location = new Point(88, 91);
             FullnameTextBox.Name = "FullnameTextBox";
             FullnameTextBox.Size = new Size(354, 27);
             FullnameTextBox.TabIndex = 2;
@@ -180,7 +184,7 @@
             Controls.Add(SelectedCustomerGroupBox);
             Controls.Add(CustomerGroupBox);
             Name = "CustomersTab";
-            Size = new Size(979, 622);
+            Size = new Size(979, 654);
             CustomerGroupBox.ResumeLayout(false);
             SelectedCustomerGroupBox.ResumeLayout(false);
             SelectedCustomerGroupBox.PerformLayout();

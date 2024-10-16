@@ -42,7 +42,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private Customer AddItemsInfo()
         {
             string fullname = FullnameTextBox.Text;
-            return new Customer(fullname, AddressControl.AddFromTextBoxs());
+            return new Customer(fullname);
         }
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace ObjectOrientedPractics.View.Tabs
             _currentCustomer = _customers[CustomersListBox.SelectedIndex];
             IdTextBox.Text = _currentCustomer.Id.ToString();
             FullnameTextBox.Text = _currentCustomer.Fullname.ToString();
-            Address selectedAdress = _currentCustomer.CustomerAddress;
-            AddressControl.SelelctedTextBoxs(selectedAdress);
+            AddressControl.OurAddress = _currentCustomer.CustomerAddress;
+            AddressControl.SelelctedTextBoxs();
         }
 
         private void FullnameTextBox_TextChanged(object sender, EventArgs e)
@@ -117,6 +117,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) && ifRed)
                 {
                     Customer selectedCustomer = AddItemsInfo();
+                    selectedCustomer.CustomerAddress = AddressControl.AddFromTextBoxs();
                     _customers.Add(selectedCustomer);
                     UpdateListBox();
                 }

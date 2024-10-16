@@ -24,7 +24,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задает список товаров.
         /// </summary>
-        public List<Item> Items { get { return _items; } set {  _items = value; } }
+        public List<Item> Items { get { return _items; } set { _items = value; } }
 
         /// <summary>
         /// Возвращает и задает список покупателей. 

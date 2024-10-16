@@ -49,23 +49,23 @@
             // 
             // ItemsGroupBox
             // 
+            ItemsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ItemsGroupBox.Controls.Add(RemoveButton);
             ItemsGroupBox.Controls.Add(AddButton);
             ItemsGroupBox.Controls.Add(ItemsListBox);
-            ItemsGroupBox.Dock = DockStyle.Left;
             ItemsGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ItemsGroupBox.Location = new Point(0, 0);
             ItemsGroupBox.Name = "ItemsGroupBox";
-            ItemsGroupBox.Size = new Size(356, 800);
-
+            ItemsGroupBox.Size = new Size(391, 591);
             ItemsGroupBox.TabIndex = 0;
             ItemsGroupBox.TabStop = false;
             ItemsGroupBox.Text = "Items";
             // 
             // RemoveButton
             // 
+            RemoveButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             RemoveButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            RemoveButton.Location = new Point(119, 536);
+            RemoveButton.Location = new Point(119, 526);
             RemoveButton.Name = "RemoveButton";
             RemoveButton.Size = new Size(108, 53);
             RemoveButton.TabIndex = 8;
@@ -75,8 +75,9 @@
             // 
             // AddButton
             // 
+            AddButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            AddButton.Location = new Point(6, 536);
+            AddButton.Location = new Point(6, 526);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(108, 53);
             AddButton.TabIndex = 8;
@@ -86,17 +87,19 @@
             // 
             // ItemsListBox
             // 
+            ItemsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ItemsListBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
             ItemsListBox.FormattingEnabled = true;
             ItemsListBox.Location = new Point(6, 26);
             ItemsListBox.Name = "ItemsListBox";
-            ItemsListBox.Size = new Size(339, 504);
+            ItemsListBox.Size = new Size(379, 484);
             ItemsListBox.TabIndex = 1;
             ItemsListBox.SelectedIndexChanged += ItemsListBox_SelectedIndexChanged;
             ItemsListBox.DoubleClick += ItemsListBox_DoubleClick;
             // 
             // SelectedItemGroupBox
             // 
+            SelectedItemGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             SelectedItemGroupBox.BackColor = Color.White;
             SelectedItemGroupBox.Controls.Add(CategoryLabel);
             SelectedItemGroupBox.Controls.Add(CategoryComboBox);
@@ -108,13 +111,10 @@
             SelectedItemGroupBox.Controls.Add(NameTextBox);
             SelectedItemGroupBox.Controls.Add(CostTextBox);
             SelectedItemGroupBox.Controls.Add(IdTextBox);
-            SelectedItemGroupBox.Dock = DockStyle.Right;
             SelectedItemGroupBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-
-            SelectedItemGroupBox.Location = new Point(387, 0);
+            SelectedItemGroupBox.Location = new Point(411, 0);
             SelectedItemGroupBox.Name = "SelectedItemGroupBox";
-            SelectedItemGroupBox.Size = new Size(615, 800);
-
+            SelectedItemGroupBox.Size = new Size(591, 591);
             SelectedItemGroupBox.TabIndex = 1;
             SelectedItemGroupBox.TabStop = false;
             SelectedItemGroupBox.Text = "Selected Item";
@@ -161,9 +161,10 @@
             // 
             // DescriptionLabel
             // 
+            DescriptionLabel.Anchor = AnchorStyles.Top;
             DescriptionLabel.AutoSize = true;
             DescriptionLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            DescriptionLabel.Location = new Point(6, 298);
+            DescriptionLabel.Location = new Point(6, 248);
             DescriptionLabel.Name = "DescriptionLabel";
             DescriptionLabel.Size = new Size(88, 20);
             DescriptionLabel.TabIndex = 5;
@@ -171,6 +172,7 @@
             // 
             // NameLabel
             // 
+            NameLabel.Anchor = AnchorStyles.Top;
             NameLabel.AutoSize = true;
             NameLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
             NameLabel.Location = new Point(6, 148);
@@ -181,21 +183,23 @@
             // 
             // DescriptionTextBox
             // 
+            DescriptionTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             DescriptionTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            DescriptionTextBox.Location = new Point(6, 321);
+            DescriptionTextBox.Location = new Point(7, 274);
             DescriptionTextBox.Multiline = true;
             DescriptionTextBox.Name = "DescriptionTextBox";
-            DescriptionTextBox.Size = new Size(547, 180);
+            DescriptionTextBox.Size = new Size(578, 153);
             DescriptionTextBox.TabIndex = 3;
             DescriptionTextBox.TextChanged += DescriptionTextBox_TextChanged;
             // 
             // NameTextBox
             // 
+            NameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             NameTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            NameTextBox.Location = new Point(6, 169);
+            NameTextBox.Location = new Point(7, 169);
             NameTextBox.Multiline = true;
             NameTextBox.Name = "NameTextBox";
-            NameTextBox.Size = new Size(547, 119);
+            NameTextBox.Size = new Size(578, 69);
             NameTextBox.TabIndex = 2;
             NameTextBox.TextChanged += NameTextBox_TextChanged;
             // 
@@ -225,9 +229,7 @@
             Controls.Add(SelectedItemGroupBox);
             Controls.Add(ItemsGroupBox);
             Name = "ItemsTab";
-
-            Size = new Size(1002, 800);
-          
+            Size = new Size(1009, 591);
             ItemsGroupBox.ResumeLayout(false);
             SelectedItemGroupBox.ResumeLayout(false);
             SelectedItemGroupBox.PerformLayout();

@@ -53,15 +53,18 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Генерирует объект товара с помощью TextBox's.
         /// </summary>
-        private void AddItemInfo()
+        private Item AddItemInfo()
         {
             if (CategoryComboBox.SelectedItem != null)
             {
                 string name = NameTextBox.Text;
                 string descryption = DescriptionTextBox.Text;
                 double cost = double.Parse(CostTextBox.Text);
-                Category category = (Category)CategoryComboBox.SelectedItem;
-                _currentItem = new Item(name, descryption, cost, category);
+                return new Item(name, descryption, cost);
+            }
+            else
+            {
+                throw new Exception("Категория товара не выбрана");
             }
         }
 
@@ -173,8 +176,9 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) 
                     && CategoryComboBox.SelectedItem != null && ifRed)
                 {
-                    AddItemInfo();
-                    _items.Add(_currentItem);
+                    Item selectedItem = AddItemInfo();
+                    selectedItem.Category = (Category)CategoryComboBox.SelectedItem;
+                    _items.Add(selectedItem);
                     UpdateListBox();
                 }
                 else
