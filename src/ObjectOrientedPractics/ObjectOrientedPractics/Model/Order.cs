@@ -23,11 +23,6 @@ namespace ObjectOrientedPractics.Model
         private readonly DateTime _date;
 
         /// <summary>
-        /// Имя покупателя, сделавшего заказ.
-        /// </summary>
-        private string _customerFullName = string.Empty;
-
-        /// <summary>
         /// Возвращает уникальный номер заказа.
         /// </summary>
         public int Id { get { return _id; } }
@@ -40,7 +35,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задаёт имя покупателя, сделавшего заказ.
         /// </summary>
-        public string CustomerFullName { get { return _customerFullName; } set { _customerFullName = value; } }
+        public string CustomerFullName { get; set; }
 
         /// <summary>
         /// Возвращает и задаёт адрес доставки.
@@ -81,11 +76,13 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Создаёт экземпляр класса <see cref="Item"/>.
+        /// Создаёт экземпляр класса <see cref="Order"/>.
         /// </summary>
         /// <param name="address">Адрес доставки для покупателя.</param>
         /// <param name="items">Список товаров.</param>
-        public Order(Address address, List<Item> items, string fullname)
+        /// /// <param name="fullname">Полное имя покупателя.</param>
+        /// /// <param name="customerId">уникальный номер покупателя.</param>
+        public Order(Address address, List<Item> items, string fullname, int customerId)
         {
             _id = IdGenerator.GetNextId();
             _date = DateTime.Now;

@@ -29,7 +29,10 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         public List<Customer> Customers { get { return _customers; } set { _customers = value; } }
 
-
+        /// <summary>
+        /// Переменная для приоритетных покупателей.
+        /// </summary>
+        private bool _isPriority = false;
 
         public CustomersTab()
         {
@@ -80,7 +83,7 @@ namespace ObjectOrientedPractics.View.Tabs
             IdTextBox.Text = _currentCustomer.Id.ToString();
             FullnameTextBox.Text = _currentCustomer.Fullname.ToString();
             AddressControl.OurAddress = _currentCustomer.CustomerAddress;
-            AddressControl.SelelctedTextBoxs();
+            AddressControl.SelectedTextBoxs();
         }
 
         private void FullnameTextBox_TextChanged(object sender, EventArgs e)
@@ -118,12 +121,14 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     Customer selectedCustomer = AddItemsInfo();
                     selectedCustomer.CustomerAddress = AddressControl.AddFromTextBoxs();
+                    selectedCustomer.IsPriority = _isPriority;
                     _customers.Add(selectedCustomer);
                     UpdateListBox();
                 }
                 else
                 {
-                    throw new Exception("Некоректные значения. Введите корректные значения для корректной работы программы.");
+                    throw new Exception("Некоректные значения. Введите корректные " +
+                        "значения для корректной работы программы.");
                 }
             }
             catch (Exception ex)
@@ -172,8 +177,19 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (CustomersListBox.SelectedItem != null)
             {
-                AddressControl.EditTextBoxs(_currentCustomer);   
+                AddressControl.EditTextBoxs(_currentCustomer);
+            }
+        }
 
+        private void PriorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (PriorityCheckBox.Checked == true)
+            {
+                _isPriority = true;
+            }
+            else
+            {
+                _isPriority = false;
             }
         }
     }
