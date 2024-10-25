@@ -81,8 +81,7 @@ namespace ObjectOrientedPractics.Model
         /// <param name="address">Адрес доставки для покупателя.</param>
         /// <param name="items">Список товаров.</param>
         /// /// <param name="fullname">Полное имя покупателя.</param>
-        /// /// <param name="customerId">уникальный номер покупателя.</param>
-        public Order(Address address, List<Item> items, string fullname, int customerId)
+        public Order(Address address, List<Item> items, string fullname)
         {
             _id = IdGenerator.GetNextId();
             _date = DateTime.Now;

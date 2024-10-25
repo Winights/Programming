@@ -96,7 +96,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     foreach (Order order in customer.Orders)
                     {
                         _priorityOrders.Add(new PriorityOrder(order.Items, order.Address,
-                            order.CustomerFullName, order.Id, DeliveryTime.Morning, DateTime.Now));
+                            order.CustomerFullName, DeliveryTime.Morning, DateTime.Now));
                     }
                 }
             }

@@ -148,7 +148,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     CurrentCustomer.Orders.Add(new PriorityOrder(CurrentCustomer.CustomerCart.Items, 
                         CurrentCustomer.CustomerAddress,
-                        CurrentCustomer.Fullname, CurrentCustomer.Id,
+                        CurrentCustomer.Fullname,
                         DeliveryTime.Morning, DateTime.Now.Date));
                     CurrentCustomer.CustomerCart.Items.Clear();
                     UpdateCartListBox();
@@ -156,7 +156,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 else 
                 {
                     CurrentCustomer.Orders.Add(new Order(CurrentCustomer.CustomerAddress,
-                    CurrentCustomer.CustomerCart.Items, CurrentCustomer.Fullname, 0));
+                    CurrentCustomer.CustomerCart.Items, CurrentCustomer.Fullname));
                     CurrentCustomer.CustomerCart.Items.Clear();
                     UpdateCartListBox();
                 }              

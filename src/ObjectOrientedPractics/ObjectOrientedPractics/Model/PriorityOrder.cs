@@ -30,9 +30,9 @@ namespace ObjectOrientedPractics.Model
         /// <param name="desiredDeliveryTime">Время доставки.</param>
         /// <param name="deliveryDate">Дата доставки.</param>
         public PriorityOrder(List<Item> items, Address deliveryAddress, 
-            string customerName, int customerId, DeliveryTime 
+            string customerName, DeliveryTime 
             desiredDeliveryTime, DateTime deliveryDate) : base(deliveryAddress, items,
-                customerName, customerId)
+                customerName)
         {
             DesiredDeliveryTime = desiredDeliveryTime;
             DeliveryDate = deliveryDate;

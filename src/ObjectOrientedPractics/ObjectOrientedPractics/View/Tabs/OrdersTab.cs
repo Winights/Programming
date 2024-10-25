@@ -73,9 +73,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
             foreach (Order order in _orders)
             {
-                OrdersDataGridView.Rows.Add(order.Id, order.Date, $"{order.Address.Country}," +
-                    $"{order.Address.City}, {order.Address.Street}, {order.Address.Building}," +
-                    $"{order.Address.Apartment}", order.CustomerFullName);
+                OrdersDataGridView.Rows.Add(order.Id, order.Date, order.OrderStatus, order.CustomerFullName);
             }
         }
 
