@@ -40,7 +40,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertStringOnLength(value, 200, "Fullname");
+                ValueValidator.AssertStringOnLength(value, 200, "Fullname");
                 _fullname = value;
             }
         }

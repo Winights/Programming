@@ -57,7 +57,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertValueInRange(value, 100000, 999999, "Index");
+                ValueValidator.AssertValueInRange(value, 100000, 999999, "Index");
                 _index = value;
             }
         }
@@ -73,7 +73,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertStringOnLength(value, 50, "Country");
+                ValueValidator.AssertStringOnLength(value, 50, "Country");
                 _country = value;
             }
         }
@@ -89,7 +89,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertStringOnLength(value, 50, "City");
+                ValueValidator.AssertStringOnLength(value, 50, "City");
                 _city = value;
             }
         }
@@ -105,7 +105,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertStringOnLength(value, 100, "Street");
+                ValueValidator.AssertStringOnLength(value, 100, "Street");
                 _street = value;
             }
         }
@@ -121,7 +121,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertStringOnLength(value, 10, "Street");
+                ValueValidator.AssertStringOnLength(value, 10, "Street");
                 _building = value;
             }
         }
@@ -137,7 +137,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertStringOnLength(value, 10, "Street");
+                ValueValidator.AssertStringOnLength(value, 10, "Street");
                 _apartment = value;
             }
         }
