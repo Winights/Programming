@@ -143,10 +143,23 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (CustomerComboBox.SelectedIndex != -1 && CurrentCustomer.CustomerCart.Items.Count != 0)
             {
-                CurrentCustomer.Orders.Add(new Order(CurrentCustomer.CustomerAddress, 
+                MessageBox.Show($"{CurrentCustomer.IsPriority}");
+                if (CurrentCustomer.IsPriority)
+                {
+                    CurrentCustomer.Orders.Add(new PriorityOrder(CurrentCustomer.CustomerCart.Items, 
+                        CurrentCustomer.CustomerAddress,
+                        CurrentCustomer.Fullname,
+                        DeliveryTime.Morning, DateTime.Now.Date));
+                    CurrentCustomer.CustomerCart.Items.Clear();
+                    UpdateCartListBox();
+                }
+                else 
+                {
+                    CurrentCustomer.Orders.Add(new Order(CurrentCustomer.CustomerAddress,
                     CurrentCustomer.CustomerCart.Items, CurrentCustomer.Fullname));
-                CurrentCustomer.CustomerCart.Items.Clear();
-                UpdateCartListBox();
+                    CurrentCustomer.CustomerCart.Items.Clear();
+                    UpdateCartListBox();
+                }              
             }
             else
             {

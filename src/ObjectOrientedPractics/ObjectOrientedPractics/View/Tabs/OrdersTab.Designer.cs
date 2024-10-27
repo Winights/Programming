@@ -36,6 +36,10 @@
             StatusColumn = new DataGridViewTextBoxColumn();
             FullnameColumn = new DataGridViewTextBoxColumn();
             SelectedOrderGroupBox = new GroupBox();
+            PriorityOptionsPanel = new Panel();
+            DeliveryTimeLabel = new Label();
+            PriorityOptionsLabel = new Label();
+            DeliveryTimeComboBox = new ComboBox();
             StatusLabel = new Label();
             CreatedLabel = new Label();
             IdLabel = new Label();
@@ -50,6 +54,7 @@
             OrdersGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)OrdersDataGridView).BeginInit();
             SelectedOrderGroupBox.SuspendLayout();
+            PriorityOptionsPanel.SuspendLayout();
             OrderItemsGroupBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -115,6 +120,7 @@
             // SelectedOrderGroupBox
             // 
             SelectedOrderGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            SelectedOrderGroupBox.Controls.Add(PriorityOptionsPanel);
             SelectedOrderGroupBox.Controls.Add(StatusLabel);
             SelectedOrderGroupBox.Controls.Add(CreatedLabel);
             SelectedOrderGroupBox.Controls.Add(IdLabel);
@@ -129,6 +135,46 @@
             SelectedOrderGroupBox.TabIndex = 1;
             SelectedOrderGroupBox.TabStop = false;
             SelectedOrderGroupBox.Text = "Selected Order:";
+            // 
+            // PriorityOptionsPanel
+            // 
+            PriorityOptionsPanel.Controls.Add(DeliveryTimeLabel);
+            PriorityOptionsPanel.Controls.Add(PriorityOptionsLabel);
+            PriorityOptionsPanel.Controls.Add(DeliveryTimeComboBox);
+            PriorityOptionsPanel.Location = new Point(312, 0);
+            PriorityOptionsPanel.Name = "PriorityOptionsPanel";
+            PriorityOptionsPanel.Size = new Size(268, 109);
+            PriorityOptionsPanel.TabIndex = 8;
+            PriorityOptionsPanel.Visible = false;
+            // 
+            // DeliveryTimeLabel
+            // 
+            DeliveryTimeLabel.AutoSize = true;
+            DeliveryTimeLabel.Font = new Font("Segoe UI", 9F);
+            DeliveryTimeLabel.Location = new Point(3, 26);
+            DeliveryTimeLabel.Name = "DeliveryTimeLabel";
+            DeliveryTimeLabel.Size = new Size(100, 20);
+            DeliveryTimeLabel.TabIndex = 9;
+            DeliveryTimeLabel.Text = "Delivery time:";
+            // 
+            // PriorityOptionsLabel
+            // 
+            PriorityOptionsLabel.AutoSize = true;
+            PriorityOptionsLabel.Location = new Point(0, 0);
+            PriorityOptionsLabel.Name = "PriorityOptionsLabel";
+            PriorityOptionsLabel.Size = new Size(106, 20);
+            PriorityOptionsLabel.TabIndex = 1;
+            PriorityOptionsLabel.Text = "Priority Label:";
+            // 
+            // DeliveryTimeComboBox
+            // 
+            DeliveryTimeComboBox.Font = new Font("Segoe UI", 9F);
+            DeliveryTimeComboBox.FormattingEnabled = true;
+            DeliveryTimeComboBox.Location = new Point(109, 23);
+            DeliveryTimeComboBox.Name = "DeliveryTimeComboBox";
+            DeliveryTimeComboBox.Size = new Size(151, 28);
+            DeliveryTimeComboBox.TabIndex = 0;
+            DeliveryTimeComboBox.SelectedIndexChanged += DeliveryTimeComboBox_SelectedIndexChanged;
             // 
             // StatusLabel
             // 
@@ -269,6 +315,8 @@
             ((System.ComponentModel.ISupportInitialize)OrdersDataGridView).EndInit();
             SelectedOrderGroupBox.ResumeLayout(false);
             SelectedOrderGroupBox.PerformLayout();
+            PriorityOptionsPanel.ResumeLayout(false);
+            PriorityOptionsPanel.PerformLayout();
             OrderItemsGroupBox.ResumeLayout(false);
             OrderItemsGroupBox.PerformLayout();
             ResumeLayout(false);
@@ -294,5 +342,9 @@
         private ListBox OrderItemsListBox;
         private Label TotalCostLabel;
         private Label AmountLabel;
+        private Panel PriorityOptionsPanel;
+        private ComboBox DeliveryTimeComboBox;
+        private Label DeliveryTimeLabel;
+        private Label PriorityOptionsLabel;
     }
 }

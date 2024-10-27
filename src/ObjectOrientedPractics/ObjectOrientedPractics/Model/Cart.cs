@@ -12,14 +12,9 @@ namespace ObjectOrientedPractics.Model
     public class Cart
     {
         /// <summary>
-        /// Список товаров.
+        /// Возвращает и задает cписок товаров в корзине.
         /// </summary>
-        private List<Item> _items = new List<Item>();
-
-        /// <summary>
-        /// Возвращает и задает список товаров.
-        /// </summary>
-        public List<Item> Items { get { return _items; } set { _items = value; } }
+        public List<Item> Items { get; set; } = new List<Item>();
 
         /// <summary>
         /// Возвращает стоимость всех товаров в корзине.
@@ -28,14 +23,14 @@ namespace ObjectOrientedPractics.Model
         {
             get
             {
-                if (_items.Count == 0 || _items == null)
+                if (Items.Count == 0 || Items == null)
                 {
                     return 0.0;
                 }
                 else
                 {
                     double amount = 0.0;
-                    foreach (Item item in _items)
+                    foreach (Item item in Items)
                     {
                         amount += item.Cost;
                     }
@@ -51,6 +46,5 @@ namespace ObjectOrientedPractics.Model
         {
             Items = new List<Item>();
         }
-
     }
 }

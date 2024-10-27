@@ -25,21 +25,6 @@ namespace ObjectOrientedPractics.Model
         private string _fullname = string.Empty;
 
         /// <summary>
-        /// Адрес доставки для покупателя.
-        /// </summary>
-        private Address _address = new Address();
-
-        /// <summary>
-        /// Корзина с товарами покупателя.
-        /// </summary>
-        private Cart _cart = new Cart();
-
-        /// <summary>
-        /// Список заказов.
-        /// </summary>
-        private List<Order> _orders = new List<Order>();
-
-        /// <summary>
         /// Возвращает уникальный номер покупателя.
         /// </summary>
         public int Id { get { return _id; } }
@@ -61,55 +46,29 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает и задает адреса для доставки. Должен не превышать 500 символов.
+        /// Возвращает и задает адрес покупателя.
         /// </summary>
-        public Address CustomerAddress
-        {
-            get
-            {
-                return _address;
-            }
-            set
-            {
-                _address = value;
-            }
-        }
+        public Address CustomerAddress { get; set; }
 
         /// <summary>
-        /// Возвращает и задаёт корзину покупателя.
+        /// Возвращает и задает корзину покупателя.
         /// </summary>
-        public Cart CustomerCart
-        {
-            get
-            {
-                return _cart;
-            }
-            set
-            {
-                _cart = value;
-            }
-        }
+        public Cart CustomerCart { get; set; }
 
         /// <summary>
-        /// Возвращает и задаёт список заказов.
+        /// Возвращает и задает список заказов покупателя.
         /// </summary>
-        public List<Order> Orders
-        {
-            get
-            {
-                return _orders;
-            }
-            set
-            {
-                _orders = value;
-            }
-        }
+        public List<Order> Orders { get; set; }
 
         /// <summary>
-        /// Создаёт экземпляр класса <see cref="Item"/>.
+        /// Возвращает и задает булево значение о том, является ли покупатель приоритетным.
+        /// </summary>
+        public bool IsPriority { get; set; } = false;
+
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Customer"/>.
         /// </summary>
         /// <param name="fullname">Полное имя покупателя.</param>
-        /// <param name="address">Адрес доставки для покупателя.</param>
         public Customer(string fullname)
         {
             Fullname = fullname;
@@ -120,7 +79,7 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Создаёт пустой экземпляр класса <see cref="Item"/>.
+        /// Создаёт пустой экземпляр класса <see cref="Customer"/>.
         /// </summary>
         public Customer()
         {

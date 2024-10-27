@@ -32,7 +32,7 @@ namespace ObjectOrientedPractics.View.Controls
         /// <summary>
         /// Обновляет текстбоксы.
         /// </summary>
-        public void SelelctedTextBoxs()
+        public void SelectedTextBoxs()
         {
             IndexTextBox.Text = OurAddress.Index.ToString();
             CountryTextBox.Text = OurAddress.Country.ToString();
