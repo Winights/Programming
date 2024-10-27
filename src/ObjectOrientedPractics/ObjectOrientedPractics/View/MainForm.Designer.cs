@@ -38,14 +38,11 @@
             CartsTab = new View.Tabs.CartsTab();
             tabPage4 = new TabPage();
             OrdersTab = new View.Tabs.OrdersTab();
-            tabPage5 = new TabPage();
-            PriorityTab = new View.Tabs.PriorityOrdersTab();
             ObjecTabControl.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
             tabPage4.SuspendLayout();
-            tabPage5.SuspendLayout();
             SuspendLayout();
             // 
             // ObjecTabControl
@@ -54,7 +51,6 @@
             ObjecTabControl.Controls.Add(tabPage2);
             ObjecTabControl.Controls.Add(tabPage3);
             ObjecTabControl.Controls.Add(tabPage4);
-            ObjecTabControl.Controls.Add(tabPage5);
             ObjecTabControl.Dock = DockStyle.Fill;
             ObjecTabControl.Location = new Point(0, 0);
             ObjecTabControl.Name = "ObjecTabControl";
@@ -141,25 +137,6 @@
             OrdersTab.Size = new Size(979, 588);
             OrdersTab.TabIndex = 0;
             // 
-            // tabPage5
-            // 
-            tabPage5.Controls.Add(PriorityTab);
-            tabPage5.Location = new Point(4, 29);
-            tabPage5.Name = "tabPage5";
-            tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(985, 594);
-            tabPage5.TabIndex = 4;
-            tabPage5.Text = "tabPage5";
-            tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // PriorityTab
-            // 
-            PriorityTab.Dock = DockStyle.Fill;
-            PriorityTab.Location = new Point(3, 3);
-            PriorityTab.Name = "PriorityTab";
-            PriorityTab.Size = new Size(979, 588);
-            PriorityTab.TabIndex = 0;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -173,7 +150,6 @@
             tabPage2.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
-            tabPage5.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -188,7 +164,5 @@
         private View.Tabs.CartsTab CartsTab;
         private TabPage tabPage4;
         private View.Tabs.OrdersTab OrdersTab;
-        private TabPage tabPage5;
-        private View.Tabs.PriorityOrdersTab PriorityTab;
     }
 }
