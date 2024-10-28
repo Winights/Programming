@@ -1,16 +1,17 @@
-﻿using ObjectOrientedPractics.Services;
+﻿using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Discounts
 {
     /// <summary>
     /// Хранит процентную скидку.
     /// </summary>
-    public class PercentDiscount
+    public class PercentDiscount : IDiscount
     {
         /// <summary>
         /// Скидка в процентах.
@@ -28,8 +29,8 @@ namespace ObjectOrientedPractics.Model
         public int Percent
         {
             get
-            { 
-                return _percent; 
+            {
+                return _percent;
             }
             private set
             {
@@ -106,7 +107,7 @@ namespace ObjectOrientedPractics.Model
         /// Создаёт экземпляр класса <see cref="PercentDiscount"/>.
         /// </summary>
         /// <param name="initialPoints">Накопленные баллы.</param>
-        public PercentDiscount(Category category) 
+        public PercentDiscount(Category category)
         {
             Category = category;
         }

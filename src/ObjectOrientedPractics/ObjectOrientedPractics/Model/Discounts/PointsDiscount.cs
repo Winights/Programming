@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Discounts
 {
     /// <summary>
     /// Хранит количество накопленных баллов.
     /// </summary>
-    public class PointsDiscount
+    public class PointsDiscount : IDiscount
     {
         /// <summary>
         /// Накопительные баллы.
@@ -97,15 +97,15 @@ namespace ObjectOrientedPractics.Model
         /// Создаёт экземпляр класса <see cref="PointsDiscount"/>.
         /// </summary>
         /// <param name="initialPoints">Накопленные баллы.</param>
-        public PointsDiscount(int initialPoints) 
-        { 
+        public PointsDiscount(int initialPoints)
+        {
             Points = initialPoints;
         }
 
         /// <summary>
         /// Создаёт пустой экземпляр класса <see cref="PointsDiscount"/>.
         /// </summary>
-        public PointsDiscount() 
+        public PointsDiscount()
         {
             Points = 0;
         }

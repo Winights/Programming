@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Orders;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -148,7 +149,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     CurrentCustomer.Orders.Add(new PriorityOrder(CurrentCustomer.CustomerCart.Items, 
                         CurrentCustomer.CustomerAddress,
-                        CurrentCustomer.Fullname,
+                        CurrentCustomer.Fullname, 0,
                         DeliveryTime.Morning, DateTime.Now.Date));
                     CurrentCustomer.CustomerCart.Items.Clear();
                     UpdateCartListBox();
@@ -156,7 +157,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 else 
                 {
                     CurrentCustomer.Orders.Add(new Order(CurrentCustomer.CustomerAddress,
-                    CurrentCustomer.CustomerCart.Items, CurrentCustomer.Fullname));
+                    CurrentCustomer.CustomerCart.Items, CurrentCustomer.Fullname, 0));
                     CurrentCustomer.CustomerCart.Items.Clear();
                     UpdateCartListBox();
                 }              
