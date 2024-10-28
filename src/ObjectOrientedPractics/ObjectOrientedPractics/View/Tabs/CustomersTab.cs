@@ -1,4 +1,5 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.View.DiscountsModalWindow;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ObjectOrientedPractics.Model.Discounts;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -84,6 +86,32 @@ namespace ObjectOrientedPractics.View.Tabs
             FullnameTextBox.Text = _currentCustomer.Fullname.ToString();
             AddressControl.OurAddress = _currentCustomer.CustomerAddress;
             AddressControl.SelectedTextBoxs();
+            UpdateDiscountsListBox(_currentCustomer);
+        }
+
+        /// <summary>
+        /// Обновляет данные в списке скидок покупателя.
+        /// </summary>
+        /// <param name="customer">Текущий покупатель.</param>
+        private void UpdateDiscountsListBox(Customer customer)
+        {
+            DiscountsListBox.Items.Clear();
+
+            foreach (var discount in customer.Discounts)
+            {
+                DiscountsListBox.Items.Add(discount.Info);
+            }
+        }
+
+        /// <summary>
+        /// Обновляет данные в списке скидок покупателя.
+        /// </summary>
+        public void UpdateDiscountsListBox()
+        {
+            if (CustomersListBox.SelectedIndex > 0)
+            {
+                UpdateDiscountsListBox(Customers[CustomersListBox.SelectedIndex]);
+            }
         }
 
         private void FullnameTextBox_TextChanged(object sender, EventArgs e)
@@ -183,7 +211,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void PriorityCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (PriorityCheckBox.Checked == true)
+            if (PriorityCheckBox.Checked)
             {
                 _isPriority = true;
             }
@@ -191,6 +219,64 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _isPriority = false;
             }
+        }
+
+        private void AddDiscountsButton_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                _currentCustomer = Customers[CustomersListBox.SelectedIndex];
+                var discountWindowPopUp = new DiscountModalWindow(_currentCustomer);
+
+                if (discountWindowPopUp.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                var discount = new PercentDiscount(discountWindowPopUp.Category);
+                _currentCustomer.Discounts.Add(discount);
+                UpdateDiscountsListBox(_currentCustomer);
+            }
+            else
+            {
+                // Выводим сообщение, если не выбран элемент
+                MessageBox.Show(
+                    "Не выбран покупатель для добавления скидки.",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }           
+        }
+
+        private void RemoveDiscountsButton_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1 && DiscountsListBox.SelectedIndex != -1)
+            {
+                _currentCustomer = Customers[CustomersListBox.SelectedIndex];
+                if (DiscountsListBox.SelectedIndex != 0)
+                {
+                    _currentCustomer.Discounts.RemoveAt(
+                        DiscountsListBox.SelectedIndex);
+                    UpdateDiscountsListBox(_currentCustomer);
+                }
+                else 
+                {
+                    return;
+                }
+            }
+            else
+            {
+                // Выводим сообщение, если не выбран элемент
+                MessageBox.Show(
+                    "Не выбран покупатель или скидка для удаления.",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }         
         }
     }
 }

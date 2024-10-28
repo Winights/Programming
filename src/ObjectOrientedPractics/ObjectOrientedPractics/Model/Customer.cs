@@ -70,7 +70,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задает список скидок покупателя.
         /// </summary>
-        public List<IDiscount> Discount { get; set; }
+        public List<IDiscount> Discounts { get; set; }
 
         /// <summary>
         /// Создаёт экземпляр класса <see cref="Customer"/>.
@@ -83,8 +83,8 @@ namespace ObjectOrientedPractics.Model
             _id = IdGenerator.GetNextId();
             CustomerCart = new Cart();
             Orders = new List<Order>();
-            Discount = new List<IDiscount>();
-            Discount.Add(new PointsDiscount());
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
 
         /// <summary>
@@ -97,8 +97,8 @@ namespace ObjectOrientedPractics.Model
             _id = IdGenerator.GetNextId();
             CustomerCart = new Cart();
             Orders = new List<Order>();
-            Discount = new List<IDiscount>();
-            Discount.Add(new PointsDiscount());
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
     }
 }
