@@ -16,7 +16,7 @@ namespace ObjectOrientedPractics.Model.Discounts
         /// <summary>
         /// Скидка в процентах.
         /// </summary>
-        private int _percent;
+        private int _percent = 1;
 
         /// <summary>
         /// Возвращает скидочную категорию.
