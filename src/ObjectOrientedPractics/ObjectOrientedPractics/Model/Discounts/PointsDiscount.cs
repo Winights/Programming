@@ -1,4 +1,5 @@
-﻿using ObjectOrientedPractics.Services;
+﻿using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace ObjectOrientedPractics.Model.Discounts
         /// <summary>
         /// Максимальная скидка.
         /// </summary>
-        private const double MaxDiscountPercentage = 0.3;
+        private const double _maxDiscountPercentage = 0.3;
 
         /// <summary>
         /// Возвращает и задает баллы. Должен быть положительным числом.
@@ -52,7 +53,7 @@ namespace ObjectOrientedPractics.Model.Discounts
                 totalCost += item.Cost;
             }
 
-            double maxDiscount = totalCost * MaxDiscountPercentage;
+            double maxDiscount = totalCost * _maxDiscountPercentage;
 
             return Math.Min(Points, maxDiscount);
         }
@@ -91,7 +92,13 @@ namespace ObjectOrientedPractics.Model.Discounts
         /// <summary>
         /// Возвращает информацию о скидке.
         /// </summary>
-        public string Info => $"Накопительная – {Points} баллов";
+        public string Info
+        {
+            get
+            {
+                return $"Накопительная – {Points} баллов";
+            }
+        }
 
         /// <summary>
         /// Создаёт экземпляр класса <see cref="PointsDiscount"/>.
