@@ -1,11 +1,12 @@
-﻿using ObjectOrientedPractics.Services;
+﻿using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
     /// <summary>
     /// Хранит данные о заказе.
@@ -51,7 +52,23 @@ namespace ObjectOrientedPractics.Model
         /// Возвращает и задает статус заказа.
         /// </summary>
         public OrderStatus OrderStatus { get; set; }
-        
+
+        /// <summary>
+        /// Возвращает и задает скидку на товары.
+        /// </summary>
+        public double DiscountAmount { get; set; }
+
+        /// <summary>
+        /// Возращает стоимость заказа со скидкой.
+        /// </summary>
+        public double Total
+        {
+            get
+            {
+                return Amount - DiscountAmount;
+            }
+        }
+
         /// <summary>
         /// Возвращает стоимость всех товаров в корзине.
         /// </summary>
@@ -81,17 +98,18 @@ namespace ObjectOrientedPractics.Model
         /// <param name="address">Адрес доставки для покупателя.</param>
         /// <param name="items">Список товаров.</param>
         /// /// <param name="fullname">Полное имя покупателя.</param>
-        public Order(Address address, List<Item> items, string fullname)
+        public Order(Address address, List<Item> items, string fullname, double discountAmount)
         {
             _id = IdGenerator.GetNextId();
             _date = DateTime.Now;
             Address = address;
-            foreach(Item item in items)
+            foreach (Item item in items)
             {
                 Items.Add(item);
             }
             OrderStatus = new OrderStatus();
             CustomerFullName = fullname;
+            DiscountAmount = discountAmount;
 
         }
 
@@ -106,6 +124,7 @@ namespace ObjectOrientedPractics.Model
             Items = new List<Item>();
             OrderStatus = new OrderStatus();
             CustomerFullName = string.Empty;
+            DiscountAmount = 0;
         }
     }
 }

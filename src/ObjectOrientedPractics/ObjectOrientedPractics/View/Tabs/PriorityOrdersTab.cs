@@ -1,4 +1,6 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Model.Orders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -96,7 +98,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     foreach (Order order in customer.Orders)
                     {
                         _priorityOrders.Add(new PriorityOrder(order.Items, order.Address,
-                            order.CustomerFullName, DeliveryTime.Morning, DateTime.Now));
+                            order.CustomerFullName, 0, DeliveryTime.Morning, DateTime.Now));
                     }
                 }
             }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
     /// <summary>
     /// Хранит данные о приоритетном заказе.
@@ -29,10 +29,10 @@ namespace ObjectOrientedPractics.Model
         /// <param name="customerName">Имя покупателя.</param>
         /// <param name="desiredDeliveryTime">Время доставки.</param>
         /// <param name="deliveryDate">Дата доставки.</param>
-        public PriorityOrder(List<Item> items, Address deliveryAddress, 
-            string customerName, DeliveryTime 
+        public PriorityOrder(List<Item> items, Address deliveryAddress,
+            string customerName,double discountAmount, DeliveryTime
             desiredDeliveryTime, DateTime deliveryDate) : base(deliveryAddress, items,
-                customerName)
+                customerName, discountAmount)
         {
             DesiredDeliveryTime = desiredDeliveryTime;
             DeliveryDate = deliveryDate;

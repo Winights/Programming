@@ -1,4 +1,6 @@
-﻿using ObjectOrientedPractics.Services;
+﻿using ObjectOrientedPractics.Model.Orders;
+using ObjectOrientedPractics.Services;
+using ObjectOrientedPractics.Model.Discounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +42,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertStringOnLength(value, 200, "Fullname");
+                ValueValidator.AssertStringOnLength(value, 200, "Fullname");
                 _fullname = value;
             }
         }
@@ -66,6 +68,11 @@ namespace ObjectOrientedPractics.Model
         public bool IsPriority { get; set; } = false;
 
         /// <summary>
+        /// Возвращает и задает список скидок покупателя.
+        /// </summary>
+        public List<IDiscount> Discounts { get; set; }
+
+        /// <summary>
         /// Создаёт экземпляр класса <see cref="Customer"/>.
         /// </summary>
         /// <param name="fullname">Полное имя покупателя.</param>
@@ -76,6 +83,8 @@ namespace ObjectOrientedPractics.Model
             _id = IdGenerator.GetNextId();
             CustomerCart = new Cart();
             Orders = new List<Order>();
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
 
         /// <summary>
@@ -88,6 +97,8 @@ namespace ObjectOrientedPractics.Model
             _id = IdGenerator.GetNextId();
             CustomerCart = new Cart();
             Orders = new List<Order>();
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
     }
 }

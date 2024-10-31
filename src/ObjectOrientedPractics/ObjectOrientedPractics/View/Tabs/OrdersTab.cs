@@ -1,4 +1,6 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Model.Orders;
 using ObjectOrientedPractics.View.Controls;
 using System;
 using System.Collections.Generic;
@@ -62,6 +64,7 @@ namespace ObjectOrientedPractics.View.Tabs
             LoadStatusComboBox();
             LoadDeliveryTimeComboBox();
             TotalCostLabel.Text = "0";
+            TotalCostWithDiscountlLabel.Text = "0";
         }
 
         /// <summary>
@@ -74,7 +77,7 @@ namespace ObjectOrientedPractics.View.Tabs
             foreach (Order order in _orders)
             {
                 OrdersDataGridView.Rows.Add(order.Id, order.Date,
-                    order.OrderStatus, order.CustomerFullName);
+                    order.OrderStatus, order.CustomerFullName, order.Amount, order.Total);
             }
         }
 
@@ -159,6 +162,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CreatedTextBox.Text = _selectedOrder.Date.ToString();
                 StatusComboBox.SelectedItem = _selectedOrder.OrderStatus;
                 TotalCostLabel.Text = _selectedOrder.Amount.ToString();
+                TotalCostWithDiscountlLabel.Text = _selectedOrder.Total.ToString();
 
                 FillOrderItemsListBox();
             }
