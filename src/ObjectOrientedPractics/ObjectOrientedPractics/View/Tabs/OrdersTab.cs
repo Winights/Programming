@@ -164,6 +164,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 TotalCostLabel.Text = _selectedOrder.Amount.ToString();
                 TotalCostWithDiscountlLabel.Text = _selectedOrder.Total.ToString();
 
+                //var equals = _selectedOrder.Equals(_orders[0]);
+                //MessageBox.Show($"{equals}");
                 FillOrderItemsListBox();
             }
 

@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ObjectOrientedPractics.Model
 {
     /// <summary>
     /// Хранит данные о корзине покупателя.
     /// </summary>
-    public class Cart
+    public class Cart : ICloneable
     {
         /// <summary>
         /// Возвращает и задает cписок товаров в корзине.
@@ -45,6 +47,22 @@ namespace ObjectOrientedPractics.Model
         public Cart()
         {
             Items = new List<Item>();
+        }
+
+        /// <summary>
+        /// Создают копию класса <see cref="Cart"/>..
+        /// </summary>
+        /// <returns>Копия объекта.</returns>
+        public object Clone()
+        {
+            var cartClone = new Cart();
+            foreach (Item item in Items)
+            {
+                cartClone.Items.Add((Item)item.Clone());
+            }
+
+            return cartClone;
+        
         }
     }
 }

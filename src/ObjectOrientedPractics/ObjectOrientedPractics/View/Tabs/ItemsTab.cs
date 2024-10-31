@@ -180,6 +180,12 @@ namespace ObjectOrientedPractics.View.Tabs
                     Item selectedItem = AddItemInfo();
                     selectedItem.Category = (Category)CategoryComboBox.SelectedItem;
                     _items.Add(selectedItem);
+                    //var clone = (Item)selectedItem.Clone();
+                    //MessageBox.Show($"{clone.Id} {clone.Name} {clone.Info} {clone.Cost} {clone.Category}");
+                    //var equals = selectedItem.Equals(_items[0]);
+                    //MessageBox.Show($"{equals}");
+                    //var compare = selectedItem.CompareTo(_items[0]);
+                    //MessageBox.Show($"{compare}");
                     UpdateListBox();
                 }
                 else

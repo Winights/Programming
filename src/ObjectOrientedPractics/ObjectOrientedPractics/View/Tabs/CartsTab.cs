@@ -179,6 +179,11 @@ namespace ObjectOrientedPractics.View.Tabs
                 return;
             }
             CurrentCustomer.CustomerCart.Items.Add(Items[ItemsListBox.SelectedIndex]);
+            //var clone = (Cart)CurrentCustomer.CustomerCart.Clone();
+            //foreach (var item in clone.Items)
+            //{
+            //    MessageBox.Show($"{item.Id} {item.Name} {item.Info} {item.Cost} {item.Category}");
+            //}
             UpdateDiscounts();
             UpdateCartListBox();
         }

@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ObjectOrientedPractics.Model.Orders
 {
     /// <summary>
     /// Хранит данные о заказе.
     /// </summary>
-    public class Order
+    public class Order : IEquatable<Order>
     {
         /// <summary>
         /// Уникальный номер покупателя.
@@ -125,6 +126,55 @@ namespace ObjectOrientedPractics.Model.Orders
             OrderStatus = new OrderStatus();
             CustomerFullName = string.Empty;
             DiscountAmount = 0;
+        }
+
+        /// <summary>
+        /// Проверка на равенство объекта с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса.</param>
+        /// <returns>Равны ли объекты.</returns>
+        public bool Equals(Order subject)
+        {
+            if (subject == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, subject))
+            {
+                return true;
+            }
+
+            if (!Items.SequenceEqual(subject.Items))
+            {
+                return false;
+            }
+
+            return
+                Address == subject.Address &&
+                OrderStatus == subject.OrderStatus &&
+                CustomerFullName == subject.CustomerFullName &&
+                Amount == subject.Amount;
+        }
+
+        /// <summary>
+        /// Проверка на равенство объекта с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса.</param>
+        /// <returns>Равны ли объекты.</returns>
+        public override bool Equals(object subject)
+        {
+            if (subject == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, subject))
+            {
+                return true;
+            }
+
+            return Equals((Order)subject);
         }
     }
 }

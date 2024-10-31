@@ -151,6 +151,11 @@ namespace ObjectOrientedPractics.View.Tabs
                     selectedCustomer.CustomerAddress = AddressControl.AddFromTextBoxs();
                     selectedCustomer.IsPriority = _isPriority;
                     _customers.Add(selectedCustomer);
+                    //var clone = (Address)selectedCustomer.CustomerAddress.Clone();
+                    //MessageBox.Show($"{clone.Index} {clone.Country} {clone.Apartment} " +
+                    //    $"{clone.Building} {clone.City} {clone.Street}");
+                    //var equals = selectedCustomer.CustomerAddress.Equals(_customers[0].CustomerAddress);
+                    //MessageBox.Show($"{equals}");
                     UpdateListBox();
                 }
                 else
