@@ -155,6 +155,7 @@ namespace ObjectOrientedPractics.Model.Orders
                 OrderStatus == subject.OrderStatus &&
                 CustomerFullName == subject.CustomerFullName &&
                 Amount == subject.Amount;
+
         }
 
         /// <summary>
