@@ -11,7 +11,7 @@ namespace ObjectOrientedPractics.Model.Discounts
     /// <summary>
     /// Хранит процентную скидку.
     /// </summary>
-    public class PercentDiscount : IDiscount
+    public class PercentDiscount : IDiscount, IComparable<PercentDiscount>
     {
         /// <summary>
         /// Скидка в процентах.
@@ -118,6 +118,29 @@ namespace ObjectOrientedPractics.Model.Discounts
         public PercentDiscount()
         {
             Category = Category.Medicine;
+        }
+
+        /// <summary>
+        /// Сравнивает цену.
+        /// </summary>
+        /// <param name="subject">Объект класса <see cref="PercentDiscount"/>.</param>
+        /// <returns>0 - цены равны, 1 - цена меньше, -1 - цена больше.</returns>
+        public int CompareTo(PercentDiscount subject)
+        {
+            if (subject == null)
+            {
+                return 1;
+            }
+
+            if (ReferenceEquals(this, subject))
+            {
+                return 0;
+            }
+
+            else
+            {
+                return _percent.CompareTo(subject.Percent);
+            }
         }
     }
 }

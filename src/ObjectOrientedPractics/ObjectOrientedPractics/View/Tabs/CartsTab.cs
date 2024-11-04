@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Model.Orders;
+using ObjectOrientedPractics.Model.Enums;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -128,7 +130,9 @@ namespace ObjectOrientedPractics.View.Tabs
                         .Calculate(CurrentCustomer.CustomerCart.Items);
                 }
             }
+
             TotalDiscountLabel.Text = discountAmount.ToString();
+
             if (CurrentCustomer.CustomerCart.Amount != 0)
             {
                 TotalCostWithDiscountlLabel.Text = (CurrentCustomer.CustomerCart.Amount 
@@ -179,6 +183,11 @@ namespace ObjectOrientedPractics.View.Tabs
                 return;
             }
             CurrentCustomer.CustomerCart.Items.Add(Items[ItemsListBox.SelectedIndex]);
+            //var clone = (Cart)CurrentCustomer.CustomerCart.Clone();
+            //foreach (var item in clone.Items)
+            //{
+            //    MessageBox.Show($"{item.Id} {item.Name} {item.Info} {item.Cost} {item.Category}");
+            //}
             UpdateDiscounts();
             UpdateCartListBox();
         }
