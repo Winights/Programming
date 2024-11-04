@@ -156,6 +156,10 @@ namespace ObjectOrientedPractics.View.Tabs
                     //    $"{clone.Building} {clone.City} {clone.Street}");
                     //var equals = selectedCustomer.CustomerAddress.Equals(_customers[0].CustomerAddress);
                     //MessageBox.Show($"{equals}");
+                    //var pointsDiscount = (PointsDiscount)Customers[1].Discounts[0];
+                    //var compare = (PointsDiscount)Customers[0].Discounts[0];
+                    //var result = pointsDiscount.CompareTo(compare);
+                    //MessageBox.Show($"{result}");
                     UpdateListBox();
                 }
                 else
