@@ -1,5 +1,6 @@
 ﻿using ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Diagnostics.Tracing;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,11 +34,27 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         public List<Item> Items { get { return _items; } set { _items = value; } }
 
+        /// <summary>
+        /// Возвращает и задает делегат критерия фильтрации.
+        /// </summary>
+        private Predicate<Item> FilterСriterion { get; set; }
+
+        /// <summary>
+        /// Список фильтрованных товаров.
+        /// </summary>
+        private List<Item> _displayedItems = new ();
+
+        /// <summary>
+        /// Возвращает и задает делегат критерия сортировки.
+        /// </summary>
+        private DataTools.CompareCriteria SortСriterion { get; set; }
+
 
         public ItemsTab()
         {
             InitializeComponent();
             LoadCategoryComboBox();
+            OrderByComboBox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -72,14 +90,34 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Добавляет элементы списка в ItemsListBox.
         /// </summary>
-        private void UpdateListBox()
+        private void UpdateListBox(List<Item> items)
         {
             ItemsListBox.Items.Clear();
 
-            foreach (Item item in _items)
+            foreach (Item item in items)
             {
                 ItemsListBox.Items.Add($"{item.Id} / {item.Name} / {item.Category}");
             }
+        }
+
+        /// <summary>
+        /// Обновить список товаров, который будет выведен на экран.
+        /// </summary>
+        private void UpdateDisplayedItems()
+        {
+            var displayedItems = Items;
+
+            if (FilterСriterion != null)
+            {
+                displayedItems = DataTools.FilterItems(displayedItems, FilterСriterion);
+            }
+            if (SortСriterion != null)
+            {
+                displayedItems = DataTools.SortItems(displayedItems, SortСriterion);
+            }
+
+            _displayedItems = displayedItems;
+            UpdateListBox(_displayedItems);
         }
 
         /// <summary>
@@ -174,19 +212,22 @@ namespace ObjectOrientedPractics.View.Tabs
                 }
 
                 // Проверяем, что все TextBox'ы не пустые и не один из TextBox'ов не красный
-                if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text)) 
+                if (textBoxes.All(tb => !string.IsNullOrWhiteSpace(tb.Text))
                     && CategoryComboBox.SelectedItem != null && ifRed)
                 {
                     Item selectedItem = AddItemInfo();
                     selectedItem.Category = (Category)CategoryComboBox.SelectedItem;
-                    _items.Add(selectedItem);
+                    Items.Add(selectedItem);
+                    _displayedItems = Items;
+                    UpdateDisplayedItems();
+
                     //var clone = (Item)selectedItem.Clone();
                     //MessageBox.Show($"{clone.Id} {clone.Name} {clone.Info} {clone.Cost} {clone.Category}");
                     //var equals = selectedItem.Equals(_items[0]);
                     //MessageBox.Show($"{equals}");
                     //var compare = selectedItem.CompareTo(_items[0]);
                     //MessageBox.Show($"{compare}");
-                    UpdateListBox();
+                    //UpdateListBox();
                 }
                 else
                 {
@@ -215,7 +256,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     MessageBoxDefaultButton.Button1);
                 return;
             }
-            _items.RemoveAt(ItemsListBox.SelectedIndex);
+            Items.RemoveAt(ItemsListBox.SelectedIndex);
             ItemsListBox.Items.RemoveAt(ItemsListBox.SelectedIndex);
             ClearItemInfo();
         }
@@ -224,7 +265,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (ItemsListBox.SelectedItem != null)
             {
-                _currentItem = _items[ItemsListBox.SelectedIndex];
+                _currentItem = _displayedItems[ItemsListBox.SelectedIndex];
                 UpdateItemInfo(_currentItem);
             }
         }
@@ -233,7 +274,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (ItemsListBox.SelectedItem != null)
             {
-                UpdateListBox();
+                UpdateDisplayedItems();
             }
         }
 
@@ -244,6 +285,46 @@ namespace ObjectOrientedPractics.View.Tabs
                 _currentItem.Category = (Category)CategoryComboBox.SelectedItem;
                 UpdateItemInfo(_currentItem);
             }
+        }
+
+        private void FindTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (FindTextBox.Text.Length == 0)
+            {
+                FilterСriterion = null;
+            }
+            else
+            {
+                FilterСriterion = (item) => { return item.Name.Contains(FindTextBox.Text); };
+            }
+            UpdateDisplayedItems();
+        }
+
+        private void OrderByComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (OrderByComboBox.SelectedIndex)
+            {
+                case 0:
+                    SortСriterion = (first, second) =>
+                    {
+                        return first.Name.CompareTo(second.Name) < 0;
+                    };
+                    break;
+                case 1:
+                    SortСriterion = (first, second) =>
+                    {
+                        return first.Cost.CompareTo(second.Cost) > 0;
+                    };
+                    break;
+                case 2:
+                    SortСriterion = (first, second) =>
+                    {
+                        return first.Cost.CompareTo(second.Cost) < 0;
+                    };
+                    break;
+            }
+            _displayedItems = Items;
+            UpdateDisplayedItems();
         }
     }
 }
