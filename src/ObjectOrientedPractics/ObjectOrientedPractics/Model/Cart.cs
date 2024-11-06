@@ -56,6 +56,7 @@ namespace ObjectOrientedPractics.Model
         public object Clone()
         {
             var cartClone = new Cart();
+
             foreach (Item item in Items)
             {
                 cartClone.Items.Add((Item)item.Clone());
