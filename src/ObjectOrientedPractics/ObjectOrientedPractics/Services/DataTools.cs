@@ -48,6 +48,7 @@ namespace ObjectOrientedPractics.Services
         CompareCriteria compare)
         {
             var sortedItems = new List<Item>(items);
+
             for (int i = 0; i < sortedItems.Count; i++)
             {
                 for (int j = 1; j < sortedItems.Count; j++)
@@ -60,6 +61,7 @@ namespace ObjectOrientedPractics.Services
                     }
                 }
             }
+
             return sortedItems;
         }
     }
