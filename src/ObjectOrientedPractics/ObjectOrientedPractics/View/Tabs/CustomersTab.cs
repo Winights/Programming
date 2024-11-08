@@ -36,6 +36,11 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private bool _isPriority = false;
 
+        /// <summary>
+        /// Событие при изменении информации о покупателях.
+        /// </summary>
+        public event EventHandler<EventArgs> CustomersChanged;
+
         public CustomersTab()
         {
             InitializeComponent();
@@ -120,6 +125,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _currentCustomer.Fullname = FullnameTextBox.Text;
                 FullnameTextBox.BackColor = Color.White;
+                CustomersChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (ArgumentException)
             {
@@ -161,6 +167,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     //var result = pointsDiscount.CompareTo(compare);
                     //MessageBox.Show($"{result}");
                     UpdateListBox();
+                    CustomersChanged?.Invoke(this, EventArgs.Empty);
                 }
                 else
                 {
@@ -192,6 +199,7 @@ namespace ObjectOrientedPractics.View.Tabs
             _customers.RemoveAt(CustomersListBox.SelectedIndex);
             CustomersListBox.Items.RemoveAt(CustomersListBox.SelectedIndex);
             ClearItemInfo();
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -228,6 +236,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _isPriority = false;
             }
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void AddDiscountsButton_Click(object sender, EventArgs e)
@@ -245,6 +254,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 var discount = new PercentDiscount(discountWindowPopUp.Category);
                 _currentCustomer.Discounts.Add(discount);
                 UpdateDiscountsListBox(_currentCustomer);
+                CustomersChanged?.Invoke(this, EventArgs.Empty);
             }
             else
             {
@@ -269,6 +279,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     _currentCustomer.Discounts.RemoveAt(
                         DiscountsListBox.SelectedIndex);
                     UpdateDiscountsListBox(_currentCustomer);
+                    CustomersChanged?.Invoke(this, EventArgs.Empty);
                 }
                 else 
                 {

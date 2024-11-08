@@ -61,7 +61,6 @@
             ObjecTabControl.SelectedIndex = 0;
             ObjecTabControl.Size = new Size(993, 627);
             ObjecTabControl.TabIndex = 0;
-            ObjecTabControl.SelectedIndexChanged += ObjecTabControl_SelectedIndexChanged;
             // 
             // tabPage1
             // 

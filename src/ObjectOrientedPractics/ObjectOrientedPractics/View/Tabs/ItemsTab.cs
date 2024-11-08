@@ -49,6 +49,10 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private DataTools.CompareCriteria SortСriterion { get; set; }
 
+        /// <summary>
+        /// Событие при изменении информации о товарах.
+        /// </summary>
+        public event EventHandler<EventArgs> ItemsChanged;
 
         public ItemsTab()
         {
@@ -158,6 +162,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _currentItem.Cost = double.Parse(CostTextBox.Text);
                 CostTextBox.BackColor = Color.White;
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception)
             {
@@ -174,6 +179,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _currentItem.Name = NameTextBox.Text;
                 NameTextBox.BackColor = Color.White;
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (ArgumentException)
             {
@@ -187,6 +193,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _currentItem.Info = DescriptionTextBox.Text;
                 DescriptionTextBox.BackColor = Color.White;
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (ArgumentException)
             {
@@ -220,6 +227,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     Items.Add(selectedItem);
                     _displayedItems = Items;
                     UpdateDisplayedItems();
+                    ItemsChanged?.Invoke(this, EventArgs.Empty);
 
                     //var clone = (Item)selectedItem.Clone();
                     //MessageBox.Show($"{clone.Id} {clone.Name} {clone.Info} {clone.Cost} {clone.Category}");
@@ -259,6 +267,7 @@ namespace ObjectOrientedPractics.View.Tabs
             Items.RemoveAt(ItemsListBox.SelectedIndex);
             ItemsListBox.Items.RemoveAt(ItemsListBox.SelectedIndex);
             ClearItemInfo();
+            ItemsChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -284,6 +293,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _currentItem.Category = (Category)CategoryComboBox.SelectedItem;
                 UpdateItemInfo(_currentItem);
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 

@@ -17,20 +17,30 @@ namespace ObjectOrientedPractics
             CartsTab.Items = _store.Items;
             CartsTab.Customers = _store.Customers;
             OrdersTab.Customers = _store.Customers;
-            discountsTab1.Items = _store.Items;
+            ItemsTab.ItemsChanged += ItemsChanged;
+            CartsTab.OrdersCreated += OrdersCreated;
+            CustomersTab.CustomersChanged += CustomersChanged;
         }
 
-        private void ObjecTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void CustomersChanged(object? sender, EventArgs e)
         {
-            switch (ObjecTabControl.SelectedIndex)
-            {
-                case 2:
-                    CartsTab.RefreshData();
-                    break;
-                case 3:
-                    OrdersTab.RefreshData();
-                    break;
-            }
+            CartsTab.Customers = CustomersTab.Customers;
+            OrdersTab.Customers = _store.Customers;
+            CartsTab.RefreshData();
+            OrdersTab.RefreshData();
+        }
+
+        private void OrdersCreated(object? sender, EventArgs e)
+        {
+            CartsTab.Items = ItemsTab.Items;
+            CartsTab.RefreshData();
+            OrdersTab.RefreshData();
+        }
+
+        private void ItemsChanged(object? sender, EventArgs e)
+        {
+            CartsTab.Items = ItemsTab.Items;
+            CartsTab.RefreshData();
         }
     }
 }

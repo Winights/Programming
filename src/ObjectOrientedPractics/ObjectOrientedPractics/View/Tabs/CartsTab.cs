@@ -31,6 +31,11 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private Customer CurrentCustomer { get; set; } = new Customer();
 
+        /// <summary>
+        /// Событие при создании заказа.
+        /// </summary>
+        public event EventHandler<EventArgs> OrdersCreated;
+
         public CartsTab()
         {
             InitializeComponent();
@@ -231,6 +236,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     UpdateDiscountsCheckedListBox();
                     CurrentCustomer.CustomerCart.Items.Clear();
                     UpdateCartListBox();
+                    OrdersCreated?.Invoke(this, EventArgs.Empty);
                 }
                 else
                 {
@@ -247,6 +253,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     UpdateDiscountsCheckedListBox();
                     CurrentCustomer.CustomerCart.Items.Clear();
                     UpdateCartListBox();
+                    OrdersCreated?.Invoke(this, EventArgs.Empty);
                 }
             }
             else

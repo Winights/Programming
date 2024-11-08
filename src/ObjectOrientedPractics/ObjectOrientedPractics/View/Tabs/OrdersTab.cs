@@ -59,7 +59,6 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         public void RefreshData()
         {
-            UpdateOrders();
             RefreshDataGrid();
             LoadStatusComboBox();
             LoadDeliveryTimeComboBox();
@@ -73,19 +72,6 @@ namespace ObjectOrientedPractics.View.Tabs
         private void RefreshDataGrid()
         {
             OrdersDataGridView.Rows.Clear();
-
-            foreach (Order order in _orders)
-            {
-                OrdersDataGridView.Rows.Add(order.Id, order.Date,
-                    order.OrderStatus, order.CustomerFullName, order.Amount, order.Total);
-            }
-        }
-
-        /// <summary>
-        /// Обновляет список заказов.
-        /// </summary>
-        private void UpdateOrders()
-        {
             _orders.Clear();
             foreach (Customer customer in Customers)
             {
@@ -94,10 +80,13 @@ namespace ObjectOrientedPractics.View.Tabs
                     foreach (Order order in customer.Orders)
                     {
                         _orders.Add(order);
+                        OrdersDataGridView.Rows.Add(order.Id, order.Date,
+                    order.OrderStatus, customer.Fullname, order.Amount, order.Total);
                     }
                 }
             }
         }
+
         /// <summary>
         /// Заполняет список товарами заказа.
         /// </summary>
