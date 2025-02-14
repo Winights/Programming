@@ -108,17 +108,6 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
-        /// <summary>
-        /// Обновляет данные в списке скидок покупателя.
-        /// </summary>
-        public void UpdateDiscountsListBox()
-        {
-            if (CustomersListBox.SelectedIndex > 0)
-            {
-                UpdateDiscountsListBox(Customers[CustomersListBox.SelectedIndex]);
-            }
-        }
-
         private void FullnameTextBox_TextChanged(object sender, EventArgs e)
         {
             try
