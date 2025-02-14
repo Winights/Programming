@@ -49,6 +49,11 @@ namespace ObjectOrientedPractics.Model
         private string _apartment = string.Empty;
 
         /// <summary>
+        /// Событие изменения адреса.
+        /// </summary>
+        public event EventHandler<EventArgs> AddressChanged;
+
+        /// <summary>
         /// Возвращает и задает почтовый индекс. Должен быть шестизначным числом.
         /// </summary>
         public int Index
@@ -61,6 +66,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertValueInRange(value, 100000, 999999, "Index");
                 _index = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -77,6 +83,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 50, "Country");
                 _country = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -93,6 +100,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 50, "City");
                 _city = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -109,6 +117,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 100, "Street");
                 _street = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -125,6 +134,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 10, "Street");
                 _building = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -141,6 +151,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 10, "Street");
                 _apartment = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 

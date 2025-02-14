@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             ItemsGroupBox = new GroupBox();
+            OrderByComboBox = new ComboBox();
+            OrderByLabel = new Label();
             FindTextBox = new TextBox();
             FindLabel = new Label();
             RemoveButton = new Button();
@@ -45,8 +47,6 @@
             NameTextBox = new TextBox();
             CostTextBox = new TextBox();
             IdTextBox = new TextBox();
-            OrderByLabel = new Label();
-            OrderByComboBox = new ComboBox();
             ItemsGroupBox.SuspendLayout();
             SelectedItemGroupBox.SuspendLayout();
             SuspendLayout();
@@ -68,6 +68,29 @@
             ItemsGroupBox.TabIndex = 0;
             ItemsGroupBox.TabStop = false;
             ItemsGroupBox.Text = "Items";
+            // 
+            // OrderByComboBox
+            // 
+            OrderByComboBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            OrderByComboBox.Font = new Font("Segoe UI", 9F);
+            OrderByComboBox.FormattingEnabled = true;
+            OrderByComboBox.Items.AddRange(new object[] { "Name", "Rising cost", "Down cost" });
+            OrderByComboBox.Location = new Point(79, 483);
+            OrderByComboBox.Name = "OrderByComboBox";
+            OrderByComboBox.Size = new Size(306, 28);
+            OrderByComboBox.TabIndex = 12;
+            OrderByComboBox.SelectedIndexChanged += OrderByComboBox_SelectedIndexChanged;
+            // 
+            // OrderByLabel
+            // 
+            OrderByLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            OrderByLabel.AutoSize = true;
+            OrderByLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            OrderByLabel.Location = new Point(6, 486);
+            OrderByLabel.Name = "OrderByLabel";
+            OrderByLabel.Size = new Size(70, 20);
+            OrderByLabel.TabIndex = 11;
+            OrderByLabel.Text = "Order by:";
             // 
             // FindTextBox
             // 
@@ -249,28 +272,6 @@
             IdTextBox.ReadOnly = true;
             IdTextBox.Size = new Size(151, 27);
             IdTextBox.TabIndex = 0;
-            // 
-            // OrderByLabel
-            // 
-            OrderByLabel.AutoSize = true;
-            OrderByLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            OrderByLabel.Location = new Point(6, 486);
-            OrderByLabel.Name = "OrderByLabel";
-            OrderByLabel.Size = new Size(70, 20);
-            OrderByLabel.TabIndex = 11;
-            OrderByLabel.Text = "Order by:";
-            // 
-            // OrderByComboBox
-            // 
-            OrderByComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            OrderByComboBox.Font = new Font("Segoe UI", 9F);
-            OrderByComboBox.FormattingEnabled = true;
-            OrderByComboBox.Items.AddRange(new object[] { "Name", "Rising cost", "Down cost" });
-            OrderByComboBox.Location = new Point(79, 483);
-            OrderByComboBox.Name = "OrderByComboBox";
-            OrderByComboBox.Size = new Size(306, 28);
-            OrderByComboBox.TabIndex = 12;
-            OrderByComboBox.SelectedIndexChanged += OrderByComboBox_SelectedIndexChanged;
             // 
             // ItemsTab
             // 
