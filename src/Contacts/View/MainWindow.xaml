@@ -5,8 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Contact" Height="400" Width="400" MinHeight="220" MinWidth="350">
     <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header ="Edit Contact" Grid.Column="0" Margin="10,0,3,40">
+                <StackPanel>
+                    <TextBlock Text="Name:" Margin="0,0,0,3"></TextBlock>
+                    <TextBox Height="15" Margin="0,0,0,3"></TextBox>
+                    <TextBlock Text="Phone Number:"></TextBlock>
+                    <TextBox Height="15" Margin="0,0,0,3"></TextBox>
+                    <TextBlock Text="Email:"></TextBlock>
+                    <TextBox Height="15" Margin="0,0,0,3"></TextBox>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Read Contact" Grid.Column="1" Margin="0,0,10,40">
+                <StackPanel>
+                    <TextBlock Text="Name:"></TextBlock>
+                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0" Margin="0,0,0,3"></TextBox>
+                    <TextBlock Text="Phone Number"></TextBlock>
+                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0" Margin="0,0,0,3"></TextBox>
+                    <TextBlock Text="Email"></TextBlock>
+                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0" Margin="0,0,0,3"></TextBox>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment ="Bottom"
+                    Margin="10,10,10,10">
+            <Button Content="Save" Width="75" Height="25" Margin="0,0,3,0"/>
+            <Button Content="Load" Width="75" Height="25"/>
+        </StackPanel>
 
     </Grid>
 </Window>
