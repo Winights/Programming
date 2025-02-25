@@ -17,8 +17,10 @@
                 <StackPanel>
                     <TextBlock Text="Name:" Margin="0,0,0,3"></TextBlock>
                     <TextBox Height="15" Margin="0,0,0,3"></TextBox>
+                    
                     <TextBlock Text="Phone Number:"></TextBlock>
                     <TextBox Height="15" Margin="0,0,0,3"></TextBox>
+                    
                     <TextBlock Text="Email:"></TextBlock>
                     <TextBox Height="15" Margin="0,0,0,3"></TextBox>
                 </StackPanel>
@@ -27,11 +29,16 @@
             <GroupBox Header="Read Contact" Grid.Column="1" Margin="0,0,10,40">
                 <StackPanel>
                     <TextBlock Text="Name:"></TextBlock>
-                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0" Margin="0,0,0,3"></TextBox>
+                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0" 
+                             Margin="0,0,0,3"></TextBox>
+                    
                     <TextBlock Text="Phone Number"></TextBlock>
-                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0" Margin="0,0,0,3"></TextBox>
+                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0"
+                             Margin="0,0,0,3"></TextBox>
+                    
                     <TextBlock Text="Email"></TextBlock>
-                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0" Margin="0,0,0,3"></TextBox>
+                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0"
+                             Margin="0,0,0,3"></TextBox>
                 </StackPanel>
             </GroupBox>
         </Grid>
