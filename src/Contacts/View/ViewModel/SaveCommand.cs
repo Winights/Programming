@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using View.Model.Services;
+using View.Model;
+
+namespace View.ViewModel
+{
+    /// <summary>
+    /// Реализует логику для сохранения объекта контакта в файл.
+    /// </summary>
+    public class SaveCommand : ICommand
+    {
+        /// <summary>
+        /// Объект контакта.
+        /// </summary>
+        private readonly Contact _contact;
+
+        /// <summary>
+        /// Событие для команды.
+        /// </summary>
+        public event EventHandler CanExecuteChanged;
+
+        /// <summary>
+        /// Может ли команда выполниться.
+        /// </summary>
+        /// <param name="parameter">Дополнительная информация при вызове команды.</param>
+        public bool CanExecute(object parameter) => true;
+
+        /// <summary>
+        /// Логика для выполнения команды, а именно сохранения объекта контакта в файл.
+        /// </summary>
+        /// <param name="parameter">Дополнительная информация при вызове команды.</param>
+        public void Execute(object parameter)
+        {
+            ContactSerializer.SaveContact(_contact);
+        }
+
+        /// <summary>
+        /// Создаёт пустой экземпляр класса <see cref="SaveCommand"/>.
+        /// </summary>
+        /// <param name="contact">Объект контакта.</param>
+        public SaveCommand(Contact contact)
+        {
+            _contact = contact;
+        }
+    }
+}

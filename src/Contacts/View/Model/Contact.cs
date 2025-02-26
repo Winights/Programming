@@ -38,7 +38,7 @@ namespace View.Model
             }
             set
             {
-                ValueValidator.AssertStringOnLength(value, 200, "Name");
+                ValueValidator.AssertStringOnLength(value, 100, "Name");
                 _fullname = value;
             }
         }
@@ -94,7 +94,7 @@ namespace View.Model
         /// </summary>
         public Contact()
         {
-            Fullname = string.Empty;
+            Fullname = "Alexsandr Ivanov";
             Email = "yuri.smirnov@no.mail";
             PhoneNumber = "+7-999-999-99-99";
         }

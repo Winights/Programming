@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
+        xmlns:validation="clr-namespace:View.ViewModel.Validation"
         Title="Contact" Height="400" Width="400" MinHeight="220" MinWidth="350">
     <Grid>
         <Grid>
@@ -13,40 +14,118 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <GroupBox Header ="Edit Contact" Grid.Column="0" Margin="10,0,3,40">
+            <GroupBox Header ="Edit Contact" Grid.Column="0" Margin="15,0,3,43">
                 <StackPanel>
                     <TextBlock Text="Name:" Margin="0,0,0,3"></TextBlock>
-                    <TextBox Height="15" Margin="0,0,0,3"></TextBox>
-                    
-                    <TextBlock Text="Phone Number:"></TextBlock>
-                    <TextBox Height="15" Margin="0,0,0,3"></TextBox>
-                    
-                    <TextBlock Text="Email:"></TextBlock>
-                    <TextBox Height="15" Margin="0,0,0,3"></TextBox>
+                    <TextBox Height="20" Margin="0,0,0,3">
+                        <TextBox.Text>
+                            <Binding Path ="CurrentContact.Fullname" UpdateSourceTrigger="PropertyChanged" 
+                                     Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validation:FullnameValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding> 
+                        </TextBox.Text>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="True">
+                                        <Setter Property="BorderBrush" Value="Red"/>
+                                        <Setter Property="BorderThickness" Value="2"/>
+                                        <Setter Property="Foreground" Value="Red" />
+                                        <Setter Property="ToolTip"
+                                            Value="{Binding RelativeSource={RelativeSource Self},
+                                                Path=(Validation.Errors)/ErrorContent}" />  
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <TextBlock Text="Phone Number:" Margin="0,0,0,3"></TextBlock>
+                    <TextBox Height="20" Margin="0,0,0,3">
+                        <TextBox.Text>
+                            <Binding Path="CurrentContact.PhoneNumber" UpdateSourceTrigger="PropertyChanged"
+                        Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validation:PhoneNumberValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="True">
+                                        <Setter Property="BorderBrush" Value="Red"/>
+                                        <Setter Property="BorderThickness" Value="2"/>
+                                        <Setter Property="ToolTip"
+                                             Value="{Binding RelativeSource={RelativeSource Self},
+                                                 Path=(Validation.Errors)/ErrorContent}" />         
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <TextBlock Text="Email:" Margin="0,0,0,3"></TextBlock>
+                    <TextBox Height="20" Margin="0,0,0,3">
+                        <TextBox.Text>
+                            <Binding Path="CurrentContact.Email" UpdateSourceTrigger="PropertyChanged" 
+                        Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validation:EmailValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+
+                        </TextBox.Text>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="True">
+                                        <Setter Property="BorderBrush" Value="Red"/>
+                                        <Setter Property="BorderThickness" Value="2"/>
+                                        <Setter Property="ToolTip"
+                                             Value="{Binding RelativeSource={RelativeSource Self},
+                                                 Path=(Validation.Errors)/ErrorContent}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Read Contact" Grid.Column="1" Margin="0,0,10,40">
+            <GroupBox Header="Read Contact" Grid.Column="1" Margin="0,0,15,43">
                 <StackPanel>
-                    <TextBlock Text="Name:"></TextBlock>
-                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0" 
-                             Margin="0,0,0,3"></TextBox>
-                    
-                    <TextBlock Text="Phone Number"></TextBlock>
-                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0"
-                             Margin="0,0,0,3"></TextBox>
-                    
-                    <TextBlock Text="Email"></TextBlock>
-                    <TextBox Height="15" FontWeight="Bold" BorderThickness="0"
-                             Margin="0,0,0,3"></TextBox>
+                    <TextBlock Text="Name:" Margin="0,0,0,3"></TextBlock>
+                    <TextBox 
+                        Text="{Binding CurrentContact.Fullname, Mode=OneWay}"
+                        IsReadOnly="True"
+                        Height="20" FontWeight="Bold" BorderThickness="0" 
+                        Margin="0,0,0,3"></TextBox>
+
+                    <TextBlock Text="Phone Number:" Margin="0,0,0,3"></TextBlock>
+                    <TextBox 
+                        Text="{Binding CurrentContact.PhoneNumber, Mode=OneWay}"
+                        IsReadOnly="True"
+                        Height="20" FontWeight="Bold" BorderThickness="0"
+                        Margin="0,0,0,3"></TextBox>
+
+                    <TextBlock Text="Email:" Margin="0,0,0,3"></TextBlock>
+                    <TextBox 
+                        Text="{Binding CurrentContact.Email, Mode=OneWay}"
+                        IsReadOnly="True"
+                        Height="20" FontWeight="Bold" BorderThickness="0"
+                        Margin="0,0,0,3"></TextBox>
                 </StackPanel>
             </GroupBox>
         </Grid>
-        
+
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment ="Bottom"
-                    Margin="10,10,10,10">
-            <Button Content="Save" Width="75" Height="25" Margin="0,0,3,0"/>
-            <Button Content="Load" Width="75" Height="25"/>
+                    Margin="0,3,15,15">
+            <Button Content="Save" Command="{Binding SaveCommand}"
+                    Width="75" Height="25" Margin="0,0,3,0"/>
+            <Button Content="Load" Command="{Binding LoadCommand}" Width="75" Height="25"/>
         </StackPanel>
 
     </Grid>

@@ -4,36 +4,51 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Xml.Linq;
 using View.Model;
+using View.Model.Services;
 
 namespace View.ViewModel
 {
     /// <summary>
-    /// Реализует логику для работы с интерфейсом.
+    /// Реализует логику для работы с основным окном.
     /// </summary>
     public class MainVM : INotifyPropertyChanged
     {
         /// <summary>
         /// Объект контакта.
         /// </summary>
-        private Contact _contact;
+        private Contact _currentContact;
+
+        /// <summary>
+        /// Команда для сохранения объекта в файл.
+        /// </summary>
+        public ICommand SaveCommand { get; }
+
+        /// <summary>
+        /// Команда для загрузки объекта их файла.
+        /// </summary>
+        public ICommand LoadCommand { get; }
 
         /// <summary>
         /// Возвращает и задает новое значение для объекта контакта. Должен быть новым значением 
         /// для обновления информации.
         /// </summary>
-        public Contact Contact
+        public Contact CurrentContact
         { 
             get 
             { 
-                return _contact;
+                return _currentContact;
             }
             set
             {
-                if (_contact != value)
+                if (_currentContact != value)
                 {
-                    _contact = value;
+                    _currentContact = value;
                     OnPropertyChanged();
                 }
             }
@@ -41,19 +56,19 @@ namespace View.ViewModel
 
         /// <summary>
         /// Возвращает и задает полное имя контакта. Должен быть новым значением 
-        /// для обновления информации.
+        /// для обновления информации и не пустым.
         /// </summary>
         public string Fullname
         {
             get
             {
-                return _contact?.Fullname;
+                return _currentContact?.Fullname;
             }
             set
             {
-                if (_contact.Fullname != value && _contact != null)
+                if (_currentContact.Fullname != value && value != null)
                 {
-                    _contact.Fullname = value;
+                    _currentContact.Fullname = value;
                     OnPropertyChanged();
                 }
             }
@@ -61,19 +76,19 @@ namespace View.ViewModel
 
         /// <summary>
         /// Возвращает и задает номер телефона контакта. Должен быть новым значением 
-        /// для обновления информации.
+        /// для обновления информации и не пустым.
         /// </summary>
         public string PhoneNumber
         {
             get
             {
-                return _contact?.PhoneNumber;
+                return _currentContact?.PhoneNumber;
             }
             set
             {
-                if (value != _contact?.PhoneNumber && _contact != null)
+                if (value != _currentContact?.PhoneNumber && value != null)
                 {
-                    _contact.PhoneNumber = value;
+                    _currentContact.PhoneNumber = value;
                     OnPropertyChanged();
                 }
             }
@@ -81,19 +96,19 @@ namespace View.ViewModel
 
         /// <summary>
         /// Возвращает и задает электронную почту контакта. Должен быть новым значением 
-        /// для обновления информации.
+        /// для обновления информации и не пустым.
         /// </summary>
         public string Email
         {
             get 
             {
-                return _contact?.Email;
+                return _currentContact?.Email;
             }
             set
             {
-                if (_contact.Email != value && _contact != null)
+                if (_currentContact.Email != value && value != null)
                 {
-                    _contact.Email = value;
+                    _currentContact.Email = value;
                     OnPropertyChanged();
                 }
             }
@@ -115,11 +130,13 @@ namespace View.ViewModel
         }
 
         /// <summary>
-        /// Создаёт пустой экземпляр класса <see cref="Contact"/>.
+        /// Создаёт пустой экземпляр класса <see cref="MainVM"/>.
         /// </summary>
         public MainVM()
         {
-            Contact = new Contact();
+            CurrentContact = new Contact();
+            SaveCommand = new SaveCommand(CurrentContact);
+            LoadCommand = new LoadCommand(contact => CurrentContact = contact);
         }
     }
 }
