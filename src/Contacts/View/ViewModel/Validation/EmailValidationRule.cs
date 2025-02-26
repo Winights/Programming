@@ -18,7 +18,8 @@ namespace View.ViewModel.Validation
         /// Выполняет проверку значений.
         /// </summary>
         /// <param name="value">Проверяемое значение.</param>
-        /// <param name="cultureInfo">Культура, используемая в этом правиле.</param>
+        /// <param name="cultureInfo">Сведения об определенном языке и региональных параметрах, 
+        /// используемые в этом правиле.</param>
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string patternOfEmail = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";

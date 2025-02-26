@@ -38,6 +38,7 @@ namespace View.Model
             }
             set
             {
+                ValueValidator.AssertStringOnEmpty(value, "Fullname");
                 ValueValidator.AssertStringOnLength(value, 100, "Name");
                 _fullname = value;
             }

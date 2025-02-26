@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         xmlns:validation="clr-namespace:View.ViewModel.Validation"
-        Title="Contact" Height="400" Width="400" MinHeight="220" MinWidth="350">
+        Title="Contact" Height="400" Width="400" MinHeight="220" MinWidth="350"
+        Icon="pack://application:,,,/Resources/IconMain.ico">
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -19,7 +20,8 @@
                     <TextBlock Text="Name:" Margin="0,0,0,3"></TextBlock>
                     <TextBox Height="20" Margin="0,0,0,3">
                         <TextBox.Text>
-                            <Binding Path ="CurrentContact.Fullname" UpdateSourceTrigger="PropertyChanged" 
+                            <Binding Path ="CurrentContact.Fullname" 
+                                     UpdateSourceTrigger="PropertyChanged" 
                                      Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <validation:FullnameValidationRule/>
@@ -45,8 +47,9 @@
                     <TextBlock Text="Phone Number:" Margin="0,0,0,3"></TextBlock>
                     <TextBox Height="20" Margin="0,0,0,3">
                         <TextBox.Text>
-                            <Binding Path="CurrentContact.PhoneNumber" UpdateSourceTrigger="PropertyChanged"
-                        Mode="TwoWay">
+                            <Binding Path="CurrentContact.PhoneNumber" 
+                                     UpdateSourceTrigger="PropertyChanged"
+                                     Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <validation:PhoneNumberValidationRule/>
                                 </Binding.ValidationRules>
@@ -70,8 +73,9 @@
                     <TextBlock Text="Email:" Margin="0,0,0,3"></TextBlock>
                     <TextBox Height="20" Margin="0,0,0,3">
                         <TextBox.Text>
-                            <Binding Path="CurrentContact.Email" UpdateSourceTrigger="PropertyChanged" 
-                        Mode="TwoWay">
+                            <Binding Path="CurrentContact.Email"
+                                     UpdateSourceTrigger="PropertyChanged" 
+                                     Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <validation:EmailValidationRule/>
                                 </Binding.ValidationRules>

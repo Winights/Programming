@@ -27,6 +27,19 @@ namespace View.Model.Services
         }
 
         /// <summary>
+        /// Проверяет, что строка не пустая.
+        /// </summary>
+        /// <param name="value">Проверямая строка.</param>
+        /// <param name="propertyName">Имя свойства или объекта, которое подлежит проверке.</param>
+        public static void AssertStringOnEmpty(string value, string propertyName)
+        {
+            if (value == string.Empty)
+            {
+                throw new ArgumentOutOfRangeException($"Ошибка в {propertyName}");
+            }
+        }
+
+        /// <summary>
         /// Проверяет, что строка по формату является номером телефона.
         /// </summary>
         /// <param name="value">Проверямая строка.</param>
