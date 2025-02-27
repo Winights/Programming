@@ -39,7 +39,7 @@ namespace View.Model
             set
             {
                 ValueValidator.AssertStringOnEmpty(value, "Fullname");
-                ValueValidator.AssertStringOnLength(value, 100, "Name");
+                ValueValidator.AssertStringOnLength(value, 100, "Fullname");
                 _fullname = value;
             }
         }
@@ -55,8 +55,8 @@ namespace View.Model
             }
             set
             {
-                ValueValidator.AssertStringOnPhoneEmail(value, "Email");
-                ValueValidator.AssertStringOnLength(value, 250, "Email");
+                ValueValidator.AssertStringOnEmail(value, "Email");
+                ValueValidator.AssertStringInRange(value, 6, 100, "Email");
                 _email = value;
             }
         }

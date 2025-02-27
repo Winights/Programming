@@ -22,14 +22,18 @@ namespace View.ViewModel.Validation
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string patternOfNumber = @"^(\+7|8)?[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$";
+
+            if (value.ToString() == string.Empty) 
+            {
+                return new ValidationResult(false, "Phone number  must not null");
+            }
+
             if (!Regex.IsMatch(value.ToString(), patternOfNumber))
             {
                 return new ValidationResult(false, "Incorrect phone number format");
             }
-            else
-            {
-                return ValidationResult.ValidResult;
-            }
+
+            return ValidationResult.ValidResult;
         }
     }
 }

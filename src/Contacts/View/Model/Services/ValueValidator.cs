@@ -58,10 +58,25 @@ namespace View.Model.Services
         /// </summary>
         /// <param name="value">Проверямая строка.</param>
         /// <param name="propertyName">Имя свойства или объекта, которое подлежит проверке.</param>
-        public static void AssertStringOnPhoneEmail(string value, string propertyName)
+        public static void AssertStringOnEmail(string value, string propertyName)
         {
             string patternOfEmail = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             if (!Regex.IsMatch(value, patternOfEmail))
+            {
+                throw new ArgumentOutOfRangeException($"Ошибка в {propertyName}");
+            }
+        }
+
+        /// <summary>
+        /// Проверяет, что длина строки входит в диапозон входит в диапазон.
+        /// </summary>
+        /// <param name="value">Проверямое строка.</param>
+        /// <param name="min">Нижняя граница.</param>
+        /// <param name="max">Верхняя граница.</param>
+        /// <param name="propertyName">Имя свойства или объекта, которое подлежит проверке.</param>
+        public static void AssertStringInRange(string value, int min, int max, string propertyName)
+        {
+            if (value.Length < min || value.Length > max)
             {
                 throw new ArgumentOutOfRangeException($"Ошибка в {propertyName}");
             }

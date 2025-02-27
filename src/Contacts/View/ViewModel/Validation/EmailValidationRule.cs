@@ -23,14 +23,28 @@ namespace View.ViewModel.Validation
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string patternOfEmail = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+
+            if (value.ToString() == string.Empty)
+            {
+                return new ValidationResult(false, "Email must not null");
+            }
+
             if (!Regex.IsMatch(value.ToString(), patternOfEmail))
             {
                 return new ValidationResult(false, "Incorrect email format");
             }
-            else
+
+            if ((value.ToString()).Length > 100)
             {
-                return ValidationResult.ValidResult;
+                return new ValidationResult(false, "Email is too long");
             }
+
+            if ((value.ToString()).Length < 6)
+            {
+                return new ValidationResult(false, "Email is too short");
+            }
+
+            return ValidationResult.ValidResult;
         }
     }
 }

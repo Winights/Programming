@@ -24,14 +24,13 @@ namespace View.ViewModel.Validation
             {
                 return new ValidationResult(false, "Fullname must not exceed 100 characters");
             }
-            else if (value == string.Empty)
+
+            if (value == string.Empty)
             {
                 return new ValidationResult(false, "Fullname must not null");
             }
-            else
-            {
-                return ValidationResult.ValidResult;
-            }
+
+            return ValidationResult.ValidResult;
         }
     }
 }
