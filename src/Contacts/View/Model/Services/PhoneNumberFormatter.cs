@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace View.Model.Services
 {
+    /// <summary>
+    /// Реализирует форматирования номера телефона.
+    /// </summary>
     public class PhoneNumberFormatter
     {
+        /// <summary>
+        /// Форматирует номер телефона в определенный формат.
+        /// </summary>
+        /// <param name="value">Строка, содержащая номер телефона.</param>
+        /// <returns> Возвращает строку с отформатированым номером телефона.</returns>
         public static string FormatPhoneNumber(string value)
         {
             string digits = new string(value.Where(char.IsDigit).ToArray());

@@ -56,7 +56,7 @@ namespace View.Model
             set
             {
                 ValueValidator.AssertStringOnEmail(value, "Email");
-                ValueValidator.AssertStringInRange(value, 6, 100, "Email");
+                ValueValidator.AssertStringOnLength(value, 100, "Email");
                 _email = value;
             }
         }
