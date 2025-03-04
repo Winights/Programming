@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:validation="clr-namespace:View.ViewModel.Validation"
         Title="Contact" Height="400" Width="400" MinHeight="250" MinWidth="350"
-        Icon="pack://application:,,,/Resources/IconMain.ico">
+        Icon="pack://application:,,,/Resources/ContactsApp_96x96.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

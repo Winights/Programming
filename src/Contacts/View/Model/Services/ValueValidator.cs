@@ -46,7 +46,7 @@ namespace View.Model.Services
         /// <param name="propertyName">Имя свойства или объекта, которое подлежит проверке.</param>
         public static void AssertStringOnPhoneNumber(string value, string propertyName)
         {
-            string patternOfNumber = @"^(\+7|8)?[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$";
+            string patternOfNumber = @"^(\+7|8)[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$";
             if (!Regex.IsMatch(value, patternOfNumber))
             {
                 throw new ArgumentOutOfRangeException($"Ошибка в {propertyName}");
