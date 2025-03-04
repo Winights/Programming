@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Xml.Linq;
 using View.Model;
 using View.Model.Services;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace View.ViewModel
 {
@@ -89,7 +90,6 @@ namespace View.ViewModel
                 if (value != _currentContact?.PhoneNumber && value != null)
                 {
                     _currentContact.PhoneNumber = value;
-                    OnPropertyChanged();
                 }
             }
         }

@@ -73,7 +73,7 @@ namespace View.Model
             set
             {
                 ValueValidator.AssertStringOnPhoneNumber(value, "PhoneNumber");
-                _phoneNumber = value;
+                _phoneNumber = PhoneNumberFormatter.FormatPhoneNumber(value);
             }
         }
 
@@ -97,7 +97,7 @@ namespace View.Model
         {
             Fullname = "Alexsandr Ivanov";
             Email = "yuri.smirnov@no.mail";
-            PhoneNumber = "+7-999-999-99-99";
+            PhoneNumber = "+79999999999";
         }
     }
 }
