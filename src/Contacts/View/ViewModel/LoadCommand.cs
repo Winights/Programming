@@ -15,9 +15,9 @@ namespace View.ViewModel
     public class LoadCommand : ICommand
     {
         /// <summary>
-        /// Ссылка на метод обновления контакта.
+        /// Ссылка на экземпляр MainVM.
         /// </summary>
-        private readonly Action<Contact> _updateContact;
+        private readonly MainVM _mainVM;
 
         /// <summary>
         /// Событие для команды.
@@ -39,7 +39,7 @@ namespace View.ViewModel
             var contact = ContactSerializer.LoadContact();
             if (contact != null)
             {
-                _updateContact(contact);
+                _mainVM.CurrentContact = contact;
             }
         }
 
@@ -47,9 +47,9 @@ namespace View.ViewModel
         /// Создаёт пустой экземпляр класса <see cref="LoadCommand"/>.
         /// </summary>
         /// <param name="updateContact">ССылка на метод обновления контакта.</param>
-        public LoadCommand(Action<Contact> updateContact)
+        public LoadCommand(MainVM mainVM)
         {
-            _updateContact = updateContact;
+            _mainVM = mainVM;
         }
     }
 }

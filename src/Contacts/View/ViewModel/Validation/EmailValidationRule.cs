@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using View.Model.Services;
 
 namespace View.ViewModel.Validation
 {
@@ -22,7 +23,7 @@ namespace View.ViewModel.Validation
         /// используемые в этом правиле.</param>
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            string patternOfEmail = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            string patternOfEmail = ValueValidator.GetEmailPattern();
 
             if (value.ToString() == string.Empty)
             {
@@ -37,11 +38,6 @@ namespace View.ViewModel.Validation
             if ((value.ToString()).Length > 100)
             {
                 return new ValidationResult(false, "Email is too long");
-            }
-
-            if ((value.ToString()).Length < 6)
-            {
-                return new ValidationResult(false, "Email is too short");
             }
 
             return ValidationResult.ValidResult;

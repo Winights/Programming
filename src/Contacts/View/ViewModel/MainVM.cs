@@ -26,6 +26,11 @@ namespace View.ViewModel
         private Contact _currentContact;
 
         /// <summary>
+        /// Событие изменения информации о контакте.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
         /// Команда для сохранения объекта в файл.
         /// </summary>
         public ICommand SaveCommand { get; }
@@ -63,7 +68,7 @@ namespace View.ViewModel
         {
             get
             {
-                return _currentContact?.Fullname;
+                return _currentContact.Fullname;
             }
             set
             {
@@ -83,7 +88,7 @@ namespace View.ViewModel
         {
             get
             {
-                return _currentContact?.PhoneNumber;
+                return _currentContact.PhoneNumber;
             }
             set
             {
@@ -102,7 +107,7 @@ namespace View.ViewModel
         {
             get 
             {
-                return _currentContact?.Email;
+                return _currentContact.Email;
             }
             set
             {
@@ -115,18 +120,15 @@ namespace View.ViewModel
         }
 
         /// <summary>
-        /// Событие изменения информации о контакте.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
         /// Сообщает интерфейсу об изменении значения в свойстве.
         /// </summary>
         /// <param name="prop">Имя свойства, в котором произошло событие.</param>
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            }
         }
 
         /// <summary>
@@ -136,7 +138,7 @@ namespace View.ViewModel
         {
             CurrentContact = new Contact();
             SaveCommand = new SaveCommand(CurrentContact);
-            LoadCommand = new LoadCommand(contact => CurrentContact = contact);
+            LoadCommand = new LoadCommand(this);
         }
     }
 }

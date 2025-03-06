@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace View.Model.Services
 {
     /// <summary>
     /// Реализирует валидацию значений.
     /// </summary>
-    public class ValueValidator
+    public static class ValueValidator
     {
         /// <summary>
         /// Проверяет, что строка не больше заданного числа.
@@ -35,8 +38,17 @@ namespace View.Model.Services
         {
             if (value == string.Empty)
             {
-                throw new ArgumentOutOfRangeException($"Ошибка в {propertyName}");
+                throw new ArgumentNullException($"Ошибка в {propertyName}");
             }
+        }
+
+        /// <summary>
+        /// Возвращает строку с форматом для номера телефона.
+        /// </summary>
+        /// <returns>Возвращает строку с шаблон для номера телефона.</returns>
+        public static string GetPhoneNumberPattern()
+        {
+            return @"^(\+7|8)?[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$";
         }
 
         /// <summary>
@@ -44,13 +56,31 @@ namespace View.Model.Services
         /// </summary>
         /// <param name="value">Проверямая строка.</param>
         /// <param name="propertyName">Имя свойства или объекта, которое подлежит проверке.</param>
+        /// <example>
+        /// Примеры допустимых форматов:
+        /// +7 (123) 456-78-90  
+        /// 8-912-234-56-77  
+        /// +7 888 900 12 33
+        /// 89992341266
+        /// 9998976543
+        /// (123) 456 78 90
+        /// </example>
         public static void AssertStringOnPhoneNumber(string value, string propertyName)
         {
-            string patternOfNumber = @"^(\+7|8)?[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$";
-            if (!Regex.IsMatch(value, patternOfNumber))
+            string pattern = GetPhoneNumberPattern();
+            if (!Regex.IsMatch(value, pattern))
             {
-                throw new ArgumentOutOfRangeException($"Ошибка в {propertyName}");
+                throw new ArgumentException($"Ошибка в {propertyName}");
             }
+        }
+
+        /// <summary>
+        /// Возвращает строку с форматом для почты.
+        /// </summary>
+        /// <returns>Возвращает строку с шаблон для почты.</returns>
+        public static string GetEmailPattern()
+        {
+            return @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
         }
 
         /// <summary>
@@ -58,27 +88,50 @@ namespace View.Model.Services
         /// </summary>
         /// <param name="value">Проверямая строка.</param>
         /// <param name="propertyName">Имя свойства или объекта, которое подлежит проверке.</param>
+        /// <example>
+        /// Примеры допустимых форматов:
+        /// user@example.com
+        /// john.doe123 @gmail.com
+        /// contact_us @company.co.uk
+        /// my-email+filter @sub.domain.org
+        /// 123user @test.net
+        /// first.last @university.edu
+        /// name @xn--d1acpjx3f.xn--p1ai
+        /// </example>
         public static void AssertStringOnEmail(string value, string propertyName)
         {
-            string patternOfEmail = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-            if (!Regex.IsMatch(value, patternOfEmail))
+            string pattern = GetEmailPattern();
+            if (!Regex.IsMatch(value, pattern))
             {
-                throw new ArgumentOutOfRangeException($"Ошибка в {propertyName}");
+                throw new ArgumentException($"Ошибка в {propertyName}");
             }
         }
 
         /// <summary>
-        /// Проверяет, что длина строки входит в диапозон входит в диапазон.
+        /// Возвращает строку с форматом для имени.
+        /// </summary>
+        /// <returns>Возвращает строку с шаблон для имени.</returns>
+        public static string GetNamePattern()
+        {
+            return @"^[a-zA-Zа-яА-Я\s]+$";
+        }
+
+        /// <summary>
+        /// Проверяет, что строка содержит только буквы
         /// </summary>
         /// <param name="value">Проверямое строка.</param>
-        /// <param name="min">Нижняя граница.</param>
-        /// <param name="max">Верхняя граница.</param>
         /// <param name="propertyName">Имя свойства или объекта, которое подлежит проверке.</param>
-        public static void AssertStringInRange(string value, int min, int max, string propertyName)
+        /// /// <example>
+        /// Примеры допустимых форматов:
+        /// Petrov Petr Petrovich
+        /// Иванов Иван Иванович
+        /// </example>
+        public static void AssertStringOnName(string value, string propertyName)
         {
-            if (value.Length < min || value.Length > max)
+            string pattern = GetNamePattern();
+            if (!Regex.IsMatch(value, pattern))
             {
-                throw new ArgumentOutOfRangeException($"Ошибка в {propertyName}");
+                throw new ArgumentException($"Ошибка в {propertyName}");
             }
         }
     }

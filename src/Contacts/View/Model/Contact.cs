@@ -38,8 +38,9 @@ namespace View.Model
             }
             set
             {
-                ValueValidator.AssertStringOnEmpty(value, "Fullname");
-                ValueValidator.AssertStringOnLength(value, 100, "Fullname");
+                ValueValidator.AssertStringOnEmpty(value, nameof(Fullname));
+                ValueValidator.AssertStringOnName(value, nameof(Fullname));
+                ValueValidator.AssertStringOnLength(value, 100, nameof(Fullname));
                 _fullname = value;
             }
         }
@@ -55,8 +56,8 @@ namespace View.Model
             }
             set
             {
-                ValueValidator.AssertStringOnEmail(value, "Email");
-                ValueValidator.AssertStringOnLength(value, 100, "Email");
+                ValueValidator.AssertStringOnEmail(value, nameof(Email));
+                ValueValidator.AssertStringOnLength(value, 100, nameof(Email));
                 _email = value;
             }
         }
@@ -72,7 +73,7 @@ namespace View.Model
             }
             set
             {
-                ValueValidator.AssertStringOnPhoneNumber(value, "PhoneNumber");
+                ValueValidator.AssertStringOnPhoneNumber(value, nameof(PhoneNumber));
                 _phoneNumber = PhoneNumberFormatter.FormatPhoneNumber(value);
             }
         }
@@ -95,7 +96,7 @@ namespace View.Model
         /// </summary>
         public Contact()
         {
-            Fullname = "Alexsandr Ivanov";
+            Fullname = "Aleksandr Ivanov";
             Email = "yuri.smirnov@no.mail";
             PhoneNumber = "+79999999999";
         }

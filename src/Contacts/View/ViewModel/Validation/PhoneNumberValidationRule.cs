@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using View.Model.Services;
 
 namespace View.ViewModel.Validation
 {
@@ -21,14 +22,14 @@ namespace View.ViewModel.Validation
         /// <param name="cultureInfo">Культура, используемая в этом правиле.</param>
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            string patternOfNumber = @"^(\+7|8)?[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$";
+            string pattern = ValueValidator.GetPhoneNumberPattern();
 
             if (value.ToString() == string.Empty) 
             {
                 return new ValidationResult(false, "Phone number  must not null");
             }
 
-            if (!Regex.IsMatch(value.ToString(), patternOfNumber))
+            if (!Regex.IsMatch(value.ToString(), pattern))
             {
                 return new ValidationResult(false, "Incorrect phone number format");
             }

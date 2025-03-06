@@ -11,7 +11,7 @@ namespace View.Model.Services
     /// <summary>
     /// Реализирует сохранение и загрузку данных из файла.
     /// </summary>
-    public class ContactSerializer
+    public static class ContactSerializer
     {
         /// <summary>
         /// Путь к файлу по умолчанию.
@@ -55,7 +55,7 @@ namespace View.Model.Services
             }
             else
             {
-                throw new Exception("File not find");
+                throw new FileNotFoundException("File not find");
             }
         }
     }

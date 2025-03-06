@@ -10,7 +10,7 @@ namespace View.Model.Services
     /// <summary>
     /// Реализирует форматирования номера телефона.
     /// </summary>
-    public class PhoneNumberFormatter
+    public static class PhoneNumberFormatter
     {
         /// <summary>
         /// Форматирует номер телефона в определенный формат.
@@ -32,7 +32,7 @@ namespace View.Model.Services
             }
             else
             {
-                throw new Exception("Incorrect phone number");
+                throw new FormatException("Incorrect phone number");
             }
         }
     }

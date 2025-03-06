@@ -8,7 +8,52 @@
         xmlns:validation="clr-namespace:View.ViewModel.Validation"
         Title="Contact" Height="400" Width="400" MinHeight="250" MinWidth="350"
         Icon="pack://application:,,,/Resources/ContactsApp_96x96.ico">
-    <Grid>
+    <Window.Resources>
+        <Style x:Key="ValidationTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="3"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="BorderBrush" Value="Red"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={RelativeSource Self}, 
+                        Path=(Validation.Errors)/ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ReadTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="IsReadOnly" Value="true"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style x:Key="EditGroupBoxStyle" TargetType="GroupBox">
+            <Setter Property="Margin" Value="0,0,3,3"/>
+        </Style>
+
+        <Style x:Key="ReadGroupBoxStyle" TargetType="GroupBox">
+            <Setter Property="Margin" Value="3,0,0,3"/>
+        </Style>
+
+        <Style x:Key="ButtonsStackPanelStyle" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="0,3,0,0"/>
+        </Style>
+
+        <Style x:Key="ButtonsStyle" TargetType="Button">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="75"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -16,13 +61,16 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="43"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <GroupBox Header ="Edit Contact" Grid.Row="0" Grid.Column="0" Margin="15,0,3,3">
+        <GroupBox Header ="Edit Contact" 
+                  Grid.Row="0" 
+                  Grid.Column="0"
+                  Style="{StaticResource EditGroupBoxStyle}">
             <StackPanel>
-                <TextBlock Text="Name:" Margin="3,3,3,3"></TextBlock>
-                <TextBox Height="20" Margin="3,3,3,3">
+                <TextBlock Text="Name:" Margin="3"></TextBlock>
+                <TextBox Style="{StaticResource ValidationTextBoxStyle}">
                     <TextBox.Text>
                         <Binding Path ="CurrentContact.Fullname" 
                          UpdateSourceTrigger="PropertyChanged" 
@@ -32,24 +80,10 @@
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
-                    <TextBox.Style>
-                        <Style TargetType="TextBox">
-                            <Style.Triggers>
-                                <Trigger Property="Validation.HasError" Value="True">
-                                    <Setter Property="BorderBrush" Value="Red"/>
-                                    <Setter Property="BorderThickness" Value="2"/>
-                                    <Setter Property="Foreground" Value="Red" />
-                                    <Setter Property="ToolTip"
-                                Value="{Binding RelativeSource={RelativeSource Self},
-                                    Path=(Validation.Errors)/ErrorContent}" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
                 </TextBox>
 
-                <TextBlock Text="Phone Number:" Margin="3,3,3,3"></TextBlock>
-                <TextBox Height="20" Margin="3,3,3,3">
+                <TextBlock Text="Phone Number:" Margin="3"></TextBlock>
+                <TextBox Style="{StaticResource ValidationTextBoxStyle}">
                     <TextBox.Text>
                         <Binding Path="CurrentContact.PhoneNumber" 
                          UpdateSourceTrigger="PropertyChanged"
@@ -59,23 +93,10 @@
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
-                    <TextBox.Style>
-                        <Style TargetType="TextBox">
-                            <Style.Triggers>
-                                <Trigger Property="Validation.HasError" Value="True">
-                                    <Setter Property="BorderBrush" Value="Red"/>
-                                    <Setter Property="BorderThickness" Value="2"/>
-                                    <Setter Property="ToolTip"
-                                 Value="{Binding RelativeSource={RelativeSource Self},
-                                     Path=(Validation.Errors)/ErrorContent}" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
                 </TextBox>
 
-                <TextBlock Text="Email:" Margin="3,3,3,3"></TextBlock>
-                <TextBox Height="20" Margin="3,3,3,3">
+                <TextBlock Text="Email:" Margin="3"></TextBlock>
+                <TextBox Style="{StaticResource ValidationTextBoxStyle}">
                     <TextBox.Text>
                         <Binding Path="CurrentContact.Email"
                          UpdateSourceTrigger="PropertyChanged" 
@@ -84,56 +105,59 @@
                                 <validation:EmailValidationRule/>
                             </Binding.ValidationRules>
                         </Binding>
-
                     </TextBox.Text>
-                    <TextBox.Style>
-                        <Style TargetType="TextBox">
-                            <Style.Triggers>
-                                <Trigger Property="Validation.HasError" Value="True">
-                                    <Setter Property="BorderBrush" Value="Red"/>
-                                    <Setter Property="BorderThickness" Value="2"/>
-                                    <Setter Property="ToolTip"
-                                 Value="{Binding RelativeSource={RelativeSource Self},
-                                     Path=(Validation.Errors)/ErrorContent}" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
                 </TextBox>
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Header="Read Contact" Grid.Row="0" Grid.Column="1" Margin="0,0,15,3">
+        <GroupBox Header="Read Contact" 
+                  Grid.Row="0" 
+                  Grid.Column="1" 
+                  Style="{StaticResource ReadGroupBoxStyle}">
             <StackPanel>
-                <TextBlock Text="Name:" Margin="3,3,3,3"></TextBlock>
-                <TextBox 
-            Text="{Binding CurrentContact.Fullname, Mode=OneWay}"
-            IsReadOnly="True"
-            Height="20" FontWeight="Bold" BorderThickness="0" 
-            Margin="3,3,3,3"></TextBox>
+                <TextBlock Text="Name:" Margin="3"></TextBlock>
+                <TextBox Style="{StaticResource ReadTextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="CurrentContact.Fullname"
+                         UpdateSourceTrigger="PropertyChanged" 
+                         Mode="OneWay">
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox> 
 
-                <TextBlock Text="Phone Number:" Margin="3,3,3,3"></TextBlock>
-                <TextBox 
-            Text="{Binding CurrentContact.PhoneNumber, Mode=OneWay}"
-            IsReadOnly="True"
-            Height="20" FontWeight="Bold" BorderThickness="0"
-            Margin="3,3,3,3"></TextBox>
+                <TextBlock Text="Phone Number:" Margin="3"></TextBlock>
+                <TextBox Style="{StaticResource ReadTextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="CurrentContact.PhoneNumber"
+                         UpdateSourceTrigger="PropertyChanged" 
+                         Mode="OneWay"> 
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox> 
 
-                <TextBlock Text="Email:" Margin="3,3,3,3"></TextBlock>
-                <TextBox 
-            Text="{Binding CurrentContact.Email, Mode=OneWay}"
-            IsReadOnly="True"
-            Height="20" FontWeight="Bold" BorderThickness="0"
-            Margin="3,3,3,3"></TextBox>
+                <TextBlock Text="Email:" Margin="3"></TextBlock>
+                <TextBox Style="{StaticResource ReadTextBoxStyle}">
+                    <TextBox.Text>
+                        <Binding Path="CurrentContact.Email"
+                         UpdateSourceTrigger="PropertyChanged" 
+                         Mode="OneWay">
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </StackPanel>
         </GroupBox>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" 
-                    HorizontalAlignment="Right" VerticalAlignment ="Bottom"
-            Margin="0,3,15,15">
-            <Button Content="Save" Command="{Binding SaveCommand}"
-            Width="75" Height="25" Margin="0,0,3,0"/>
-            <Button Content="Load" Command="{Binding LoadCommand}" Width="75" Height="25"/>
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="1" 
+                    Style="{StaticResource ButtonsStackPanelStyle}">
+            <Button Content="Save" 
+                    Command="{Binding SaveCommand}" 
+                    Style="{StaticResource ButtonsStyle}"
+                    Margin="0,0,3,0"/>
+            <Button Content="Load" 
+                    Command="{Binding LoadCommand}"
+                    Style="{StaticResource ButtonsStyle}"
+                    Margin="3,0,0,0"/>
         </StackPanel>
     </Grid>
 </Window>

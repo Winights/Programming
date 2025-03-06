@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using View.Model.Services;
 
 namespace View.ViewModel.Validation
 {
@@ -20,14 +22,21 @@ namespace View.ViewModel.Validation
         /// <param name="cultureInfo">Культура, используемая в этом правиле.</param>
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if ((value.ToString()).Length > 100)
-            {
-                return new ValidationResult(false, "Fullname must not exceed 100 characters");
-            }
+            string pattern = ValueValidator.GetNamePattern();
 
             if (value == string.Empty)
             {
                 return new ValidationResult(false, "Fullname must not null");
+            }
+
+            if (!Regex.IsMatch(value.ToString(), pattern))
+            {
+                return new ValidationResult(false, "Fullname must not consist of numbers or symbols");
+            }
+
+            if ((value.ToString()).Length > 100)
+            {
+                return new ValidationResult(false, "Fullname must not exceed 100 characters");
             }
 
             return ValidationResult.ValidResult;
