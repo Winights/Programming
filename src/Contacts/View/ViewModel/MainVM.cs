@@ -137,7 +137,7 @@ namespace View.ViewModel
         public MainVM()
         {
             CurrentContact = new Contact();
-            SaveCommand = new SaveCommand(CurrentContact);
+            SaveCommand = new SaveCommand(this);
             LoadCommand = new LoadCommand(this);
         }
     }

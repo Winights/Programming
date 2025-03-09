@@ -16,9 +16,9 @@ namespace View.ViewModel
     public class SaveCommand : ICommand
     {
         /// <summary>
-        /// Объект контакта.
+        /// Ссылка на экземпляр MainVM.
         /// </summary>
-        private readonly Contact _contact;
+        private readonly MainVM _mainVM;
 
         /// <summary>
         /// Событие для команды.
@@ -37,16 +37,16 @@ namespace View.ViewModel
         /// <param name="parameter">Дополнительная информация при вызове команды.</param>
         public void Execute(object parameter)
         {
-            ContactSerializer.SaveContact(_contact);
+            ContactSerializer.SaveContact(_mainVM.CurrentContact);
         }
 
         /// <summary>
         /// Создаёт пустой экземпляр класса <see cref="SaveCommand"/>.
         /// </summary>
         /// <param name="contact">Объект контакта.</param>
-        public SaveCommand(Contact contact)
+        public SaveCommand(MainVM mainVM)
         {
-            _contact = contact;
+            _mainVM = mainVM;
         }
     }
 }
