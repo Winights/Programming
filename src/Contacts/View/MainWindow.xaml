@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         xmlns:validation="clr-namespace:View.ViewModel.Validation"
-        Title="Contact" Height="400" Width="400" MinHeight="250" MinWidth="350"
+        Title="Contact" Height="450" Width="700" MinHeight="250" MinWidth="350"
         Icon="pack://application:,,,/Resources/ContactsApp_96x96.ico">
     <Window.Resources>
         <Style x:Key="ValidationTextBoxStyle" TargetType="TextBox">
@@ -28,8 +28,7 @@
             <Setter Property="Height" Value="20"/>
             <Setter Property="Margin" Value="3"/>
             <Setter Property="IsReadOnly" Value="true"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
 
         <Style x:Key="EditGroupBoxStyle" TargetType="GroupBox">
@@ -53,111 +52,149 @@
         </Style>
 
     </Window.Resources>
-    <Grid Margin="15">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
 
-        <GroupBox Header ="Edit Contact" 
-                  Grid.Row="0" 
-                  Grid.Column="0"
-                  Style="{StaticResource EditGroupBoxStyle}">
-            <StackPanel>
-                <TextBlock Text="Name:" Margin="3"></TextBlock>
-                <TextBox Style="{StaticResource ValidationTextBoxStyle}">
-                    <TextBox.Text>
-                        <Binding Path ="CurrentContact.Fullname" 
-                         UpdateSourceTrigger="PropertyChanged" 
-                         Mode="TwoWay">
-                            <Binding.ValidationRules>
-                                <validation:FullnameValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+        <StackPanel Grid.Column="0" Background="#f8f8f8"></StackPanel>
+        <Grid Grid.Column="0"
+              MinWidth="250" 
+              Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-                <TextBlock Text="Phone Number:" Margin="3"></TextBlock>
-                <TextBox Style="{StaticResource ValidationTextBoxStyle}">
-                    <TextBox.Text>
-                        <Binding Path="CurrentContact.PhoneNumber" 
-                         UpdateSourceTrigger="PropertyChanged"
-                         Mode="TwoWay">
-                            <Binding.ValidationRules>
-                                <validation:PhoneNumberValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+            <Grid Grid.Row="0" Margin="3" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Email:" Margin="3"></TextBlock>
-                <TextBox Style="{StaticResource ValidationTextBoxStyle}">
-                    <TextBox.Text>
-                        <Binding Path="CurrentContact.Email"
-                         UpdateSourceTrigger="PropertyChanged" 
-                         Mode="TwoWay">
-                            <Binding.ValidationRules>
-                                <validation:EmailValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </StackPanel>
-        </GroupBox>
+                <TextBlock Grid.Column="0"
+                       Margin="3" 
+                       Text="Find:" 
+                       HorizontalAlignment="Left"/>
 
-        <GroupBox Header="Read Contact" 
-                  Grid.Row="0" 
-                  Grid.Column="1" 
-                  Style="{StaticResource ReadGroupBoxStyle}">
-            <StackPanel>
-                <TextBlock Text="Name:" Margin="3"></TextBlock>
-                <TextBox Style="{StaticResource ReadTextBoxStyle}">
-                    <TextBox.Text>
-                        <Binding Path="CurrentContact.Fullname"
-                         UpdateSourceTrigger="PropertyChanged" 
-                         Mode="OneWay">
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox> 
+                <TextBox Grid.Column="1" 
+                         x:Name="SearchBox" 
+                         Margin="3,3,0,3" 
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"/>
+            </Grid>
 
-                <TextBlock Text="Phone Number:" Margin="3"></TextBlock>
-                <TextBox Style="{StaticResource ReadTextBoxStyle}">
-                    <TextBox.Text>
-                        <Binding Path="CurrentContact.PhoneNumber"
-                         UpdateSourceTrigger="PropertyChanged" 
-                         Mode="OneWay"> 
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox> 
+            <ListBox x:Name="ContactsList" 
+                     Grid.Row="1" 
+                     Grid.ColumnSpan="2" 
+                     Margin="3"/>
 
-                <TextBlock Text="Email:" Margin="3"></TextBlock>
-                <TextBox Style="{StaticResource ReadTextBoxStyle}">
-                    <TextBox.Text>
-                        <Binding Path="CurrentContact.Email"
-                         UpdateSourceTrigger="PropertyChanged" 
-                         Mode="OneWay">
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </StackPanel>
-        </GroupBox>
+            <Grid Grid.Row="2" Margin="3" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="1" 
-                    Style="{StaticResource ButtonsStackPanelStyle}">
-            <Button Content="Save" 
-                    Command="{Binding SaveCommand}" 
-                    Style="{StaticResource ButtonsStyle}"
-                    Margin="0,0,3,0"/>
-            <Button Content="Load" 
-                    Command="{Binding LoadCommand}"
-                    Style="{StaticResource ButtonsStyle}"
-                    Margin="3,0,0,0"/>
+                <Button Content="Add" 
+                        Grid.Column="0" 
+                        Height="25" 
+                        Margin="0,3,3,3" 
+                        MinWidth="75"/>
+                <Button Content="Edit" 
+                        Grid.Column="1" 
+                        Height="25" 
+                        Margin="3" 
+                        MinWidth="75"/>
+                <Button Content="Remove" 
+                        Grid.Column="2" 
+                        Height="25" 
+                        Margin="3,3,0,3" 
+                        MinWidth="75"/>
+            </Grid>
+        </Grid>
+
+        <GridSplitter Grid.Column="1"
+                      Width="3" 
+                      Background="White" 
+                      HorizontalAlignment="Stretch"/>
+
+        <StackPanel Grid.Column="2" 
+                    Background="White">
         </StackPanel>
+
+        <Grid Grid.Column="2" MinWidth="250" Margin="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Column="0"
+                   Grid.Row="1"
+                   Width="100"
+                   Height="100" 
+                   Margin="3" 
+                   Grid.RowSpan="3" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Source="/Resources/photo_placeholder_100x100.png"/>
+
+            <GroupBox BorderThickness="0" 
+                      Grid.Row="0" 
+                      Grid.Column="1">
+                <TextBlock Text="Name:" 
+                           Margin="3,3,3,0">
+                </TextBlock>
+            </GroupBox>
+
+            <GroupBox BorderThickness="0" 
+                  Grid.Row="1" 
+                  Grid.Column="1">
+                <StackPanel>
+                    <TextBox Style="{StaticResource ReadTextBoxStyle}" Margin="3,0,3,3">
+                        <TextBox.Text>
+                            <Binding Path="CurrentContact.Fullname"
+                                     UpdateSourceTrigger="PropertyChanged" 
+                                     Mode="OneWay">
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <TextBlock Text="Phone Number:" Margin="3"></TextBlock>
+                    <TextBox Style="{StaticResource ReadTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="CurrentContact.PhoneNumber"
+                                     UpdateSourceTrigger="PropertyChanged" 
+                                     Mode="OneWay">
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <TextBlock Text="Email:" Margin="3"></TextBlock>
+                    <TextBox Style="{StaticResource ReadTextBoxStyle}">
+                        <TextBox.Text>
+                            <Binding Path="CurrentContact.Email"
+                                     UpdateSourceTrigger="PropertyChanged" 
+                                     Mode="OneWay">
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <Button Content="Apply" 
+                            Height="25" 
+                            Width="75" 
+                            Margin="3,50,3,3" 
+                            HorizontalAlignment="Left"
+                            Visibility="Hidden"/>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
     </Grid>
 </Window>
