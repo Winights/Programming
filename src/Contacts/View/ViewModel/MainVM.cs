@@ -26,6 +26,11 @@ namespace View.ViewModel
         private Contact _currentContact;
 
         /// <summary>
+        /// Выбранный контакт.
+        /// </summary>
+        public Contact SelectedContact { get; set; }
+
+        /// <summary>
         /// Событие изменения информации о контакте.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;

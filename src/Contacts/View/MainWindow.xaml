@@ -9,46 +9,21 @@
         Title="Contact" Height="450" Width="700" MinHeight="250" MinWidth="350"
         Icon="pack://application:,,,/Resources/ContactsApp_96x96.ico">
     <Window.Resources>
-        <Style x:Key="ValidationTextBoxStyle" TargetType="TextBox">
+        <Style x:Key="ReadTextBoxStyle" TargetType="TextBox">
             <Setter Property="Height" Value="20"/>
             <Setter Property="Margin" Value="3"/>
+            <Setter Property="IsReadOnly" Value="true"/>
+            <Setter Property="BorderThickness" Value="1"/>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
                     <Setter Property="BorderBrush" Value="Red"/>
                     <Setter Property="BorderThickness" Value="2"/>
                     <Setter Property="Foreground" Value="Red"/>
                     <Setter Property="ToolTip"
-                            Value="{Binding RelativeSource={RelativeSource Self}, 
-                        Path=(Validation.Errors)/ErrorContent}" />
+                Value="{Binding RelativeSource={RelativeSource Self}, 
+            Path=(Validation.Errors)/ErrorContent}" />
                 </Trigger>
             </Style.Triggers>
-        </Style>
-
-        <Style x:Key="ReadTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Margin" Value="3"/>
-            <Setter Property="IsReadOnly" Value="true"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-
-        <Style x:Key="EditGroupBoxStyle" TargetType="GroupBox">
-            <Setter Property="Margin" Value="0,0,3,3"/>
-        </Style>
-
-        <Style x:Key="ReadGroupBoxStyle" TargetType="GroupBox">
-            <Setter Property="Margin" Value="3,0,0,3"/>
-        </Style>
-
-        <Style x:Key="ButtonsStackPanelStyle" TargetType="StackPanel">
-            <Setter Property="Orientation" Value="Horizontal"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="VerticalAlignment" Value="Bottom"/>
-            <Setter Property="Margin" Value="0,3,0,0"/>
-        </Style>
-
-        <Style x:Key="ButtonsStyle" TargetType="Button">
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="75"/>
         </Style>
 
     </Window.Resources>
@@ -160,9 +135,12 @@
                 <StackPanel>
                     <TextBox Style="{StaticResource ReadTextBoxStyle}" Margin="3,0,3,3">
                         <TextBox.Text>
-                            <Binding Path="CurrentContact.Fullname"
+                            <Binding Path ="CurrentContact.Fullname" 
                                      UpdateSourceTrigger="PropertyChanged" 
-                                     Mode="OneWay">
+                                     Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validation:FullnameValidationRule/>
+                                </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
@@ -170,9 +148,12 @@
                     <TextBlock Text="Phone Number:" Margin="3"></TextBlock>
                     <TextBox Style="{StaticResource ReadTextBoxStyle}">
                         <TextBox.Text>
-                            <Binding Path="CurrentContact.PhoneNumber"
+                            <Binding Path ="CurrentContact.PhoneNumber" 
                                      UpdateSourceTrigger="PropertyChanged" 
-                                     Mode="OneWay">
+                                     Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validation:PhoneNumberValidationRule/>
+                                </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
@@ -180,9 +161,12 @@
                     <TextBlock Text="Email:" Margin="3"></TextBlock>
                     <TextBox Style="{StaticResource ReadTextBoxStyle}">
                         <TextBox.Text>
-                            <Binding Path="CurrentContact.Email"
-                                     UpdateSourceTrigger="PropertyChanged" 
-                                     Mode="OneWay">
+                            <Binding Path ="CurrentContact.Email" 
+                                       UpdateSourceTrigger="PropertyChanged" 
+                                       Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validation:EmailValidationRule/>
+                                </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
