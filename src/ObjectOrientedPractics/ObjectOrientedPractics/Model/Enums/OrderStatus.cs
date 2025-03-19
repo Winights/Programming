@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Enums
 {
     /// <summary>
     /// Хранит данные о состоянии заказа.
@@ -12,11 +12,11 @@ namespace ObjectOrientedPractics.Model
     public enum OrderStatus
     {
         New,
-        Processing, 
+        Processing,
         Assembly,
-        Sent, 
-        Delivered,   
-        Returned,    
-        Abandoned   
+        Sent,
+        Delivered,
+        Returned,
+        Abandoned
     }
 }

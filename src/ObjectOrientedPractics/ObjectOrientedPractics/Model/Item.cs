@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
+using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Model.Orders;
 using ObjectOrientedPractics.Services;
 
 namespace ObjectOrientedPractics.Model
@@ -13,7 +17,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Хранит данные о товарах.
     /// </summary>
-    public class Item
+    public class Item : ICloneable, IEquatable<Item>, IComparable<Item>
     {
         /// <summary>
         /// Уникальный номер товара.
@@ -36,6 +40,21 @@ namespace ObjectOrientedPractics.Model
         private double _cost;
 
         /// <summary>
+        /// Событие изменения цены товара.
+        /// </summary>
+        public event EventHandler<EventArgs> CostChanged;
+
+        /// <summary>
+        /// Событие изменения названия товара.
+        /// </summary>
+        public event EventHandler<EventArgs> NameChanged;
+
+        /// <summary>
+        /// Событие изменения описания товара.
+        /// </summary>
+        public event EventHandler<EventArgs> InfoChanged;
+
+        /// <summary>
         /// Возвращает уникальный номер товара.
         /// </summary>
         public int Id { get { return _id; } }
@@ -52,8 +71,9 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertStringOnLength(value, 200, "Name");
+                ValueValidator.AssertStringOnLength(value, 200, "Name");
                 _name = value;
+                NameChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -68,8 +88,9 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertStringOnLength(value, 1000, "Info");
+                ValueValidator.AssertStringOnLength(value, 1000, "Info");
                 _info = value;
+                InfoChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -84,8 +105,9 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueGenerator.AssertValueInRange(value, 0, 100000, "Cost");
+                ValueValidator.AssertValueInRange(value, 0, 100000, "Cost");
                 _cost = value;
+                CostChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -100,7 +122,6 @@ namespace ObjectOrientedPractics.Model
         /// <param name="name">Название товара.</param>
         /// <param name="info">Описание товара.</param>
         /// <param name="cost">Стоимость товара.</param>
-        /// <param name="category">Категория товара.</param>
         public Item(string name, string info, double cost)
         {
             Name = name;
@@ -120,6 +141,90 @@ namespace ObjectOrientedPractics.Model
             Cost = 0;
             _id = IdGenerator.GetNextId();
             Category = new Category();
+        }
+
+
+        /// <summary>
+        /// Создают копию класса <see cref="Item"/>..
+        /// </summary>
+        /// <returns>Копия объекта.</returns>
+        public object Clone()
+        {
+            return new Item
+            {
+                Name = Name,
+                Info = Info,
+                Cost = Cost,
+                Category = Category,
+            };
+        }
+
+        /// <summary>
+        /// Проверка на равенство объекта с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса.</param>
+        /// <returns>Равны ли объекты.</returns>
+        public bool Equals(Item subject)
+        {
+            if (subject == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, subject))
+            {
+                return true;
+            }
+
+            return 
+                Name == subject.Name &&
+                Cost == subject.Cost &&
+                Info == subject.Info &&
+                Category == subject.Category;
+        }
+
+        /// <summary>
+        /// Проверка на равенство объекта с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса.</param>
+        /// <returns>Равны ли объекты.</returns>
+        public override bool Equals(object subject)
+        {
+            if (subject == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, subject))
+            {
+                return true;
+            }
+
+            return Equals((Item) subject);
+        }
+
+
+        /// <summary>
+        /// Сравнивает цену.
+        /// </summary>
+        /// <param name="subject">Объект класса <see cref="Item"/>.</param>
+        /// <returns>0 - цены равны, 1 - цена меньше, -1 - цена больше.</returns>
+        public int CompareTo(Item subject)
+        {
+            if (subject == null)
+            {
+                return 1;
+            }
+
+            if (ReferenceEquals(this, subject))
+            {
+                return 0;
+            }
+
+            else
+            {
+                return _cost.CompareTo(subject.Cost);
+            }
         }
     }
 }

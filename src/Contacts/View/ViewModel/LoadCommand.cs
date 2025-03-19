@@ -15,7 +15,7 @@ namespace View.ViewModel
     public class LoadCommand : ICommand
     {
         /// <summary>
-        /// Ссылка на экземпляр MainVM.
+        /// Ссылка на MainVM.
         /// </summary>
         private readonly MainVM _mainVM;
 
@@ -46,7 +46,7 @@ namespace View.ViewModel
         /// <summary>
         /// Создаёт пустой экземпляр класса <see cref="LoadCommand"/>.
         /// </summary>
-        /// <param name="updateContact">ССылка на метод обновления контакта.</param>
+        /// <param name="mainVM">Сcылка на MainVM.</param>
         public LoadCommand(MainVM mainVM)
         {
             _mainVM = mainVM;

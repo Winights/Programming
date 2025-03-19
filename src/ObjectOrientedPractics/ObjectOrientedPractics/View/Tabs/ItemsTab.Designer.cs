@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             ItemsGroupBox = new GroupBox();
+            OrderByComboBox = new ComboBox();
+            OrderByLabel = new Label();
+            FindTextBox = new TextBox();
+            FindLabel = new Label();
             RemoveButton = new Button();
             AddButton = new Button();
             ItemsListBox = new ListBox();
@@ -50,6 +54,10 @@
             // ItemsGroupBox
             // 
             ItemsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ItemsGroupBox.Controls.Add(OrderByComboBox);
+            ItemsGroupBox.Controls.Add(OrderByLabel);
+            ItemsGroupBox.Controls.Add(FindTextBox);
+            ItemsGroupBox.Controls.Add(FindLabel);
             ItemsGroupBox.Controls.Add(RemoveButton);
             ItemsGroupBox.Controls.Add(AddButton);
             ItemsGroupBox.Controls.Add(ItemsListBox);
@@ -61,11 +69,54 @@
             ItemsGroupBox.TabStop = false;
             ItemsGroupBox.Text = "Items";
             // 
+            // OrderByComboBox
+            // 
+            OrderByComboBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            OrderByComboBox.Font = new Font("Segoe UI", 9F);
+            OrderByComboBox.FormattingEnabled = true;
+            OrderByComboBox.Items.AddRange(new object[] { "Name", "Rising cost", "Down cost" });
+            OrderByComboBox.Location = new Point(79, 483);
+            OrderByComboBox.Name = "OrderByComboBox";
+            OrderByComboBox.Size = new Size(306, 28);
+            OrderByComboBox.TabIndex = 12;
+            OrderByComboBox.SelectedIndexChanged += OrderByComboBox_SelectedIndexChanged;
+            // 
+            // OrderByLabel
+            // 
+            OrderByLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            OrderByLabel.AutoSize = true;
+            OrderByLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            OrderByLabel.Location = new Point(6, 486);
+            OrderByLabel.Name = "OrderByLabel";
+            OrderByLabel.Size = new Size(70, 20);
+            OrderByLabel.TabIndex = 11;
+            OrderByLabel.Text = "Order by:";
+            // 
+            // FindTextBox
+            // 
+            FindTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            FindTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            FindTextBox.Location = new Point(52, 26);
+            FindTextBox.Name = "FindTextBox";
+            FindTextBox.Size = new Size(333, 27);
+            FindTextBox.TabIndex = 10;
+            FindTextBox.TextChanged += FindTextBox_TextChanged;
+            // 
+            // FindLabel
+            // 
+            FindLabel.AutoSize = true;
+            FindLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            FindLabel.Location = new Point(6, 32);
+            FindLabel.Name = "FindLabel";
+            FindLabel.Size = new Size(40, 20);
+            FindLabel.TabIndex = 9;
+            FindLabel.Text = "Find:";
+            // 
             // RemoveButton
             // 
             RemoveButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             RemoveButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            RemoveButton.Location = new Point(119, 526);
+            RemoveButton.Location = new Point(119, 528);
             RemoveButton.Name = "RemoveButton";
             RemoveButton.Size = new Size(108, 53);
             RemoveButton.TabIndex = 8;
@@ -77,7 +128,7 @@
             // 
             AddButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            AddButton.Location = new Point(6, 526);
+            AddButton.Location = new Point(6, 528);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(108, 53);
             AddButton.TabIndex = 8;
@@ -90,9 +141,9 @@
             ItemsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ItemsListBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
             ItemsListBox.FormattingEnabled = true;
-            ItemsListBox.Location = new Point(6, 26);
+            ItemsListBox.Location = new Point(6, 66);
             ItemsListBox.Name = "ItemsListBox";
-            ItemsListBox.Size = new Size(379, 484);
+            ItemsListBox.Size = new Size(379, 404);
             ItemsListBox.TabIndex = 1;
             ItemsListBox.SelectedIndexChanged += ItemsListBox_SelectedIndexChanged;
             ItemsListBox.DoubleClick += ItemsListBox_DoubleClick;
@@ -231,6 +282,7 @@
             Name = "ItemsTab";
             Size = new Size(1009, 591);
             ItemsGroupBox.ResumeLayout(false);
+            ItemsGroupBox.PerformLayout();
             SelectedItemGroupBox.ResumeLayout(false);
             SelectedItemGroupBox.PerformLayout();
             ResumeLayout(false);
@@ -253,5 +305,9 @@
         private Button AddButton;
         private Label CategoryLabel;
         private ComboBox CategoryComboBox;
+        private TextBox FindTextBox;
+        private Label FindLabel;
+        private ComboBox OrderByComboBox;
+        private Label OrderByLabel;
     }
 }

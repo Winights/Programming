@@ -1,16 +1,18 @@
-﻿using ObjectOrientedPractics.Services;
+﻿using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
     /// <summary>
     /// Хранит данные о заказе.
     /// </summary>
-    public class Order
+    public class Order : IEquatable<Order>
     {
         /// <summary>
         /// Уникальный номер покупателя.
@@ -21,11 +23,6 @@ namespace ObjectOrientedPractics.Model
         /// Дата создания заказа.
         /// </summary>
         private readonly DateTime _date;
-
-        /// <summary>
-        /// Имя покупателя, сделавшего заказ.
-        /// </summary>
-        private string _customerFullName = string.Empty;
 
         /// <summary>
         /// Возвращает уникальный номер заказа.
@@ -40,7 +37,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задаёт имя покупателя, сделавшего заказ.
         /// </summary>
-        public string CustomerFullName { get { return _customerFullName; } set { _customerFullName = value; } }
+        public string CustomerFullName { get; set; }
 
         /// <summary>
         /// Возвращает и задаёт адрес доставки.
@@ -56,7 +53,23 @@ namespace ObjectOrientedPractics.Model
         /// Возвращает и задает статус заказа.
         /// </summary>
         public OrderStatus OrderStatus { get; set; }
-        
+
+        /// <summary>
+        /// Возвращает и задает скидку на товары.
+        /// </summary>
+        public double DiscountAmount { get; set; }
+
+        /// <summary>
+        /// Возращает стоимость заказа со скидкой.
+        /// </summary>
+        public double Total
+        {
+            get
+            {
+                return Amount - DiscountAmount;
+            }
+        }
+
         /// <summary>
         /// Возвращает стоимость всех товаров в корзине.
         /// </summary>
@@ -81,21 +94,23 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Создаёт экземпляр класса <see cref="Item"/>.
+        /// Создаёт экземпляр класса <see cref="Order"/>.
         /// </summary>
         /// <param name="address">Адрес доставки для покупателя.</param>
         /// <param name="items">Список товаров.</param>
-        public Order(Address address, List<Item> items, string fullname)
+        /// /// <param name="fullname">Полное имя покупателя.</param>
+        public Order(Address address, List<Item> items, string fullname, double discountAmount)
         {
             _id = IdGenerator.GetNextId();
             _date = DateTime.Now;
             Address = address;
-            foreach(Item item in items)
+            foreach (Item item in items)
             {
                 Items.Add(item);
             }
             OrderStatus = new OrderStatus();
             CustomerFullName = fullname;
+            DiscountAmount = discountAmount;
 
         }
 
@@ -110,6 +125,57 @@ namespace ObjectOrientedPractics.Model
             Items = new List<Item>();
             OrderStatus = new OrderStatus();
             CustomerFullName = string.Empty;
+            DiscountAmount = 0;
+        }
+
+        /// <summary>
+        /// Проверка на равенство объекта с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса.</param>
+        /// <returns>Равны ли объекты.</returns>
+        public bool Equals(Order subject)
+        {
+            if (subject == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, subject))
+            {
+                return true;
+            }
+
+            if (!Items.SequenceEqual(subject.Items))
+            {
+                return false;
+            }
+
+            return
+                Address == subject.Address &&
+                OrderStatus == subject.OrderStatus &&
+                CustomerFullName == subject.CustomerFullName &&
+                Amount == subject.Amount;
+
+        }
+
+        /// <summary>
+        /// Проверка на равенство объекта с передаваемым.
+        /// </summary>
+        /// <param name="subject">Объект класса.</param>
+        /// <returns>Равны ли объекты.</returns>
+        public override bool Equals(object subject)
+        {
+            if (subject == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, subject))
+            {
+                return true;
+            }
+
+            return Equals((Order)subject);
         }
     }
 }

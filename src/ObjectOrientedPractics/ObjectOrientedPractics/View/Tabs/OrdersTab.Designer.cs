@@ -35,7 +35,13 @@
             CreatedColumn = new DataGridViewTextBoxColumn();
             StatusColumn = new DataGridViewTextBoxColumn();
             FullnameColumn = new DataGridViewTextBoxColumn();
+            AmountColumn = new DataGridViewTextBoxColumn();
+            TotalColumn = new DataGridViewTextBoxColumn();
             SelectedOrderGroupBox = new GroupBox();
+            PriorityOptionsPanel = new Panel();
+            DeliveryTimeLabel = new Label();
+            PriorityOptionsLabel = new Label();
+            DeliveryTimeComboBox = new ComboBox();
             StatusLabel = new Label();
             CreatedLabel = new Label();
             IdLabel = new Label();
@@ -44,12 +50,15 @@
             StatusComboBox = new ComboBox();
             IdTextBox = new TextBox();
             OrderItemsGroupBox = new GroupBox();
+            TotalCostWithDiscountlLabel = new Label();
+            TotalLabel = new Label();
             TotalCostLabel = new Label();
             AmountLabel = new Label();
             OrderItemsListBox = new ListBox();
             OrdersGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)OrdersDataGridView).BeginInit();
             SelectedOrderGroupBox.SuspendLayout();
+            PriorityOptionsPanel.SuspendLayout();
             OrderItemsGroupBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -71,7 +80,7 @@
             OrdersDataGridView.AllowUserToDeleteRows = false;
             OrdersDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             OrdersDataGridView.ColumnHeadersHeight = 30;
-            OrdersDataGridView.Columns.AddRange(new DataGridViewColumn[] { IdColumn, CreatedColumn, StatusColumn, FullnameColumn });
+            OrdersDataGridView.Columns.AddRange(new DataGridViewColumn[] { IdColumn, CreatedColumn, StatusColumn, FullnameColumn, AmountColumn, TotalColumn });
             OrdersDataGridView.Location = new Point(6, 26);
             OrdersDataGridView.Name = "OrdersDataGridView";
             OrdersDataGridView.ReadOnly = true;
@@ -112,9 +121,26 @@
             FullnameColumn.ReadOnly = true;
             FullnameColumn.Width = 125;
             // 
+            // AmountColumn
+            // 
+            AmountColumn.HeaderText = "Amount";
+            AmountColumn.MinimumWidth = 6;
+            AmountColumn.Name = "AmountColumn";
+            AmountColumn.ReadOnly = true;
+            AmountColumn.Width = 125;
+            // 
+            // TotalColumn
+            // 
+            TotalColumn.HeaderText = "Total";
+            TotalColumn.MinimumWidth = 6;
+            TotalColumn.Name = "TotalColumn";
+            TotalColumn.ReadOnly = true;
+            TotalColumn.Width = 125;
+            // 
             // SelectedOrderGroupBox
             // 
             SelectedOrderGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            SelectedOrderGroupBox.Controls.Add(PriorityOptionsPanel);
             SelectedOrderGroupBox.Controls.Add(StatusLabel);
             SelectedOrderGroupBox.Controls.Add(CreatedLabel);
             SelectedOrderGroupBox.Controls.Add(IdLabel);
@@ -129,6 +155,46 @@
             SelectedOrderGroupBox.TabIndex = 1;
             SelectedOrderGroupBox.TabStop = false;
             SelectedOrderGroupBox.Text = "Selected Order:";
+            // 
+            // PriorityOptionsPanel
+            // 
+            PriorityOptionsPanel.Controls.Add(DeliveryTimeLabel);
+            PriorityOptionsPanel.Controls.Add(PriorityOptionsLabel);
+            PriorityOptionsPanel.Controls.Add(DeliveryTimeComboBox);
+            PriorityOptionsPanel.Location = new Point(312, 0);
+            PriorityOptionsPanel.Name = "PriorityOptionsPanel";
+            PriorityOptionsPanel.Size = new Size(268, 109);
+            PriorityOptionsPanel.TabIndex = 8;
+            PriorityOptionsPanel.Visible = false;
+            // 
+            // DeliveryTimeLabel
+            // 
+            DeliveryTimeLabel.AutoSize = true;
+            DeliveryTimeLabel.Font = new Font("Segoe UI", 9F);
+            DeliveryTimeLabel.Location = new Point(3, 26);
+            DeliveryTimeLabel.Name = "DeliveryTimeLabel";
+            DeliveryTimeLabel.Size = new Size(100, 20);
+            DeliveryTimeLabel.TabIndex = 9;
+            DeliveryTimeLabel.Text = "Delivery time:";
+            // 
+            // PriorityOptionsLabel
+            // 
+            PriorityOptionsLabel.AutoSize = true;
+            PriorityOptionsLabel.Location = new Point(0, 0);
+            PriorityOptionsLabel.Name = "PriorityOptionsLabel";
+            PriorityOptionsLabel.Size = new Size(106, 20);
+            PriorityOptionsLabel.TabIndex = 1;
+            PriorityOptionsLabel.Text = "Priority Label:";
+            // 
+            // DeliveryTimeComboBox
+            // 
+            DeliveryTimeComboBox.Font = new Font("Segoe UI", 9F);
+            DeliveryTimeComboBox.FormattingEnabled = true;
+            DeliveryTimeComboBox.Location = new Point(109, 23);
+            DeliveryTimeComboBox.Name = "DeliveryTimeComboBox";
+            DeliveryTimeComboBox.Size = new Size(151, 28);
+            DeliveryTimeComboBox.TabIndex = 0;
+            DeliveryTimeComboBox.SelectedIndexChanged += DeliveryTimeComboBox_SelectedIndexChanged;
             // 
             // StatusLabel
             // 
@@ -212,6 +278,8 @@
             // OrderItemsGroupBox
             // 
             OrderItemsGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            OrderItemsGroupBox.Controls.Add(TotalCostWithDiscountlLabel);
+            OrderItemsGroupBox.Controls.Add(TotalLabel);
             OrderItemsGroupBox.Controls.Add(TotalCostLabel);
             OrderItemsGroupBox.Controls.Add(AmountLabel);
             OrderItemsGroupBox.Controls.Add(OrderItemsListBox);
@@ -223,12 +291,34 @@
             OrderItemsGroupBox.TabStop = false;
             OrderItemsGroupBox.Text = "Order Items";
             // 
+            // TotalCostWithDiscountlLabel
+            // 
+            TotalCostWithDiscountlLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            TotalCostWithDiscountlLabel.AutoSize = true;
+            TotalCostWithDiscountlLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            TotalCostWithDiscountlLabel.Location = new Point(524, 251);
+            TotalCostWithDiscountlLabel.Name = "TotalCostWithDiscountlLabel";
+            TotalCostWithDiscountlLabel.Size = new Size(89, 28);
+            TotalCostWithDiscountlLabel.TabIndex = 15;
+            TotalCostWithDiscountlLabel.Text = "4990,90";
+            // 
+            // TotalLabel
+            // 
+            TotalLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            TotalLabel.AutoSize = true;
+            TotalLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            TotalLabel.Location = new Point(547, 228);
+            TotalLabel.Name = "TotalLabel";
+            TotalLabel.Size = new Size(66, 23);
+            TotalLabel.TabIndex = 14;
+            TotalLabel.Text = "TOTAL:";
+            // 
             // TotalCostLabel
             // 
             TotalCostLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             TotalCostLabel.AutoSize = true;
             TotalCostLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            TotalCostLabel.Location = new Point(524, 272);
+            TotalCostLabel.Location = new Point(1, 248);
             TotalCostLabel.Name = "TotalCostLabel";
             TotalCostLabel.Size = new Size(89, 28);
             TotalCostLabel.TabIndex = 5;
@@ -238,7 +328,7 @@
             // 
             AmountLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             AmountLabel.AutoSize = true;
-            AmountLabel.Location = new Point(542, 252);
+            AmountLabel.Location = new Point(6, 228);
             AmountLabel.Name = "AmountLabel";
             AmountLabel.Size = new Size(71, 20);
             AmountLabel.TabIndex = 4;
@@ -251,7 +341,7 @@
             OrderItemsListBox.Font = new Font("Segoe UI", 9F);
             OrderItemsListBox.FormattingEnabled = true;
             OrderItemsListBox.Location = new Point(6, 31);
-            OrderItemsListBox.MinimumSize = new Size(607, 64);
+            OrderItemsListBox.MinimumSize = new Size(50, 50);
             OrderItemsListBox.Name = "OrderItemsListBox";
             OrderItemsListBox.Size = new Size(607, 144);
             OrderItemsListBox.TabIndex = 3;
@@ -269,6 +359,8 @@
             ((System.ComponentModel.ISupportInitialize)OrdersDataGridView).EndInit();
             SelectedOrderGroupBox.ResumeLayout(false);
             SelectedOrderGroupBox.PerformLayout();
+            PriorityOptionsPanel.ResumeLayout(false);
+            PriorityOptionsPanel.PerformLayout();
             OrderItemsGroupBox.ResumeLayout(false);
             OrderItemsGroupBox.PerformLayout();
             ResumeLayout(false);
@@ -278,10 +370,6 @@
 
         private GroupBox OrdersGroupBox;
         private DataGridView OrdersDataGridView;
-        private DataGridViewTextBoxColumn IdColumn;
-        private DataGridViewTextBoxColumn CreatedColumn;
-        private DataGridViewTextBoxColumn StatusColumn;
-        private DataGridViewTextBoxColumn FullnameColumn;
         private GroupBox SelectedOrderGroupBox;
         private Controls.AddressControl OrderAddressControl;
         private TextBox CreatedTextBox;
@@ -294,5 +382,17 @@
         private ListBox OrderItemsListBox;
         private Label TotalCostLabel;
         private Label AmountLabel;
+        private Panel PriorityOptionsPanel;
+        private ComboBox DeliveryTimeComboBox;
+        private Label DeliveryTimeLabel;
+        private Label PriorityOptionsLabel;
+        private DataGridViewTextBoxColumn IdColumn;
+        private DataGridViewTextBoxColumn CreatedColumn;
+        private DataGridViewTextBoxColumn StatusColumn;
+        private DataGridViewTextBoxColumn FullnameColumn;
+        private DataGridViewTextBoxColumn AmountColumn;
+        private DataGridViewTextBoxColumn TotalColumn;
+        private Label TotalCostWithDiscountlLabel;
+        private Label TotalLabel;
     }
 }

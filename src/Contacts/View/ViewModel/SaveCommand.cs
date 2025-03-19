@@ -16,7 +16,7 @@ namespace View.ViewModel
     public class SaveCommand : ICommand
     {
         /// <summary>
-        /// Ссылка на экземпляр MainVM.
+        /// Ссылка на MainVM.
         /// </summary>
         private readonly MainVM _mainVM;
 
@@ -43,7 +43,7 @@ namespace View.ViewModel
         /// <summary>
         /// Создаёт пустой экземпляр класса <see cref="SaveCommand"/>.
         /// </summary>
-        /// <param name="contact">Объект контакта.</param>
+        /// <param name="mainVM">Ссылка на MainVM.</param>
         public SaveCommand(MainVM mainVM)
         {
             _mainVM = mainVM;

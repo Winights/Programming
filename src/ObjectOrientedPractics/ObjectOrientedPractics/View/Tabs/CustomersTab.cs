@@ -1,4 +1,5 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.View.DiscountsModalWindow;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ObjectOrientedPractics.Model.Discounts;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -29,7 +31,15 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         public List<Customer> Customers { get { return _customers; } set { _customers = value; } }
 
+        /// <summary>
+        /// Переменная для приоритетных покупателей.
+        /// </summary>
+        private bool _isPriority = false;
 
+        /// <summary>
+        /// Событие при изменении информации о покупателях.
+        /// </summary>
+        public event EventHandler<EventArgs> CustomersChanged;
 
         public CustomersTab()
         {
@@ -80,7 +90,22 @@ namespace ObjectOrientedPractics.View.Tabs
             IdTextBox.Text = _currentCustomer.Id.ToString();
             FullnameTextBox.Text = _currentCustomer.Fullname.ToString();
             AddressControl.OurAddress = _currentCustomer.CustomerAddress;
-            AddressControl.SelelctedTextBoxs();
+            AddressControl.SelectedTextBoxs();
+            UpdateDiscountsListBox(_currentCustomer);
+        }
+
+        /// <summary>
+        /// Обновляет данные в списке скидок покупателя.
+        /// </summary>
+        /// <param name="customer">Текущий покупатель.</param>
+        private void UpdateDiscountsListBox(Customer customer)
+        {
+            DiscountsListBox.Items.Clear();
+
+            foreach (var discount in customer.Discounts)
+            {
+                DiscountsListBox.Items.Add(discount.Info);
+            }
         }
 
         private void FullnameTextBox_TextChanged(object sender, EventArgs e)
@@ -89,6 +114,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _currentCustomer.Fullname = FullnameTextBox.Text;
                 FullnameTextBox.BackColor = Color.White;
+                CustomersChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (ArgumentException)
             {
@@ -118,12 +144,24 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     Customer selectedCustomer = AddItemsInfo();
                     selectedCustomer.CustomerAddress = AddressControl.AddFromTextBoxs();
+                    selectedCustomer.IsPriority = _isPriority;
                     _customers.Add(selectedCustomer);
+                    //var clone = (Address)selectedCustomer.CustomerAddress.Clone();
+                    //MessageBox.Show($"{clone.Index} {clone.Country} {clone.Apartment} " +
+                    //    $"{clone.Building} {clone.City} {clone.Street}");
+                    //var equals = selectedCustomer.CustomerAddress.Equals(_customers[0].CustomerAddress);
+                    //MessageBox.Show($"{equals}");
+                    //var pointsDiscount = (PointsDiscount)Customers[1].Discounts[0];
+                    //var compare = (PointsDiscount)Customers[0].Discounts[0];
+                    //var result = pointsDiscount.CompareTo(compare);
+                    //MessageBox.Show($"{result}");
                     UpdateListBox();
+                    CustomersChanged?.Invoke(this, EventArgs.Empty);
                 }
                 else
                 {
-                    throw new Exception("Некоректные значения. Введите корректные значения для корректной работы программы.");
+                    throw new Exception("Некоректные значения. Введите корректные " +
+                        "значения для корректной работы программы.");
                 }
             }
             catch (Exception ex)
@@ -150,6 +188,7 @@ namespace ObjectOrientedPractics.View.Tabs
             _customers.RemoveAt(CustomersListBox.SelectedIndex);
             CustomersListBox.Items.RemoveAt(CustomersListBox.SelectedIndex);
             ClearItemInfo();
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -172,9 +211,81 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (CustomersListBox.SelectedItem != null)
             {
-                AddressControl.EditTextBoxs(_currentCustomer);   
-
+                AddressControl.EditTextBoxs(_currentCustomer);
             }
+        }
+
+        private void PriorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (PriorityCheckBox.Checked)
+            {
+                _isPriority = true;
+            }
+            else
+            {
+                _isPriority = false;
+            }
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void AddDiscountsButton_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                _currentCustomer = Customers[CustomersListBox.SelectedIndex];
+                var discountWindowPopUp = new DiscountModalWindow(_currentCustomer);
+
+                if (discountWindowPopUp.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                var discount = new PercentDiscount(discountWindowPopUp.Category);
+                _currentCustomer.Discounts.Add(discount);
+                UpdateDiscountsListBox(_currentCustomer);
+                CustomersChanged?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                // Выводим сообщение, если не выбран элемент
+                MessageBox.Show(
+                    "Не выбран покупатель для добавления скидки.",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }           
+        }
+
+        private void RemoveDiscountsButton_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1 && DiscountsListBox.SelectedIndex != -1)
+            {
+                _currentCustomer = Customers[CustomersListBox.SelectedIndex];
+                if (DiscountsListBox.SelectedIndex != 0)
+                {
+                    _currentCustomer.Discounts.RemoveAt(
+                        DiscountsListBox.SelectedIndex);
+                    UpdateDiscountsListBox(_currentCustomer);
+                    CustomersChanged?.Invoke(this, EventArgs.Empty);
+                }
+                else 
+                {
+                    return;
+                }
+            }
+            else
+            {
+                // Выводим сообщение, если не выбран элемент
+                MessageBox.Show(
+                    "Не выбран покупатель или скидка для удаления.",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }         
         }
     }
 }
