@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using View.Model.Services;
@@ -10,7 +12,7 @@ namespace View.Model
     /// <summary>
     /// Хранит данные о контакте.
     /// </summary>
-    public class Contact
+    public class Contact : INotifyPropertyChanged
     {
         /// <summary>
         /// Полное имя контакта.
@@ -42,6 +44,7 @@ namespace View.Model
                 ValueValidator.AssertStringOnName(value, nameof(Fullname));
                 ValueValidator.AssertStringOnLength(value, 100, nameof(Fullname));
                 _fullname = value;
+                OnPropertyChanged();
             }
         }
 
@@ -59,6 +62,7 @@ namespace View.Model
                 ValueValidator.AssertStringOnEmail(value, nameof(Email));
                 ValueValidator.AssertStringOnLength(value, 100, nameof(Email));
                 _email = value;
+                OnPropertyChanged();
             }
         }
 
@@ -75,6 +79,7 @@ namespace View.Model
             {
                 ValueValidator.AssertStringOnPhoneNumber(value, nameof(PhoneNumber));
                 _phoneNumber = PhoneNumberFormatter.FormatPhoneNumber(value);
+                OnPropertyChanged();
             }
         }
 
@@ -91,14 +96,26 @@ namespace View.Model
             PhoneNumber = phoneNumber;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Сообщает интерфейсу об изменении значения в свойстве.
+        /// </summary>
+        /// <param name="prop">Имя свойства, в котором произошло событие.</param>
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            }
+        }
+
         /// <summary>
         /// Создаёт пустой экземпляр класса <see cref="Contact"/>.
         /// </summary>
         public Contact()
         {
-            Fullname = "Aleksandr Ivanov";
-            Email = "yuri.smirnov@no.mail";
-            PhoneNumber = "+79999999999";
+
         }
     }
 }

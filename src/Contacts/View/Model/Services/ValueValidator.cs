@@ -117,11 +117,11 @@ namespace View.Model.Services
         }
 
         /// <summary>
-        /// Проверяет, что строка содержит только буквы
+        /// Проверяет, что строка содержит только буквы.
         /// </summary>
         /// <param name="value">Проверямое строка.</param>
         /// <param name="propertyName">Имя свойства или объекта, которое подлежит проверке.</param>
-        /// /// <example>
+        /// <example>
         /// Примеры допустимых форматов:
         /// Petrov Petr Petrovich
         /// Иванов Иван Иванович
