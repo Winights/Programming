@@ -15,13 +15,13 @@ namespace View.ViewModel
         /// <summary>
         /// Делегат, который представляет собой метод, выполняемый при вызове команды.
         /// </summary>
-        private Action<object> execute;
+        private Action<object> _execute;
 
         /// <summary>
         /// Делегат, который представляет собой метод, определяющий, 
         /// может ли команда быть выполнена в текущий момент.
         /// </summary>
-        private Func<object, bool> canExecute;
+        private Func<object, bool> _canExecute;
 
         /// <summary>
         /// События для команд.
@@ -40,7 +40,7 @@ namespace View.ViewModel
         /// данный момент равен null и если передано значение для делегата, иначе false.</returns>
         public bool CanExecute(object parameter)
         {
-            return this.canExecute == null || this.canExecute(parameter);
+            return _canExecute == null || _canExecute(parameter);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace View.ViewModel
         /// <param name="parameter">Дополнительная информация при вызове команды.</param>
         public void Execute(object parameter)
         {
-            this.execute(parameter);
+            _execute(parameter);
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace View.ViewModel
         /// может ли команда быть выполнена в текущий момент.</param>
         public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
-            this.execute = execute;
-            this.canExecute = canExecute;
+            _execute = execute;
+            _canExecute = canExecute;
         }
     }
 }

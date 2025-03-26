@@ -20,10 +20,10 @@ namespace View.Model.Services
         public static string FormatPhoneNumber(string value)
         {
             string digits = new string(value.Where(char.IsDigit).ToArray());
-            if (digits.Length == 11)
+            if (digits.Length == 11 && (digits.StartsWith("7") || digits.StartsWith("8")))
             {
-                return $"+7 ({digits.Substring(1, 3)}) {digits.Substring(3, 3)}-" +
-                $"{digits.Substring(6, 2)}-{digits.Substring(8, 2)}";
+                return $"+7 ({digits.Substring(1, 3)}) {digits.Substring(4, 3)}-" +
+                $"{digits.Substring(7, 2)}-{digits.Substring(9, 2)}";
             }
             if (digits.Length == 10)
             {

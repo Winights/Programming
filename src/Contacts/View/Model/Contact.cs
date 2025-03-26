@@ -30,6 +30,11 @@ namespace View.Model
         private string _phoneNumber = string.Empty;
 
         /// <summary>
+        /// Событие изменения информации о контакте.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
         /// Возвращает и задает полное имя контакта. Должен не превышать 200 символов.
         /// </summary>
         public string Fullname
@@ -84,6 +89,18 @@ namespace View.Model
         }
 
         /// <summary>
+        /// Сообщает интерфейсу об изменении значения в свойстве.
+        /// </summary>
+        /// <param name="prop">Имя свойства, в котором произошло событие.</param>
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            }
+        }
+
+        /// <summary>
         /// Создаёт экземпляр класса <see cref="Contact"/>.
         /// </summary>
         /// <param name="fullname">Полное имя контакта.</param>
@@ -94,20 +111,6 @@ namespace View.Model
             Fullname = fullname;
             Email = email;
             PhoneNumber = phoneNumber;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Сообщает интерфейсу об изменении значения в свойстве.
-        /// </summary>
-        /// <param name="prop">Имя свойства, в котором произошло событие.</param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-            }
         }
 
         /// <summary>

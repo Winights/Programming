@@ -24,7 +24,8 @@ namespace View.ViewModel
         /// используемые в этом правиле.</param>
         /// <returns> Возвращает Visible, если значение является булевым и 
         /// равен true, иначе Hidden.</returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType,
+            object parameter, CultureInfo culture)
         {
             if (value is bool boolValue)
             {
@@ -43,7 +44,8 @@ namespace View.ViewModel
         /// используемые в этом правиле.</param>
         /// <returns> Возвращает true, если значение является Visibility и 
         /// равен Visible, иначе false.</returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType,
+            object parameter, CultureInfo culture)
         {
             return (value is Visibility visibility) && visibility == Visibility.Visible;
         }
