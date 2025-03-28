@@ -24,7 +24,7 @@ namespace View.ViewModel.Validation
         {
             string pattern = ValueValidator.GetNamePattern();
 
-            if (value == string.Empty)
+            if (string.IsNullOrWhiteSpace(value.ToString()))
             {
                 return new ValidationResult(false, "Fullname must not null");
             }

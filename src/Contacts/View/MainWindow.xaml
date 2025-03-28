@@ -27,10 +27,9 @@
             </Style.Triggers>
         </Style>
         
-        <viewModel:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <viewModel:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
-        <Style x:Key="IsEnabledButtons" TargetType="Button">
-            <Setter Property="IsEnabled" Value="{Binding IsInEditingOrCreatingMode}"/>
+        <Style x:Key="IsButtons" TargetType="Button">
             <Setter Property="Height" Value="25"/>
             <Setter Property="Margin" Value="3"/>
             <Setter Property="MinWidth" Value="75"/>
@@ -91,7 +90,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding Path=Fullname}" />
+                            <TextBlock Text="{Binding Path=Fullname}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -108,15 +107,15 @@
                 <Button Content="Add" 
                         Command="{Binding AddContactCommand}"
                         Grid.Column="0" 
-                        Style="{StaticResource IsEnabledButtons}"/>
+                        Style="{StaticResource IsButtons}"/>
                 <Button Content="Edit" 
                         Command="{Binding EditContactCommand}"
                         Grid.Column="1"
-                        Style="{StaticResource IsEnabledButtons}"/>
+                        Style="{StaticResource IsButtons}"/>
                 <Button Content="Remove" 
                         Command="{Binding RemoveContactCommand}"
                         Grid.Column="2" 
-                        Style="{StaticResource IsEnabledButtons}"/>
+                        Style="{StaticResource IsButtons}"/>
             </Grid>
         </Grid>
 
@@ -185,7 +184,7 @@
                 </TextBlock>
 
                 <TextBox Grid.Row="2"
-                    Style="{StaticResource TextBoxStyle}">
+                         Style="{StaticResource TextBoxStyle}">
                     <TextBox.Text>
                         <Binding Path ="CurrentContact.PhoneNumber" 
                                  UpdateSourceTrigger="PropertyChanged" 

@@ -25,7 +25,7 @@ namespace View.ViewModel.Validation
         {
             string patternOfEmail = ValueValidator.GetEmailPattern();
 
-            if (value.ToString() == string.Empty)
+            if (string.IsNullOrWhiteSpace(value.ToString()))
             {
                 return new ValidationResult(false, "Email must not null");
             }

@@ -24,7 +24,7 @@ namespace View.ViewModel.Validation
         {
             string pattern = ValueValidator.GetPhoneNumberPattern();
 
-            if (value.ToString() == string.Empty) 
+            if (string.IsNullOrWhiteSpace(value.ToString())) 
             {
                 return new ValidationResult(false, "Phone number  must not null");
             }

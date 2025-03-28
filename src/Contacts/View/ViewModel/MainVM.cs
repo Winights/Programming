@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -75,18 +76,8 @@ namespace View.ViewModel
         public ICommand RemoveContactCommand { get; }
 
         /// <summary>
-        /// Команда для сохранения объекта в файл.
-        /// </summary>
-        public ICommand SaveCommand { get; }
-
-        /// <summary>
-        /// Команда для загрузки объекта их файла.
-        /// </summary>
-        public ICommand LoadCommand { get; }
-
-        /// <summary>
-        /// Возвращает и задает новое значение для объекта контакта. Должен быть новым значением 
-        /// для обновления информации.
+        /// Возвращает и задает новое значение для объекта контакта. 
+        /// Должен быть новым значением для обновления информации.
         /// </summary>
         public Contact CurrentContact
         { 
@@ -144,7 +135,7 @@ namespace View.ViewModel
             }
             set
             {
-                if (CurrentContact.Fullname != value && value != null)
+                if (CurrentContact.Fullname != value && value != null) 
                 {
                     CurrentContact.Fullname = value;
                     OnPropertyChanged();
@@ -276,7 +267,7 @@ namespace View.ViewModel
         /// <summary>
         /// Начинает процесс создания контакта.
         /// </summary>
-        private void StartGreatNewContact()
+        private void StartСreatNewContact()
         {
             SelectedContact = null;
             CurrentContact = new Contact();
@@ -289,7 +280,9 @@ namespace View.ViewModel
         /// </summary>
         private void SaveChangesOrNewContact()
         {
-            if (CurrentContact == null)
+            if (string.IsNullOrWhiteSpace(CurrentContact.Email)
+                || string.IsNullOrWhiteSpace(CurrentContact.Fullname) ||
+                string.IsNullOrWhiteSpace(CurrentContact.PhoneNumber))
             {
                 return;
             }
@@ -384,23 +377,31 @@ namespace View.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
             }
         }
+        /// <summary>
+        /// Сохранеяет список контактов после закрытия программы.
+        /// </summary>
+        /// <param name="sender">Объект, инициирующее событие.</param>
+        /// <param name="e">Дополнительный данные о событие.</param>
+        private void OnApplicationExit(object sender, ExitEventArgs e)
+        {
+            ContactSerializer.SaveContacts(Contacts);
+        }
 
         /// <summary>
         /// Создаёт пустой экземпляр класса <see cref="MainVM"/>.
         /// </summary>
         public MainVM()
         {
+            Contacts = ContactSerializer.LoadContacts();
             CurrentContact = new Contact();
-            SaveCommand = new SaveCommand(this);
-            LoadCommand = new LoadCommand(this);
-            AddContactCommand = new RelayCommand(_ => StartGreatNewContact(), _ => 
-            IsInEditingOrCreatingMode);
-            EditContactCommand = new RelayCommand(_ => StartEditContact(),_ => 
-            IsInEditingOrCreatingMode && IsEditOrRemoveEnabled);
-            ApplyContactCommand = new RelayCommand(_ => SaveChangesOrNewContact(), _ => 
-            (IsCreatingContact || IsEditingContact));
-            RemoveContactCommand = new RelayCommand(_ => RemoveContact(),_ => 
-            IsEditOrRemoveEnabled);
+            AddContactCommand = new RelayCommand(create => StartСreatNewContact(), 
+                condition => IsInEditingOrCreatingMode);
+            EditContactCommand = new RelayCommand(edit => StartEditContact(),
+                condition => IsInEditingOrCreatingMode && IsEditOrRemoveEnabled);
+            ApplyContactCommand = new RelayCommand(apply => SaveChangesOrNewContact());
+            RemoveContactCommand = new RelayCommand(remove => RemoveContact(),
+                condition => IsEditOrRemoveEnabled && !IsEditingContact);
+            Application.Current.Exit += OnApplicationExit;
         }
     }
 }
