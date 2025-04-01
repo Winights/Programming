@@ -32,7 +32,7 @@ namespace View.ViewModel.Validation
 
             if (!Regex.IsMatch(value.ToString(), patternOfEmail))
             {
-                return new ValidationResult(false, "Incorrect email format");
+                return new ValidationResult(false, "Incorrect email format. Example: user@example.com");
             }
 
             if ((value.ToString()).Length > 100)

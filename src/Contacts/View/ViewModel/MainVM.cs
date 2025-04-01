@@ -196,8 +196,7 @@ namespace View.ViewModel
             {
                 _isCreatingContact = value;
                 OnPropertyChanged(nameof(IsReadOnly));
-                OnPropertyChanged(nameof(IsVisibleApply));
-                OnPropertyChanged(nameof(IsInEditingOrCreatingMode));
+                OnPropertyChanged(nameof(IsVisibleApply));   
             }
         }
 
@@ -215,7 +214,6 @@ namespace View.ViewModel
                 _isEditingContact = value;
                 OnPropertyChanged(nameof(IsReadOnly));
                 OnPropertyChanged(nameof(IsVisibleApply));
-                OnPropertyChanged(nameof(IsInEditingOrCreatingMode));
             }
         }
 

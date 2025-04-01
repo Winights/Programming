@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,22 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using View.UserControls;
 using View.ViewModel;
 
-namespace View
+namespace View.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для ContactControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ContactControl : UserControl
     {
-        public MainWindow()
+        public ContactControl()
         {
             InitializeComponent();
-            var mainVm = new MainVM();
-            DataContext = mainVm;
-            ContactControl.DataContext = mainVm;
         }
     }
 }

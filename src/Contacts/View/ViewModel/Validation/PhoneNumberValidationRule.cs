@@ -31,7 +31,7 @@ namespace View.ViewModel.Validation
 
             if (!Regex.IsMatch(value.ToString(), pattern))
             {
-                return new ValidationResult(false, "Incorrect phone number format");
+                return new ValidationResult(false, "Incorrect phone number format. Example: +7 (123) 456-78-90");
             }
 
             return ValidationResult.ValidResult;
