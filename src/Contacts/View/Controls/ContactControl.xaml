@@ -13,7 +13,7 @@
             <Setter Property="Height" Value="20"/>
             <Setter Property="Margin" Value="3,0,0,0"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="IsReadOnly" Value="{Binding IsReadOnly}"/>
+            <Setter Property="IsReadOnly" Value="{Binding IsInEditingOrCreatingMode}"/>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
                     <Setter Property="BorderBrush" Value="Red"/>
@@ -30,7 +30,7 @@
 
         <Style x:Key="IsApplyButton" TargetType="Button">
             <Setter Property="Visibility" Value="{Binding IsVisibleApply,
-         Converter={StaticResource BoolToVisibilityConverter}}"/>
+                Converter={StaticResource BoolToVisibilityConverter}}"/>
             <Setter Property="Margin" Value="3,50,3,3"/>
             <Setter Property="Width" Value="75"/>
             <Setter Property="Height" Value="25"/>
@@ -57,9 +57,9 @@
                    Source="/Resources/photo_placeholder_100x100.png"/>
 
             <TextBlock Text="Name:" 
-               Margin="3"
-               Grid.Row="0"
-               Grid.Column="1">
+                       Margin="3"
+                       Grid.Row="0"
+                       Grid.Column="1">
             </TextBlock>
 
             <Grid Grid.Column="1" 
@@ -74,11 +74,11 @@
                 </Grid.RowDefinitions>
 
                 <TextBox Grid.Row="0"
-                    Style="{StaticResource TextBoxStyle}">
+                         Style="{StaticResource TextBoxStyle}">
                     <TextBox.Text>
                         <Binding Path ="CurrentContact.Fullname" 
-                         UpdateSourceTrigger="PropertyChanged" 
-                         Mode="TwoWay">
+                                 UpdateSourceTrigger="PropertyChanged" 
+                                 Mode="TwoWay">
                             <Binding.ValidationRules>
                                 <validation:FullnameValidationRule/>
                             </Binding.ValidationRules>
@@ -87,16 +87,16 @@
                 </TextBox>
 
                 <TextBlock Grid.Row="1" 
-                   Text="Phone Number:" 
-                   Margin="3">
+                           Text="Phone Number:" 
+                           Margin="3">
                 </TextBlock>
 
                 <TextBox Grid.Row="2"
-                 Style="{StaticResource TextBoxStyle}">
+                         Style="{StaticResource TextBoxStyle}">
                     <TextBox.Text>
                         <Binding Path ="CurrentContact.PhoneNumber" 
-                         UpdateSourceTrigger="PropertyChanged" 
-                         Mode="TwoWay">
+                                 UpdateSourceTrigger="PropertyChanged" 
+                                 Mode="TwoWay">
                             <Binding.ValidationRules>
                                 <validation:PhoneNumberValidationRule/>
                             </Binding.ValidationRules>
@@ -105,16 +105,16 @@
                 </TextBox>
 
                 <TextBlock Grid.Row="3"
-                   Text="Email:" 
-                   Margin="3">
+                           Text="Email:" 
+                           Margin="3">
                 </TextBlock>
 
                 <TextBox Grid.Row="4" 
-                 Style="{StaticResource TextBoxStyle}">
+                         Style="{StaticResource TextBoxStyle}">
                     <TextBox.Text>
                         <Binding Path ="CurrentContact.Email" 
-                         UpdateSourceTrigger="PropertyChanged" 
-                         Mode="TwoWay">
+                                 UpdateSourceTrigger="PropertyChanged" 
+                                 Mode="TwoWay">
                             <Binding.ValidationRules>
                                 <validation:EmailValidationRule/>
                             </Binding.ValidationRules>

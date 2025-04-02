@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
+﻿
 namespace View.Model.Services
 {
     /// <summary>
@@ -17,7 +11,7 @@ namespace View.Model.Services
         /// </summary>
         /// <param name="value">Строка, содержащая номер телефона.</param>
         /// <returns> Возвращает строку с отформатированым номером телефона.</returns>
-        public static string FormatPhoneNumber(string value)
+        public static string Format(string value)
         {
             string digits = new string(value.Where(char.IsDigit).ToArray());
             if (digits.Length == 11 && (digits.StartsWith("7") || digits.StartsWith("8")))

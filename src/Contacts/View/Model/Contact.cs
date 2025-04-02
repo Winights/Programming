@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using View.Model.Services;
 
 namespace View.Model
@@ -17,17 +12,17 @@ namespace View.Model
         /// <summary>
         /// Полное имя контакта.
         /// </summary>
-        private string _fullname = string.Empty;
+        private string _fullname;
 
         /// <summary>
         /// Почта контакта.
         /// </summary>
-        private string _email = string.Empty;
+        private string _email;
 
         /// <summary>
         /// Номер телефона контакта.
         /// </summary>
-        private string _phoneNumber = string.Empty;
+        private string _phoneNumber;
 
         /// <summary>
         /// Событие изменения информации о контакте.
@@ -83,20 +78,8 @@ namespace View.Model
             set
             {
                 ValueValidator.AssertStringOnPhoneNumber(value, nameof(PhoneNumber));
-                _phoneNumber = PhoneNumberFormatter.FormatPhoneNumber(value);
+                _phoneNumber = PhoneNumberFormatter.Format(value);
                 OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// Сообщает интерфейсу об изменении значения в свойстве.
-        /// </summary>
-        /// <param name="prop">Имя свойства, в котором произошло событие.</param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
             }
         }
 
@@ -119,6 +102,18 @@ namespace View.Model
         public Contact()
         {
 
+        }
+
+        /// <summary>
+        /// Сообщает интерфейсу об изменении значения в свойстве.
+        /// </summary>
+        /// <param name="prop">Имя свойства, в котором произошло событие.</param>
+        private void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            }
         }
     }
 }

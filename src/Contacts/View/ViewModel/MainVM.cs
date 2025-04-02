@@ -1,20 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Xml.Linq;
 using View.Model;
 using View.Model.Services;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace View.ViewModel
 {
@@ -24,14 +13,14 @@ namespace View.ViewModel
     public class MainVM : INotifyPropertyChanged
     {
         /// <summary>
-        /// Объект контакта.
+        /// Выбранный контакта.
         /// </summary>
         private Contact _currentContact;
 
         /// <summary>
-        /// Выбранный контакт.
+        /// Копия контакт.
         /// </summary>
-        private Contact _selectedContact;
+        private Contact _originalContact;
 
         /// <summary>
         /// Флаг, показывающий идет ли создание нового контакта или нет.
@@ -49,7 +38,6 @@ namespace View.ViewModel
         public ObservableCollection<Contact> Contacts { get; set; }
             = new ObservableCollection<Contact>();
 
-
         /// <summary>
         /// Событие изменения информации о контакте.
         /// </summary>
@@ -58,22 +46,50 @@ namespace View.ViewModel
         /// <summary>
         /// Команда для добавления контакта.
         /// </summary>
-        public ICommand AddContactCommand { get; }
+        public ICommand AddContactCommand 
+        { 
+            get 
+            {
+                return new RelayCommand(create => StartСreatNewContact(),
+                condition => IsInEditingOrCreatingMode);
+            } 
+        }
 
         /// <summary>
         /// Команда для редактирования контакта.
         /// </summary>
-        public ICommand EditContactCommand { get; }
+        public ICommand EditContactCommand
+        {
+            get
+            {
+                return new RelayCommand(edit => StartEditContact(),
+                condition => IsInEditingOrCreatingMode && IsEnabled);
+            }
+        }
 
         /// <summary>
         /// Команда для сохранения контакта в списке.
         /// </summary>
-        public ICommand ApplyContactCommand { get; }
+        public ICommand ApplyContactCommand 
+        { 
+            get
+            {
+                return new RelayCommand(apply => ApplyExecute(),
+                    condition => IsApplyEnabled);
+            }
+        }
 
         /// <summary>
         /// Команда для удаления контакта в списке.
         /// </summary>
-        public ICommand RemoveContactCommand { get; }
+        public ICommand RemoveContactCommand
+        {
+            get
+            {
+                return new RelayCommand(remove => RemoveContact(),
+                condition => IsEnabled && IsInEditingOrCreatingMode);
+            }
+        }
 
         /// <summary>
         /// Возвращает и задает новое значение для объекта контакта. 
@@ -91,33 +107,12 @@ namespace View.ViewModel
                 if (_currentContact != value)
                 {
                     _currentContact = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает выбранный контакт. Если шло создание нового контакта 
-        /// или редактирование, то создание отменяется.
-        /// </summary>
-        public Contact SelectedContact
-        {
-            get
-            {
-                return _selectedContact;
-            }
-            set
-            {
-                if (_selectedContact != value)
-                {
-                    _selectedContact = value;
 
                     if (IsCreatingContact || IsEditingContact)
                     {
                         CancelContact();
                     }
 
-                    CurrentContact = _selectedContact;
                     OnPropertyChanged();
                 }
             }
@@ -195,9 +190,8 @@ namespace View.ViewModel
             private set
             {
                 _isCreatingContact = value;
-                OnPropertyChanged(nameof(IsReadOnly));
+                OnPropertyChanged(nameof(IsInEditingOrCreatingMode));
                 OnPropertyChanged(nameof(IsVisibleApply));
-                OnPropertyChanged(nameof(IsEnabledApply));
             }
         }
 
@@ -213,43 +207,19 @@ namespace View.ViewModel
             private set
             {
                 _isEditingContact = value;
-                OnPropertyChanged(nameof(IsReadOnly));
+                OnPropertyChanged(nameof(IsInEditingOrCreatingMode));
                 OnPropertyChanged(nameof(IsVisibleApply));
-                OnPropertyChanged(nameof(IsEnabledApply));
             }
         }
 
         /// <summary>
-        /// Возвращает флаг, показывающий доступны ли поля или нет.
-        /// </summary>
-        public bool IsReadOnly
-        {
-            get
-            {
-                return !(IsCreatingContact || IsEditingContact);
-            }
-
-        }
-
-        /// <summary>
-        /// Возвращает флаг, показывающий доступны ли кнопки или нет.
+        /// Возвращает флаг, показывающий в моде создания или редактирования ли кнопки или нет.
         /// </summary>
         public bool IsInEditingOrCreatingMode
         {
             get
             {
                 return !(IsCreatingContact || IsEditingContact);
-            }
-        }
-
-        /// <summary>
-        /// Возвращает флаг, показывающий доступнв ли кнопка редактирования или нет.
-        /// </summary>
-        public bool IsEditOrRemoveEnabled
-        {
-            get
-            {
-                return SelectedContact != null;
             }
         }
 
@@ -267,14 +237,34 @@ namespace View.ViewModel
         /// <summary>
         /// Возвращает флаг, показывающий доступна ли кнопка Apply или нет.
         /// </summary>
-        public bool IsEnabledApply
+        public bool IsApplyEnabled
         {
             get
             {
-                return (!string.IsNullOrWhiteSpace(CurrentContact.Email)
-                && !string.IsNullOrWhiteSpace(CurrentContact.Fullname) &&
-                !string.IsNullOrWhiteSpace(CurrentContact.PhoneNumber));
+                return CurrentContact == null || 
+                    (!string.IsNullOrWhiteSpace(CurrentContact.Email)
+                    && !string.IsNullOrWhiteSpace(CurrentContact.Fullname) &&
+                    !string.IsNullOrWhiteSpace(CurrentContact.PhoneNumber));
             }
+        }
+
+        /// <summary>
+        /// Возвращает флаг, показывающий выбран ли контакт или нет.
+        /// </summary>
+        public bool IsEnabled
+        {
+            get
+            {
+                return CurrentContact != null;
+            }
+        }
+
+        /// <summary>
+        /// Создаёт пустой экземпляр класса <see cref="MainVM"/>.
+        /// </summary>
+        public MainVM()
+        {
+            Contacts = ContactSerializer.LoadContacts();
         }
 
         /// <summary>
@@ -282,7 +272,7 @@ namespace View.ViewModel
         /// </summary>
         private void StartСreatNewContact()
         {
-            SelectedContact = null;
+            _originalContact = null;
             CurrentContact = new Contact();
             IsCreatingContact = true;
             IsEditingContact = false;
@@ -291,21 +281,18 @@ namespace View.ViewModel
         /// <summary>
         /// Сохраняет новый контакт и изменения в список.
         /// </summary>
-        private void SaveChangesOrNewContact()
+        private void ApplyExecute()
         {
             if (IsCreatingContact)
             {
                 Contacts.Add(CurrentContact);
-                SelectedContact = CurrentContact;
                 IsCreatingContact = false;
             }
 
             if (IsEditingContact)
             {
-                SelectedContact.Fullname = CurrentContact.Fullname;
-                SelectedContact.Email = CurrentContact.Email;
-                SelectedContact.PhoneNumber = CurrentContact.PhoneNumber;
                 IsEditingContact = false;
+                _originalContact = null;
             }
         }
 
@@ -316,11 +303,6 @@ namespace View.ViewModel
         {
             IsCreatingContact = false;
             IsEditingContact = false;
-
-            if (SelectedContact != null)
-            {
-                CurrentContact = SelectedContact;
-            }
         }
 
         /// <summary>
@@ -328,18 +310,17 @@ namespace View.ViewModel
         /// </summary>
         private void StartEditContact()
         {
-            if (SelectedContact == null)
+            if (CurrentContact == null)
             {
                 return;
             }
 
             IsEditingContact = true;
-            IsCreatingContact = false;
-            CurrentContact = new Contact
+            _originalContact = new Contact
             {
-                Fullname = SelectedContact.Fullname,
-                PhoneNumber = SelectedContact.PhoneNumber,
-                Email = SelectedContact.Email
+                Email = CurrentContact.Email,
+                PhoneNumber = CurrentContact.PhoneNumber,
+                Fullname = CurrentContact.Fullname,
             };
         }
 
@@ -348,67 +329,46 @@ namespace View.ViewModel
         /// </summary>
         private void RemoveContact()
         {
-            if (SelectedContact == null)
+            if (CurrentContact == null)
             {
                 return;
             }
 
-            int index = Contacts.IndexOf(SelectedContact);
-            Contacts.Remove(SelectedContact);
+            int index = Contacts.IndexOf(CurrentContact);
+            Contacts.Remove(CurrentContact);
 
             if (Contacts.Count == 0)
             {
-                SelectedContact = null;
-                CurrentContact = new Contact();
-                return;
+                CurrentContact = null;
             }
-
-            if (index >= Contacts.Count)
+            else if (index >= Contacts.Count)
             {
-                SelectedContact = Contacts.Last();
-                return;
+                CurrentContact = Contacts.Last();
             }
-
-            SelectedContact = Contacts[index];
+            else
+            {
+                CurrentContact = Contacts[index];
+            }              
         }
 
         /// <summary>
         /// Сообщает интерфейсу об изменении значения в свойстве.
         /// </summary>
         /// <param name="prop">Имя свойства, в котором произошло событие.</param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        private void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
             }
         }
+
         /// <summary>
         /// Сохранеяет список контактов после закрытия программы.
         /// </summary>
-        /// <param name="sender">Объект, инициирующее событие.</param>
-        /// <param name="e">Дополнительный данные о событие.</param>
-        private void OnApplicationExit(object sender, ExitEventArgs e)
+        public void SaveOnExit()
         {
             ContactSerializer.SaveContacts(Contacts);
-        }
-
-        /// <summary>
-        /// Создаёт пустой экземпляр класса <see cref="MainVM"/>.
-        /// </summary>
-        public MainVM()
-        {
-            Contacts = ContactSerializer.LoadContacts();
-            CurrentContact = new Contact();
-            AddContactCommand = new RelayCommand(create => StartСreatNewContact(),
-                condition => IsInEditingOrCreatingMode);
-            EditContactCommand = new RelayCommand(edit => StartEditContact(),
-                condition => IsInEditingOrCreatingMode && IsEditOrRemoveEnabled);
-            ApplyContactCommand = new RelayCommand(apply => SaveChangesOrNewContact(), 
-                condition => IsEnabledApply);
-            RemoveContactCommand = new RelayCommand(remove => RemoveContact(),
-                condition => IsEditOrRemoveEnabled && !IsEditingContact);
-            Application.Current.Exit += OnApplicationExit;
         }
     }
 }

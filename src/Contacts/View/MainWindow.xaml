@@ -23,9 +23,9 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Width="40" 
-                       Height="40" 
-                       Grid.Column="0"
-                       Source="/Resources/photo_placeholder_100x100.png">
+                           Height="40" 
+                           Grid.Column="0"
+                           Source="/Resources/photo_placeholder_100x100.png">
                         <Image.Clip>
                             <EllipseGeometry Center="20,20" 
                                              RadiusX="20" 
@@ -86,9 +86,9 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0"
-                       Margin="3,0,3,0" 
-                       Text="Find:" 
-                       HorizontalAlignment="Left"/>
+                           Margin="3,0,3,0" 
+                           Text="Find:" 
+                           HorizontalAlignment="Left"/>
 
                 <TextBox Grid.Column="1" 
                          x:Name="SearchBox" 
@@ -98,7 +98,7 @@
             </Grid>
 
             <ListBox ItemsSource="{Binding Contacts}"
-                     SelectedItem="{Binding SelectedContact}"
+                     SelectedItem="{Binding CurrentContact}"
                      Grid.Row="1" 
                      Margin="3"
                      ItemTemplate="{StaticResource ContactTemplate}">

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Documents;
+﻿using System.Text.RegularExpressions;
 
 namespace View.Model.Services
 {
