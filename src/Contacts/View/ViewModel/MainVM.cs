@@ -46,7 +46,7 @@ namespace View.ViewModel
         /// <summary>
         /// Список контактов.
         /// </summary>
-        public ObservableCollection<Contact> Contacts { get; set; } 
+        public ObservableCollection<Contact> Contacts { get; set; }
             = new ObservableCollection<Contact>();
 
 
@@ -80,9 +80,9 @@ namespace View.ViewModel
         /// Должен быть новым значением для обновления информации.
         /// </summary>
         public Contact CurrentContact
-        { 
-            get 
-            { 
+        {
+            get
+            {
                 return _currentContact;
             }
             set
@@ -104,7 +104,7 @@ namespace View.ViewModel
         {
             get
             {
-               return _selectedContact;
+                return _selectedContact;
             }
             set
             {
@@ -135,7 +135,7 @@ namespace View.ViewModel
             }
             set
             {
-                if (CurrentContact.Fullname != value && value != null) 
+                if (CurrentContact.Fullname != value && value != null)
                 {
                     CurrentContact.Fullname = value;
                     OnPropertyChanged();
@@ -169,7 +169,7 @@ namespace View.ViewModel
         /// </summary>
         public string Email
         {
-            get 
+            get
             {
                 return CurrentContact.Email;
             }
@@ -196,7 +196,8 @@ namespace View.ViewModel
             {
                 _isCreatingContact = value;
                 OnPropertyChanged(nameof(IsReadOnly));
-                OnPropertyChanged(nameof(IsVisibleApply));   
+                OnPropertyChanged(nameof(IsVisibleApply));
+                OnPropertyChanged(nameof(IsEnabledApply));
             }
         }
 
@@ -214,6 +215,7 @@ namespace View.ViewModel
                 _isEditingContact = value;
                 OnPropertyChanged(nameof(IsReadOnly));
                 OnPropertyChanged(nameof(IsVisibleApply));
+                OnPropertyChanged(nameof(IsEnabledApply));
             }
         }
 
@@ -226,7 +228,7 @@ namespace View.ViewModel
             {
                 return !(IsCreatingContact || IsEditingContact);
             }
-            
+
         }
 
         /// <summary>
@@ -258,7 +260,20 @@ namespace View.ViewModel
         {
             get
             {
-                return IsCreatingContact || IsEditingContact; 
+                return IsCreatingContact || IsEditingContact;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает флаг, показывающий доступна ли кнопка Apply или нет.
+        /// </summary>
+        public bool IsEnabledApply
+        {
+            get
+            {
+                return (!string.IsNullOrWhiteSpace(CurrentContact.Email)
+                && !string.IsNullOrWhiteSpace(CurrentContact.Fullname) &&
+                !string.IsNullOrWhiteSpace(CurrentContact.PhoneNumber));
             }
         }
 
@@ -278,13 +293,6 @@ namespace View.ViewModel
         /// </summary>
         private void SaveChangesOrNewContact()
         {
-            if (string.IsNullOrWhiteSpace(CurrentContact.Email)
-                || string.IsNullOrWhiteSpace(CurrentContact.Fullname) ||
-                string.IsNullOrWhiteSpace(CurrentContact.PhoneNumber))
-            {
-                return;
-            }
-
             if (IsCreatingContact)
             {
                 Contacts.Add(CurrentContact);
@@ -348,7 +356,7 @@ namespace View.ViewModel
             int index = Contacts.IndexOf(SelectedContact);
             Contacts.Remove(SelectedContact);
 
-            if (Contacts.Count == 0) 
+            if (Contacts.Count == 0)
             {
                 SelectedContact = null;
                 CurrentContact = new Contact();
@@ -392,11 +400,12 @@ namespace View.ViewModel
         {
             Contacts = ContactSerializer.LoadContacts();
             CurrentContact = new Contact();
-            AddContactCommand = new RelayCommand(create => StartСreatNewContact(), 
+            AddContactCommand = new RelayCommand(create => StartСreatNewContact(),
                 condition => IsInEditingOrCreatingMode);
             EditContactCommand = new RelayCommand(edit => StartEditContact(),
                 condition => IsInEditingOrCreatingMode && IsEditOrRemoveEnabled);
-            ApplyContactCommand = new RelayCommand(apply => SaveChangesOrNewContact());
+            ApplyContactCommand = new RelayCommand(apply => SaveChangesOrNewContact(), 
+                condition => IsEnabledApply);
             RemoveContactCommand = new RelayCommand(remove => RemoveContact(),
                 condition => IsEditOrRemoveEnabled && !IsEditingContact);
             Application.Current.Exit += OnApplicationExit;

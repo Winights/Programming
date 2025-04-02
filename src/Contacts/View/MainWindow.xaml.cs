@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using View.UserControls;
+using View.Controls;
 using View.ViewModel;
 
 namespace View

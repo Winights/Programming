@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using View.ViewModel;
 
-namespace View.UserControls
+namespace View.Controls
 {
     /// <summary>
     /// Логика взаимодействия для ContactControl.xaml

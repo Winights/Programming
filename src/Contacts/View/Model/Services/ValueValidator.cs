@@ -36,7 +36,7 @@ namespace View.Model.Services
         /// <param name="propertyName">Имя свойства или объекта, которое подлежит проверке.</param>
         public static void AssertStringOnEmpty(string value, string propertyName)
         {
-            if (value == string.Empty)
+            if (string.IsNullOrWhiteSpace(value))
             {
                 throw new ArgumentNullException($"Ошибка в {propertyName}");
             }

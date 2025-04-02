@@ -5,25 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        xmlns:validation="clr-namespace:View.ViewModel.Validation"
-        xmlns:viewModel="clr-namespace:View.ViewModel"
-        xmlns:userControl="clr-namespace:View.UserControls"
+        xmlns:userControl="clr-namespace:View.Controls"
         Title="Contact" Height="450" Width="700" MinHeight="350" MinWidth="550"
         Icon="pack://application:,,,/Resources/ContactsApp_96x96.ico">
     <Window.Resources>
-        <viewModel:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-
         <Style x:Key="IsButtonsStyle" TargetType="Button">
             <Setter Property="Height" Value="25"/>
             <Setter Property="MinWidth" Value="75"/>
-        </Style>
-
-        <Style x:Key="IsApplyButton" TargetType="Button">
-            <Setter Property="Visibility" Value="{Binding IsVisibleApply,
-                Converter={StaticResource BoolToVisibilityConverter}}"/>
-            <Setter Property="Margin" Value="3,50,3,3"/>
-            <Setter Property="Width" Value="75"/>
-            <Setter Property="Height" Value="25"/>
         </Style>
 
         <DataTemplate x:Key="ContactTemplate">
@@ -155,16 +143,10 @@
               Margin="8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <userControl:ContactControl x:Name="ContactControl"
                                         Grid.Row="0"/>
-            <Button Grid.Row="1" 
-                        Content="Apply" 
-                        Command="{Binding ApplyContactCommand}"
-                        Style="{StaticResource IsApplyButton}"
-                        HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>
