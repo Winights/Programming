@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using View.Model.Services;
 
@@ -24,7 +19,7 @@ namespace View.ViewModel.Validation
         {
             string pattern = ValueValidator.GetNamePattern();
 
-            if (value == string.Empty)
+            if (string.IsNullOrWhiteSpace(value.ToString()))
             {
                 return new ValidationResult(false, "Fullname must not null");
             }

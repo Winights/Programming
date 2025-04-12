@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using View.Controls;
+using View.Model.Services;
 using View.ViewModel;
 
 namespace View
@@ -20,7 +22,10 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainVM();
+            var mainVm = new MainVM();
+            DataContext = mainVm;
+            ContactControl.DataContext = mainVm;
+            Application.Current.Exit += (sender,e) => mainVm.SaveOnExit();
         }
     }
 }

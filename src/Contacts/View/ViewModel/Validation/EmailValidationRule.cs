@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using View.Model.Services;
 
@@ -25,14 +20,14 @@ namespace View.ViewModel.Validation
         {
             string patternOfEmail = ValueValidator.GetEmailPattern();
 
-            if (value.ToString() == string.Empty)
+            if (string.IsNullOrWhiteSpace(value.ToString()))
             {
                 return new ValidationResult(false, "Email must not null");
             }
 
             if (!Regex.IsMatch(value.ToString(), patternOfEmail))
             {
-                return new ValidationResult(false, "Incorrect email format");
+                return new ValidationResult(false, "Incorrect email format. Example: user@example.com");
             }
 
             if ((value.ToString()).Length > 100)

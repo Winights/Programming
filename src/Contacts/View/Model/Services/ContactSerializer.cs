@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace View.Model.Services
@@ -25,10 +21,10 @@ namespace View.Model.Services
         public static string FilePath { get { return _filePath; } }
 
         /// <summary>
-        /// Сохраняет объект контакта в файл.
+        /// Сохраняет список контактов в файл.
         /// </summary>
-        /// <param name="contact">Объект контакта.</param>
-        public static void SaveContact(Contact contact)
+        /// <param name="contacts">Список контактов.</param>
+        public static void SaveContacts(ObservableCollection<Contact> contacts)
         {
             var directory = Path.GetDirectoryName(FilePath);
 
@@ -37,25 +33,25 @@ namespace View.Model.Services
                 Directory.CreateDirectory(directory);
             }
 
-            string json = JsonConvert.SerializeObject(contact);
+            string json = JsonConvert.SerializeObject(contacts);
             File.WriteAllText(FilePath, json);
         }
 
         /// <summary>
-        /// Загружает из файла объект контакта.
+        /// Загружает из файла список объектов контакта.
         /// </summary>
-        /// <returns> Возвращает объект контакта.</returns>
-        public static Contact LoadContact()
+        /// <returns> Возвращает список объектов контакта, иначе пустой список.</returns>
+        public static ObservableCollection<Contact> LoadContacts()
         {
             if (File.Exists(FilePath))
             {
                 string json = File.ReadAllText(FilePath);
-                Contact contact = JsonConvert.DeserializeObject<Contact>(json);
-                return contact;
+                return JsonConvert.DeserializeObject<ObservableCollection<Contact>>(json)
+                    ?? new ObservableCollection<Contact>();
             }
             else
             {
-                throw new FileNotFoundException("File not find");
+                return new ObservableCollection<Contact>();
             }
         }
     }

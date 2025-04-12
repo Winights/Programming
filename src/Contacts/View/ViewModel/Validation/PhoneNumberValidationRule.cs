@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using View.Model.Services;
 
@@ -24,14 +19,14 @@ namespace View.ViewModel.Validation
         {
             string pattern = ValueValidator.GetPhoneNumberPattern();
 
-            if (value.ToString() == string.Empty) 
+            if (string.IsNullOrWhiteSpace(value.ToString())) 
             {
                 return new ValidationResult(false, "Phone number  must not null");
             }
 
             if (!Regex.IsMatch(value.ToString(), pattern))
             {
-                return new ValidationResult(false, "Incorrect phone number format");
+                return new ValidationResult(false, "Incorrect phone number format. Example: +7 (123) 456-78-90");
             }
 
             return ValidationResult.ValidResult;

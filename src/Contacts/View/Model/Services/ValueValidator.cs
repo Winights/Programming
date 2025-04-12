@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Documents;
+﻿using System.Text.RegularExpressions;
 
 namespace View.Model.Services
 {
@@ -36,7 +28,7 @@ namespace View.Model.Services
         /// <param name="propertyName">Имя свойства или объекта, которое подлежит проверке.</param>
         public static void AssertStringOnEmpty(string value, string propertyName)
         {
-            if (value == string.Empty)
+            if (string.IsNullOrWhiteSpace(value))
             {
                 throw new ArgumentNullException($"Ошибка в {propertyName}");
             }
@@ -117,11 +109,11 @@ namespace View.Model.Services
         }
 
         /// <summary>
-        /// Проверяет, что строка содержит только буквы
+        /// Проверяет, что строка содержит только буквы.
         /// </summary>
         /// <param name="value">Проверямое строка.</param>
         /// <param name="propertyName">Имя свойства или объекта, которое подлежит проверке.</param>
-        /// /// <example>
+        /// <example>
         /// Примеры допустимых форматов:
         /// Petrov Petr Petrovich
         /// Иванов Иван Иванович
