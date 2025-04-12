@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -18,7 +19,7 @@ namespace View.ViewModel
         private Contact _currentContact;
 
         /// <summary>
-        /// Копия контакт.
+        /// Копия контакта.
         /// </summary>
         private Contact _originalContact;
 
@@ -106,73 +107,12 @@ namespace View.ViewModel
 
                 if (_currentContact != value)
                 {
-                    _currentContact = value;
-
                     if (IsCreatingContact || IsEditingContact)
                     {
                         CancelContact();
                     }
 
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает полное имя контакта. Должен быть новым значением 
-        /// для обновления информации и не пустым.
-        /// </summary>
-        public string Fullname
-        {
-            get
-            {
-                return CurrentContact.Fullname;
-            }
-            set
-            {
-                if (CurrentContact.Fullname != value && value != null)
-                {
-                    CurrentContact.Fullname = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает номер телефона контакта. Должен быть новым значением 
-        /// для обновления информации и не пустым.
-        /// </summary>
-        public string PhoneNumber
-        {
-            get
-            {
-                return CurrentContact.PhoneNumber;
-            }
-            set
-            {
-                if (value != CurrentContact.PhoneNumber && value != null)
-                {
-                    CurrentContact.PhoneNumber = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает электронную почту контакта. Должен быть новым значением 
-        /// для обновления информации и не пустым.
-        /// </summary>
-        public string Email
-        {
-            get
-            {
-                return CurrentContact.Email;
-            }
-            set
-            {
-                if (CurrentContact.Email != value && value != null)
-                {
-                    CurrentContact.Email = value;
+                    _currentContact = value;
                     OnPropertyChanged();
                 }
             }
@@ -242,9 +182,9 @@ namespace View.ViewModel
             get
             {
                 return CurrentContact == null || 
-                    (!string.IsNullOrWhiteSpace(CurrentContact.Email)
-                    && !string.IsNullOrWhiteSpace(CurrentContact.Fullname) &&
-                    !string.IsNullOrWhiteSpace(CurrentContact.PhoneNumber));
+                    (string.IsNullOrWhiteSpace(CurrentContact.Email)
+                    && string.IsNullOrWhiteSpace(CurrentContact.Fullname) &&
+                    string.IsNullOrWhiteSpace(CurrentContact.PhoneNumber));
             }
         }
 
@@ -301,8 +241,14 @@ namespace View.ViewModel
         /// </summary>
         private void CancelContact()
         {
-            IsCreatingContact = false;
-            IsEditingContact = false;
+            if (IsEditingContact)
+            {
+                CurrentContact.Email = _originalContact.Email;
+                CurrentContact.Fullname = _originalContact.Fullname;
+                CurrentContact.PhoneNumber = _originalContact.PhoneNumber;
+                IsEditingContact = false;
+            }
+            IsCreatingContact = false;         
         }
 
         /// <summary>

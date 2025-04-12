@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         xmlns:userControl="clr-namespace:View.Controls"
-        Title="Contact" Height="450" Width="700" MinHeight="350" MinWidth="550"
+        Title="Contacts" Height="450" Width="700" MinHeight="350" MinWidth="550"
         Icon="pack://application:,,,/Resources/ContactsApp_96x96.ico">
     <Window.Resources>
         <Style x:Key="IsButtonsStyle" TargetType="Button">
