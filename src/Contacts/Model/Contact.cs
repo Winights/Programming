@@ -1,33 +1,27 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using View.Model.Services;
+﻿using Model.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace View.Model
+namespace Model
 {
     /// <summary>
     /// Хранит данные о контакте.
     /// </summary>
-    public class Contact : INotifyPropertyChanged
+    public class Contact : ObservableObject
     {
         /// <summary>
         /// Полное имя контакта.
         /// </summary>
-        private string _fullname;
+        private string _fullname = string.Empty;
 
         /// <summary>
         /// Почта контакта.
         /// </summary>
-        private string _email;
+        private string _email = string.Empty;
 
         /// <summary>
         /// Номер телефона контакта.
         /// </summary>
-        private string _phoneNumber;
-
-        /// <summary>
-        /// Событие изменения информации о контакте.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        private string _phoneNumber = string.Empty;
 
         /// <summary>
         /// Возвращает и задает полное имя контакта. Должен не превышать 200 символов.
@@ -43,8 +37,7 @@ namespace View.Model
                 ValueValidator.AssertStringOnEmpty(value, nameof(Fullname));
                 ValueValidator.AssertStringOnName(value, nameof(Fullname));
                 ValueValidator.AssertStringOnLength(value, 100, nameof(Fullname));
-                _fullname = value;
-                OnPropertyChanged();
+                SetProperty(ref _fullname, value);
             }
         }
 
@@ -61,8 +54,7 @@ namespace View.Model
             {
                 ValueValidator.AssertStringOnEmail(value, nameof(Email));
                 ValueValidator.AssertStringOnLength(value, 100, nameof(Email));
-                _email = value;
-                OnPropertyChanged();
+                SetProperty(ref _email, value);
             }
         }
 
@@ -78,8 +70,7 @@ namespace View.Model
             set
             {
                 ValueValidator.AssertStringOnPhoneNumber(value, nameof(PhoneNumber));
-                _phoneNumber = PhoneNumberFormatter.Format(value);
-                OnPropertyChanged();
+                SetProperty(ref _phoneNumber, PhoneNumberFormatter.Format(value));
             }
         }
 
@@ -102,18 +93,6 @@ namespace View.Model
         public Contact()
         {
 
-        }
-
-        /// <summary>
-        /// Сообщает интерфейсу об изменении значения в свойстве.
-        /// </summary>
-        /// <param name="prop">Имя свойства, в котором произошло событие.</param>
-        private void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-            }
         }
     }
 }

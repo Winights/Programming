@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using View.Model.Services;
+using Model.Services;
 
-namespace View.ViewModel.Validation
+namespace ViewModel.Validation
 {
     /// <summary>
     /// Реализует логику валидации для имени контакта.

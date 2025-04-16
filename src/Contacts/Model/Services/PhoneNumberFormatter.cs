@@ -1,5 +1,5 @@
 ﻿
-namespace View.Model.Services
+namespace Model.Services
 {
     /// <summary>
     /// Реализирует форматирования номера телефона.

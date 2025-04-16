@@ -2,8 +2,9 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace View.Model.Services
+namespace Model.Services
 {
+
     /// <summary>
     /// Реализирует сохранение и загрузку данных из файла.
     /// </summary>
@@ -13,7 +14,7 @@ namespace View.Model.Services
         /// Путь к файлу по умолчанию.
         /// </summary>
         private static string _filePath = Path.Combine(Environment.GetFolderPath
-            (Environment.SpecialFolder.MyDocuments),"Contacts", "contacts.json");
+            (Environment.SpecialFolder.MyDocuments), "Contacts", "contacts.json");
 
         /// <summary>
         /// Возвращает путь к файлу.

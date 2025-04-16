@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace View.Model.Services
+namespace Model.Services
 {
     /// <summary>
     /// Реализирует валидацию значений.

@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using View.Model.Services;
+using Model.Services;
 
-namespace View.ViewModel.Validation
+namespace ViewModel.Validation
 {
     /// <summary>
     /// Реализует логику валидации для номера телефона.
@@ -19,14 +19,15 @@ namespace View.ViewModel.Validation
         {
             string pattern = ValueValidator.GetPhoneNumberPattern();
 
-            if (string.IsNullOrWhiteSpace(value.ToString())) 
+            if (string.IsNullOrWhiteSpace(value.ToString()))
             {
                 return new ValidationResult(false, "Phone number  must not null");
             }
 
             if (!Regex.IsMatch(value.ToString(), pattern))
             {
-                return new ValidationResult(false, "Incorrect phone number format. Example: +7 (123) 456-78-90");
+                return new ValidationResult(false, "Incorrect phone number format. " +
+                    "Example: +7 (123) 456-78-90");
             }
 
             return ValidationResult.ValidResult;

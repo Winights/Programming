@@ -2,7 +2,7 @@
 using System.Windows.Data;
 using System.Windows;
 
-namespace View.ViewModel
+namespace ViewModel
 {
     /// <summary>
     /// Конверитирует булевые значения в Visibility.
@@ -25,7 +25,7 @@ namespace View.ViewModel
             if (value is bool boolValue)
             {
                 return boolValue ? Visibility.Visible : Visibility.Hidden;
-            }  
+            }
             return Visibility.Hidden;
         }
 
